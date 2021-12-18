@@ -1,5 +1,6 @@
 import Application from '../../components/application/application';
 
-export default (client: Application) => {
+const warnCreate = (client: Application) => {
   console.log("Hello i'm warnCreate event");
 };
+export default warnCreate;
