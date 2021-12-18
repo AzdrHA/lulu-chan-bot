@@ -21,6 +21,7 @@ export type BaseCommandType = {
   disable: boolean;
   example: string;
   onlyDev: boolean;
+  multipleCommand: boolean;
 
   execute: () => Promise<Message>;
 };
@@ -34,6 +35,7 @@ export abstract class BaseCommand implements BaseCommandType {
   abstract disable: boolean;
   abstract example: string;
   abstract onlyDev: boolean;
+  abstract multipleCommand: boolean;
 
   abstract execute(): Promise<Message>;
 }
