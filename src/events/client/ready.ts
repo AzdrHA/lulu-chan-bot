@@ -1,5 +1,8 @@
 import Application from '../../components/application/application';
+import { commands } from '../../lib/constants';
 
-export default (client: Application) => {
+const ready = (client: Application) => {
+  console.log(commands);
   console.log(`Logged in as ${client.user.tag}!`);
 };
+export default ready;
