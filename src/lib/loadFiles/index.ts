@@ -2,11 +2,19 @@ import * as fs from 'fs';
 import print from '../print';
 import * as path from 'path';
 import Application from '../../components/application/application';
+import { CommandCategory, commands, commandsList } from '../constants';
+import { BaseCommandType } from '../../components/baseCommand';
 const fsPromises = fs.promises;
+import { Server, Socket } from 'socket.io';
 
-export type LoadFile = 'command' | 'event';
+export type LoadFile = 'command' | 'event' | 'socket';
 
-const loadFiles = async (dir: string, type: LoadFile, client: Application) => {
+const loadFiles = async (
+  dir: string,
+  type: LoadFile,
+  client: Application,
+  socket: Server
+) => {
   return fsPromises
     .readdir(dir)
     .then(async (files) => {
@@ -17,17 +25,34 @@ const loadFiles = async (dir: string, type: LoadFile, client: Application) => {
               const filePath = path.resolve(dir, file);
               const stats = fs.statSync(filePath);
               if (stats.isDirectory()) {
-                await loadFiles(filePath, type, client);
+                await loadFiles(filePath, type, client, socket);
               } else if (stats.isFile() && filePath.endsWith('.ts')) {
                 const fileName = path.parse(filePath).name;
                 const { default: event } = await import(filePath);
-                if (!event)
-                  return print.danger('%s is not configured', fileName);
 
                 if (type === 'event') {
-                  client.on(fileName, (listener) => event(client, listener));
+                  if (!event || event.name !== fileName) {
+                    print.danger(
+                      '%s is not correctly configured!',
+                      print.options.bright(fileName)
+                    );
+                  } else
+                    client.on(fileName, (listener) => event(client, listener));
                 } else if (type === 'command') {
-                  const command = new event();
+                  const command: BaseCommandType = new event();
+                  if (!command.multipleCommand) {
+                    const hasCommand =
+                      commands.get(<CommandCategory>command.category) ?? [];
+
+                    commands.set(
+                      <CommandCategory>command.category,
+                      hasCommand.concat([command.alias[0]])
+                    );
+                  }
+
+                  command.alias.forEach((name) => {
+                    commandsList.set(name, command);
+                  });
                 }
               }
               resolve(i * 2);
