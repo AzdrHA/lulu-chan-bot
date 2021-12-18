@@ -76,7 +76,14 @@ export const danger = (message: string, ...optionalParams: any[]) => {
   return log('[' + color.red('ERROR') + ']', '⨯ ' + message, ...optionalParams);
 };
 
+export const options = {
+  bright: (message: string) => {
+    return `\x1b[1m${message}\x1b[0m`;
+  }
+};
+
 const print = {
+  options,
   info,
   danger
 };
