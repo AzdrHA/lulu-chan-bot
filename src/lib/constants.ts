@@ -1,5 +1,16 @@
+import { HexColorString } from 'discord.js';
+
 export type CommandCategory = 'emote' | 'reaction' | 'hentai' | 'porn';
+export type Settings = {
+  id: number;
+  prefix: string;
+  color: HexColorString;
+  language: string;
+  createdAt: string;
+  updateAt: string;
+};
 export const commands = new Map<CommandCategory, string[]>();
+export const settings = new Map<string, Settings>();
 export const commandsList = new Map<string, any>();
 export const getProjectDir = process.cwd();
 export const getAppDir = getProjectDir + '/src';

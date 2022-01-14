@@ -39,7 +39,7 @@ const loadFiles = async (
                   } else
                     client.on(fileName, (listener) => event(client, listener));
                 } else if (type === 'command') {
-                  const command: BaseCommandType = new event();
+                  const command: BaseCommandType = new event({});
                   if (!command.multipleCommand) {
                     const hasCommand =
                       commands.get(<CommandCategory>command.category) ?? [];
@@ -51,7 +51,7 @@ const loadFiles = async (
                   }
 
                   command.alias.forEach((name) => {
-                    commandsList.set(name, command);
+                    commandsList.set(name, event);
                   });
                 }
               }

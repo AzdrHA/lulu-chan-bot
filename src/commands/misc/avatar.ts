@@ -20,7 +20,7 @@ export default class Avatar extends BaseCommand {
     this.alias = ['avatar'];
     this.allowDM = true;
     this.category = 'misc';
-    this.cooldown = 1;
+    this.cooldown = 3;
     this.description = 'Display his avatar or that of the member mentioned';
     this.disable = false;
     this.example = '{prefix} avatar [@member|ID]';
@@ -29,7 +29,27 @@ export default class Avatar extends BaseCommand {
     this.size = 512;
   }
 
-  execute(): Promise<Message<boolean>> {
-    throw new Error('Method not implemented.');
+  execute(): Promise<Message> {
+    if (this.message.channel.type === 'DM') {
+      return this.messageEmbed({
+        description: `[Your avatar!](https://cdn.discordapp.com/avatars/${this.author.id}/${this.author.avatar}.png?size=${this.size})`,
+        image: {
+          url: `https://cdn.discordapp.com/avatars/${this.author.id}/${this.author.avatar}?size=${this.size}`
+        }
+      });
+    } else {
+      return this.messageEmbed({
+        description: `[${
+          this.message.member.displayName
+        }'s avatar](${this.message.member.displayAvatarURL({
+          size: this.size
+        })})`,
+        image: {
+          url: this.message.member.displayAvatarURL({
+            size: this.size
+          })
+        }
+      });
+    }
   }
 }
