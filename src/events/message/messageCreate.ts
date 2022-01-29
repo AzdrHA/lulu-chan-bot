@@ -1,13 +1,14 @@
 import Application from '../../components/application/application';
 import { Message } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
-import { commandsList, Settings, settings } from '../../lib/constants';
-import { BaseCommand } from '../../components/baseCommand';
+import { commandsList, Guild, settings } from '../../lib/constants';
+import { BaseCommand, CommandConstructor } from '../../components/baseCommand';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 
 const messageCreate = async (client: Application, message: Message) => {
   if (message.author.bot) return;
+  if (message.channel.type === 'DM') return;
   if (client.development && message.channel.type === 'GUILD_TEXT') {
     if (
       AppConfig.owners &&
@@ -18,11 +19,11 @@ const messageCreate = async (client: Application, message: Message) => {
   }
 
   if (!settings.get(message.guildId)) {
-    const setting = (await makeRequest(
+    const guild = (await makeRequest(
       ApiConfig.get_or_create_setting(message.guildId),
       'POST'
-    )) as Settings;
-    settings.set(message.guildId, setting);
+    )) as Guild;
+    settings.set(message.guildId, guild.setting);
   }
 
   const setting = settings.get(message.guildId);
@@ -44,9 +45,18 @@ const messageCreate = async (client: Application, message: Message) => {
     .trim()
     .split(/ +/g);
 
-  const CommandClass = commandsList.get(args.shift());
+  const commandName = args.shift();
+  const CommandClass = commandsList.get(commandName);
   if (!CommandClass) return;
-  const command: BaseCommand = new CommandClass({ client, message, setting });
+
+  const CTOR: CommandConstructor = {
+    client: client,
+    message: message,
+    setting: setting,
+    command: commandName,
+    args: args
+  };
+  const command: BaseCommand = new CommandClass(CTOR);
   return command.execute();
 };
 export default messageCreate;

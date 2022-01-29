@@ -1,6 +1,19 @@
 import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
 import { Message } from 'discord.js';
 import { commands } from '../../lib/constants';
+import { makeRequest } from '../../api/makeRequest';
+
+interface FetchImageError {
+  response: { statusCode: number; message: string };
+  status: number;
+  message: string;
+  name: string;
+}
+
+interface FetchImage extends Partial<FetchImageError> {
+  name: string;
+  url: string;
+}
 
 export default class Emote extends BaseCommand {
   alias: string[];
@@ -27,7 +40,29 @@ export default class Emote extends BaseCommand {
     this.multipleCommand = true;
   }
 
-  execute(): Promise<Message<boolean>> {
-    throw new Error('Method not implemented.');
+  private fetchImage = (name: string) =>
+    // ${process.env.API_URL}
+    makeRequest(`http://api.lulu-chan.fun/api/v1/image/${name}`, 'GET');
+
+  async execute(): Promise<Message> {
+    const image: any = await this.fetchImage(this.command);
+    console.log(image);
+    if (image.status && image.status === 404)
+      return this.messageEmbed({
+        description: 'This command has no image yet',
+        image: {
+          url: 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'
+        }
+      });
+
+    return this.messageEmbed({
+      footer: {
+        text: image.name
+      },
+      timestamp: new Date(),
+      image: {
+        url: image.url
+      }
+    });
   }
 }

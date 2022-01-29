@@ -8,7 +8,10 @@ export const makeRequest = async (url: string, method: Method, data = {}) => {
       baseURL: AppConfig.api_domain,
       method,
       url,
-      data
+      data,
+      headers: {
+        authorization: `Bearer ${process.env.API_TOKEN}`
+      }
     })
       .then((r) => resolve(r.data))
       .catch((e: AxiosError) => {

@@ -38,14 +38,20 @@ export default class Avatar extends BaseCommand {
         }
       });
     } else {
+      let member =
+        this.message.mentions.members.first() ||
+        this.message.guild.members.cache.get(this.args[0]);
+      if (!member)
+        member = this.message.guild.members.cache.get(this.author.id);
+
       return this.messageEmbed({
         description: `[${
-          this.message.member.displayName
-        }'s avatar](${this.message.member.displayAvatarURL({
+          member.displayName
+        }'s avatar](${member.displayAvatarURL({
           size: this.size
         })})`,
         image: {
-          url: this.message.member.displayAvatarURL({
+          url: member.displayAvatarURL({
             size: this.size
           })
         }

@@ -1,7 +1,7 @@
 import { Message, MessageEmbed, MessageEmbedOptions, User } from 'discord.js';
 import Application from '../application/application';
 import { APIEmbed } from 'discord-api-types';
-import { Settings } from '../../lib/constants';
+import { Setting } from '../../lib/constants';
 export type CategoryInterface =
   | 'moderator'
   | 'image'
@@ -29,28 +29,46 @@ export type BaseCommandType = {
   execute: () => Promise<Message>;
 };
 
+export type CommandConstructor = {
+  client: Application;
+  message: Message;
+  setting: Setting;
+  command: string;
+  args: string[];
+};
+
 export abstract class BaseCommand implements BaseCommandType {
-  abstract alias: string[];
-  abstract allowDM: boolean;
-  abstract category: CategoryInterface;
-  abstract cooldown: number;
-  abstract description: string;
-  abstract disable: boolean;
-  abstract example: string;
-  abstract onlyDev: boolean;
-  abstract multipleCommand: boolean;
+  public abstract alias: string[];
+  public abstract allowDM: boolean;
+  public abstract category: CategoryInterface;
+  public abstract cooldown: number;
+  public abstract description: string;
+  public abstract disable: boolean;
+  public abstract example: string;
+  public abstract onlyDev: boolean;
+  public abstract multipleCommand: boolean;
+  public readonly command: string;
 
-  public client: Application | null = null;
-  public message: Message | null = null;
-  public setting: Settings | null = null;
+  public readonly client: Application | null = null;
+  public readonly message: Message | null = null;
+  public readonly setting: Setting | null = null;
 
-  public author: User;
+  public readonly author: User;
+  public readonly args: string[];
 
-  protected constructor({ client, message, setting }) {
+  protected constructor({
+    client,
+    message,
+    setting,
+    command,
+    args
+  }: CommandConstructor) {
     if (!client) return;
     this.client = client;
     this.message = message;
     this.setting = setting;
+    this.command = command;
+    this.args = args;
 
     this.author = message.author;
   }
