@@ -1,0 +1,195 @@
+{
+  "karma": {
+    "self": [
+      "{author} Karma is the best friend forever.",
+      "{author} Karma is the best friend for life"
+    ],
+    "mentioned": [
+      "{author} karmated {member}"
+    ]
+  },
+  "pout": {
+    "mentioned": [
+      "{author} grumbling about {member}! I hate YOU!!!",
+      "{author} balks at {member}!! You idiot !",
+      "{author} pout {member}!",
+      "{author} gives {member} a big hug!",
+      "{author} hugs {member}!! Don't squeeze too hard!"
+    ]
+  },
+  "hug": {
+    "self": [
+      "{author} hugs himself."
+    ],
+    "mentioned": [
+      "{author} hug {member}!",
+      "{author} gives {member} a big hug!",
+      "{author} hugs {member}!! Don't squeeze too hard!"
+    ]
+  },
+  "cuddle": {
+    "self": [
+      "{author} cuddle himself."
+    ],
+    "mentioned": [
+      "{author} cuddles {member}~ cute!",
+      "{author} cuddles {member}~ adorable!",
+      "{author} cuddles {member}~~ kyaaaa!!"
+    ]
+  },
+  "kiss": {
+    "self": [
+      "{author} gets a kiss on his reflection. <:nani:684831262539907082>"
+    ],
+    "mentioned": [
+      "{author} kissed {member}! Cute!",
+      "{member} got a kiss from {author}!",
+      "{author} kisses {member}!! 0wO",
+      "{author} kisses {member}'s lips~"
+    ]
+  },
+  "slap": {
+    "self": [
+      "{author} give each other slaps to wake up."
+    ],
+    "mentioned": [
+      "{author} slaps {member}!! Deserves it!",
+      "{author} slaps {member}!! oof.",
+      "{author} slaps {member}!! That looks like it hurt..."
+    ]
+  },
+  "wasted": {
+    "mentioned": [
+      "{author} killed {member}! Brutal!",
+      "{author} killed {member}! Oh my...",
+      "{author} killed {member}! oof!"
+    ]
+  },
+  "bite": {
+    "self": [
+      "{author} bites himself."
+    ],
+    "mentioned": [
+      "{author} bites {member}! Owie",
+      "{author} bites {member}!! Kinky ;)",
+      "{author} gives {member} a bite! Yumm~"
+    ]
+  },
+  "wink": {
+    "mentioned": [
+      "{author} winked at {member}!"
+    ]
+  },
+  "bang": {
+    "self": [
+      "{author} give each other slaps to wake up."
+    ],
+    "mentioned": [
+      "{author} at gunpoint {member}!"
+    ]
+  },
+  "pat": {
+    "mentioned": [
+      "{author} pets {member}! There there!",
+      "{author} pets {member}! Adorable~",
+      "{author} pets {member}! *pat pat*"
+    ]
+  },
+  "lick": {
+    "self": [
+      "{author} lick oneself."
+    ],
+    "mentioned": [
+      "{author} lick {member}!"
+    ]
+  },
+  "greet": {
+    "mentioned": [
+      "{author} says hello to {member}",
+      "{author} waves at {member}",
+      "{author} says hi to {member}!"
+    ]
+  },
+  "thumbup": {
+    "mentioned": [
+      "{author} gives a thumbs up to {member}!",
+      "{author} agrees {member}!",
+      "{author} has a thumbs up to {member}!"
+    ]
+  },
+  "bleh": {
+    "mentioned": [
+      "{author} sticks his tongue out at {member}!"
+    ]
+  },
+  "highfive": {
+    "mentioned": [
+      "{author} give me a high five. {member}!"
+    ]
+  },
+  "handholding": {
+    "mentioned": [
+      "{author} holds the hand of {member}! It's so cute!"
+    ]
+  },
+  "tickle": {
+    "mentioned": [
+      "{author} tickles {member}! Ha!",
+      "{author} tickles {member}! OwO!",
+      "{author} tickles {member}! Hehe~!"
+    ]
+  },
+  "baka": {
+    "self": [
+      "B-B-B BAKA!",
+      "BAKA バカ!"
+    ],
+    "mentioned": [
+      "B-B-B BAKA!",
+      "BAKA バカ!"
+    ]
+  },
+  "poke": {
+    "mentioned": [
+      "{author} touche {member} .-.",
+      "{author} touche {member}! boop!",
+      "{author} touche {member} ;)",
+      "{author}( •_•)σ {member}"
+    ]
+  },
+  "feed": {
+    "mentioned": [
+      "{author} feeds {member}!"
+    ]
+  },
+  "burn": {
+    "mentioned": [
+      "{author} gives gentle slaps to {member}!"
+    ]
+  },
+  "wrestling": {
+    "mentioned": [
+      "{author} fights against {member}!"
+    ]
+  },
+  "push": {
+    "mentioned": [
+      "{author} push {member}!"
+    ]
+  },
+  "punch": {
+    "mentioned": [
+      "{author} gives a kick in the pants to {member}!"
+    ]
+  },
+  "hit": {
+    "mentioned": [
+      "{author} hit {member}!"
+    ]
+  },
+  "naruto": {
+    "mentioned": [
+      "sakura punching {member}!"
+    ]
+  }
+}

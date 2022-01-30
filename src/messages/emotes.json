@@ -1,0 +1,54 @@
+{
+  "shrug": [
+    "{author} shrug ¯\\_(ツ)_/¯"
+  ],
+  "cry": [
+    "{author} needs a hug!",
+    "{author} is sad!",
+    "{author} is so sad!",
+    "{author} cries... :'c",
+    "{author} screams crying... mum/mama/momy... where are you!"
+  ],
+  "think": [
+    "{author} is thinking!",
+    "{author} is thoughtful!",
+    "{author} is thinking of a better world!",
+    "{author} wonders about the existence of a parallel world!",
+    "{author} wonders... why is the water blue?"
+  ],
+  "sleep": [
+    "{author} is sleepy!",
+    "{author} wants to sleep 💤",
+    "{author} is tired..."
+  ],
+  "hungry": [
+    "{author} is hungry!",
+    "{author} is so hungry she could eat anything!"
+  ],
+  "rage": [
+    "{author} rabies!!!! (╯°□°）╯︵ ┻━┻"
+  ],
+  "nom": [
+    "{author} eats for 5!!"
+  ],
+  "shy": [
+    "{author} blushed."
+  ],
+  "laugh": [
+    "{author} laugh."
+  ],
+  "smug": [
+    "{author} smug ಸ‿ಸ"
+  ],
+  "blush":  [
+      "{author} (/w\\\\)"
+  ],
+  "sip": [
+      "{author} sip"
+  ],
+  "nyan": [],
+  "happy": [
+    "{author} sip"
+  ],
+  "bullshit": []
+}
