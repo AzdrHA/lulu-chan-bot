@@ -1,6 +1,13 @@
 import { HexColorString } from 'discord.js';
 
-export type CommandCategory = 'emote' | 'reaction' | 'hentai' | 'porn' | 'misc';
+export type CommandCategory =
+  | 'emote'
+  | 'reaction'
+  | 'hentai'
+  | 'porn'
+  | 'misc'
+  | 'setting';
+
 export type Setting = {
   id: number;
   prefix: string;

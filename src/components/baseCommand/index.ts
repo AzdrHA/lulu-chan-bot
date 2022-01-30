@@ -2,6 +2,9 @@ import { Message, MessageEmbed, MessageEmbedOptions, User } from 'discord.js';
 import Application from '../application/application';
 import { APIEmbed } from 'discord-api-types';
 import { Setting } from '../../lib/constants';
+import translations from '../translations/translations';
+import color from '../../utils/color';
+import emoji from '../../utils/emoji';
 export type CategoryInterface =
   | 'moderator'
   | 'image'
@@ -82,6 +85,36 @@ export abstract class BaseCommand implements BaseCommandType {
   public messageEmbed = (options: MessageEmbedOptions) => {
     return this.message.channel.send({ embeds: [this.embed(options)] });
   };
+
+  public warningMessage = (options: MessageEmbedOptions) => {
+    options.color = color.warning;
+    options.description = `${emoji.warning} ${options.description}`;
+    return this.messageEmbed(options);
+  };
+
+  public errorMessage = (options: MessageEmbedOptions) => {
+    options.color = color.danger;
+    options.description = `${emoji.error} ${options.description}`;
+    return this.messageEmbed(options);
+  };
+
+  public accessDenied = (options: MessageEmbedOptions) => {
+    options.color = color.danger;
+    options.description = `${emoji.denied} ${options.description}`;
+    return this.messageEmbed(options);
+  };
+
+  public successMessage = (options: MessageEmbedOptions) => {
+    options.color = color.success;
+    options.description = `${emoji.success} ${options.description}`;
+    return this.messageEmbed(options);
+  };
+
+  public translation = (key: string, variables?: object) =>
+    translations(key, {
+      lang: this.setting.language || 'en',
+      variables: variables
+    });
 
   abstract execute(): Promise<Message>;
 }
