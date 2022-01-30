@@ -20,7 +20,7 @@ export default class Avatar extends BaseCommand {
     this.alias = ['avatar'];
     this.allowDM = true;
     this.category = 'misc';
-    this.cooldown = 3;
+    this.cooldown = 2;
     this.description = 'Display his avatar or that of the member mentioned';
     this.disable = false;
     this.example = '{prefix} avatar [@member|ID]';
@@ -48,11 +48,13 @@ export default class Avatar extends BaseCommand {
         description: `[${
           member.displayName
         }'s avatar](${member.displayAvatarURL({
-          size: this.size
+          size: this.size,
+          format: 'png'
         })})`,
         image: {
           url: member.displayAvatarURL({
-            size: this.size
+            size: this.size,
+            format: 'png'
           })
         }
       });

@@ -1,8 +1,10 @@
 import Application from '../../components/application/application';
-import { commands } from '../../lib/constants';
+import { UtilsDiscord } from '../../utils/utilsDiscord';
 
-const ready = (client: Application) => {
-  console.log(commands);
+const ready = async (client: Application) => {
+  await UtilsDiscord.updateGuildsStatus(client);
+  await UtilsDiscord.updateMembersStatus(client);
+
   console.log(`Logged in as ${client.user.tag}!`);
 };
 export default ready;

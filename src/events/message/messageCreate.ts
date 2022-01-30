@@ -5,10 +5,15 @@ import { commandsList, Guild, settings } from '../../lib/constants';
 import { BaseCommand, CommandConstructor } from '../../components/baseCommand';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
+import UtilsDate from '../../utils/utilsDate';
+import { UtilsDiscord } from '../../utils/utilsDiscord';
+const cooldown = new Map<string, any>();
 
 const messageCreate = async (client: Application, message: Message) => {
   if (message.author.bot) return;
-  if (message.channel.type === 'DM') return;
+  if (message.channel.type === 'DM')
+    return UtilsDiscord.directMessage(client, message);
+
   if (client.development && message.channel.type === 'GUILD_TEXT') {
     if (
       AppConfig.owners &&
@@ -20,7 +25,7 @@ const messageCreate = async (client: Application, message: Message) => {
 
   if (!settings.get(message.guildId)) {
     const guild = (await makeRequest(
-      ApiConfig.get_or_create_setting(message.guildId),
+      ApiConfig.get_or_create_or_update_setting(message.guildId),
       'POST'
     )) as Guild;
     settings.set(message.guildId, guild.setting);
@@ -57,6 +62,30 @@ const messageCreate = async (client: Application, message: Message) => {
     args: args
   };
   const command: BaseCommand = new CommandClass(CTOR);
+
+  const userCooldown = message.author.id + command.alias[0];
+  const commandCooldown = command.cooldown * 1000;
+
+  if (cooldown.get(userCooldown)) {
+    const cooldownEnd =
+      commandCooldown - (Date.now() - cooldown.get(userCooldown));
+    return command.message.channel
+      .send({
+        content: command
+          .translation('COOLDOWN')
+          .replace(/{time}/, UtilsDate.formatTime(cooldownEnd))
+      })
+      .then((r) => setTimeout(() => r.delete(), cooldownEnd));
+  }
+
+  // SET THE COOLDOWN
+  cooldown.set(userCooldown, Date.now());
+
+  // DELETE THE COOLDOWN
+  setTimeout(() => {
+    cooldown.delete(userCooldown);
+  }, commandCooldown);
+
   return command.execute();
 };
 export default messageCreate;

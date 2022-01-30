@@ -1,6 +1,10 @@
 import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import { commands } from '../../lib/constants';
+import { makeRequest } from '../../api/makeRequest';
+import { ApiConfig } from '../../config/apiConfig';
+import { Image } from '../../types/Image';
+import { AppConfig } from '../../config/appConfig';
 
 export default class Porn extends BaseCommand {
   alias: string[];
@@ -27,7 +31,38 @@ export default class Porn extends BaseCommand {
     this.multipleCommand = true;
   }
 
-  execute(): Promise<Message<boolean>> {
-    throw new Error('Method not implemented.');
+  async execute(): Promise<Message> {
+    if (!(this.message.channel instanceof TextChannel)) return;
+
+    if (!this.message.channel.nsfw)
+      return this.warningMessage({
+        description: this.translation('NSFW_CHANNEL'),
+        image: {
+          url: AppConfig.cdn_domain + '/utils/not-nsfw-loading.gif'
+        }
+      });
+
+    const image = (await makeRequest(
+      ApiConfig.get_image_by_command(this.command),
+      'GET'
+    )) as Image;
+
+    if (image.status && image.status === 404)
+      return this.messageEmbed({
+        description: this.translation('COMMAND_HAS_NOT_IMAGE'),
+        image: {
+          url: AppConfig.cdn_domain + '/utils/image-not-found.png'
+        }
+      });
+
+    return this.messageEmbed({
+      footer: {
+        text: image.name
+      },
+      timestamp: new Date(),
+      image: {
+        url: image.url
+      }
+    });
   }
 }

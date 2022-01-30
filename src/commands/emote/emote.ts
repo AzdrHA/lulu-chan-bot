@@ -1,19 +1,13 @@
 import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import { commands } from '../../lib/constants';
 import { makeRequest } from '../../api/makeRequest';
+import { ApiConfig } from '../../config/apiConfig';
+import { Image } from '../../types/Image';
+import { AppConfig } from '../../config/appConfig';
 
-interface FetchImageError {
-  response: { statusCode: number; message: string };
-  status: number;
-  message: string;
-  name: string;
-}
-
-interface FetchImage extends Partial<FetchImageError> {
-  name: string;
-  url: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const messages = require('../../messages/emotes.json');
 
 export default class Emote extends BaseCommand {
   alias: string[];
@@ -40,22 +34,32 @@ export default class Emote extends BaseCommand {
     this.multipleCommand = true;
   }
 
-  private fetchImage = (name: string) =>
-    // ${process.env.API_URL}
-    makeRequest(`http://api.lulu-chan.fun/api/v1/image/${name}`, 'GET');
-
   async execute(): Promise<Message> {
-    const image: any = await this.fetchImage(this.command);
-    console.log(image);
+    if (!(this.message.channel instanceof TextChannel)) return;
+
+    const image = (await makeRequest(
+      ApiConfig.get_image_by_command(this.command),
+      'GET'
+    )) as Image;
+
+    let message: string[] | string = messages[this.command];
+    message = message
+      ? message[Math.floor(Math.random() * message.length)].replace(
+          /{author}/,
+          this.author.toString()
+        )
+      : '';
+
     if (image.status && image.status === 404)
       return this.messageEmbed({
-        description: 'This command has no image yet',
+        description: this.translation('COMMAND_HAS_NOT_IMAGE'),
         image: {
-          url: 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'
+          url: AppConfig.cdn_domain + '/utils/image-not-found.png'
         }
       });
 
     return this.messageEmbed({
+      description: message,
       footer: {
         text: image.name
       },
