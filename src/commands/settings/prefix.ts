@@ -1,0 +1,91 @@
+import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { Message, TextChannel } from 'discord.js';
+import { makeRequest } from '../../api/makeRequest';
+import { ApiConfig } from '../../config/apiConfig';
+import { settings } from '../../lib/constants';
+
+export default class Prefix extends BaseCommand {
+  alias: string[];
+  allowDM: boolean;
+  category: CategoryInterface;
+  cooldown: number;
+  description: string;
+  disable: boolean;
+  example: string;
+  onlyDev: boolean;
+  multipleCommand: boolean;
+
+  private prefix_max_length = 5;
+
+  constructor(props) {
+    super(props);
+
+    this.alias = ['prefix'];
+    this.allowDM = false;
+    this.category = 'setting';
+    this.cooldown = 5;
+    this.description = 'jsp';
+    this.disable = false;
+    this.example = 'jsp';
+    this.onlyDev = false;
+  }
+
+  execute(): Promise<Message> {
+    if (!(this.message.channel instanceof TextChannel)) return;
+
+    // Check right permissions
+    if (!this.message.member.permissions.has('MANAGE_GUILD'))
+      return this.accessDenied({
+        description: this.translation('BAD_PERMISSION'),
+        footer: {
+          text: this.translation('PERMISSION_REQUIRED', {
+            PERMISSION: this.translation('MANAGE_GUILD')
+          })
+        }
+      });
+
+    const newPrefix = this.args[0];
+
+    // Check first argument is given
+    if (!newPrefix)
+      return this.warningMessage({
+        description: this.translation('PREFIX_MISSING')
+      });
+
+    // Check if the prefix is not equal to the current
+    if (newPrefix === settings.get(this.message.guildId).prefix)
+      return this.warningMessage({
+        description: this.translation('NEW_PREFIX_EQUAL_TO_CURRENT')
+      });
+
+    // Check le len of prefix
+    if (newPrefix.length > this.prefix_max_length)
+      return this.warningMessage({
+        description: this.translation('PREFIX_MAX_LENGTH'),
+        footer: {
+          text: this.translation('PREFIX_LENGTH', {
+            maxLength: this.prefix_max_length
+          })
+        }
+      });
+
+    makeRequest(
+      ApiConfig.get_or_create_or_update_setting(this.message.guildId),
+      'PUT',
+      {
+        prefix: newPrefix
+      }
+    )
+      .then(() => {
+        settings.get(this.message.guildId).prefix = newPrefix;
+        return this.successMessage({
+          description: this.translation('PREFIX_CHANGED')
+        });
+      })
+      .catch(() => {
+        return this.errorMessage({
+          description: this.translation('API_CHANGE_ERROR')
+        });
+      });
+  }
+}
