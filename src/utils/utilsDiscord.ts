@@ -69,6 +69,7 @@ export class UtilsDiscord {
 
       const embed = new MessageEmbed({
         color: color.danger,
+        timestamp: new Date(),
         description: `Error detected in the command: ${command}`
       });
       await channel.send({
