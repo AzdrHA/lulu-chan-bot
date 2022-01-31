@@ -27,9 +27,12 @@ const guildCreate = async (client: Application, guild: Guild) => {
     }
   });
 
-  const channel = client.channels.cache.get(AppConfig.channel.add_bot);
+  const channel =
+    client.channels.cache.get(AppConfig.channel.add_bot) ??
+    (await client.channels.fetch(AppConfig.channel.add_bot));
+
   if (channel && channel instanceof TextChannel) {
-    if (!AppConfig.development) await channel.send({ embeds: [embed] });
+    await channel.send({ embeds: [embed] });
   }
 
   await UtilsDiscord.updateGuildsStatus(client);
