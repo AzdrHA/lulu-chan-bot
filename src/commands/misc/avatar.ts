@@ -1,10 +1,11 @@
-import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message } from 'discord.js';
+import { Category } from '../../types/Category';
 
 export default class Avatar extends BaseCommand {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;
@@ -43,6 +44,8 @@ export default class Avatar extends BaseCommand {
         this.message.guild.members.cache.get(this.args[0]);
       if (!member)
         member = this.message.guild.members.cache.get(this.author.id);
+
+      console.log(member.presence);
 
       return this.messageEmbed({
         description: `[${

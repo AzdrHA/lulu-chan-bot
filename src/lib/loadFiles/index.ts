@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import print from '../print';
 import * as path from 'path';
 import Application from '../../components/application/application';
-import { CommandCategory, commands, commandsList } from '../constants';
-import { BaseCommandType } from '../../components/baseCommand';
+import { commands, commandsList } from '../constants';
+import { BaseCommandType } from '../../components/baseCommand/baseCommand';
 const fsPromises = fs.promises;
 import { Server, Socket } from 'socket.io';
 
@@ -37,15 +37,16 @@ const loadFiles = async (
                       print.options.bright(fileName)
                     );
                   } else
-                    client.on(fileName, (listener) => event(client, listener));
+                    client.on(fileName, (...listener) =>
+                      event(client, ...listener)
+                    );
                 } else if (type === 'command') {
                   const command: BaseCommandType = new event({});
                   if (!command.multipleCommand) {
-                    const hasCommand =
-                      commands.get(<CommandCategory>command.category) ?? [];
+                    const hasCommand = commands.get(command.category) ?? [];
 
                     commands.set(
-                      <CommandCategory>command.category,
+                      command.category,
                       hasCommand.concat([command.alias[0]])
                     );
                   }

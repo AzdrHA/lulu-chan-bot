@@ -1,10 +1,11 @@
-import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message, TextChannel } from 'discord.js';
 import { commands } from '../../lib/constants';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 import { Image } from '../../types/Image';
 import { AppConfig } from '../../config/appConfig';
+import { Category } from '../../types/Category';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const messages = require('../../messages/emotes.json');
@@ -12,7 +13,7 @@ const messages = require('../../messages/emotes.json');
 export default class Emote extends BaseCommand {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;

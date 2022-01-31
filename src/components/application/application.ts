@@ -1,9 +1,7 @@
 import { Client, ClientOptions } from 'discord.js';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
-import { Category } from '../../types/Category';
 import {
-  CommandCategory,
   commands,
   commandsDir,
   eventsDir,
@@ -13,6 +11,7 @@ import print from '../../lib/print';
 import loadFiles from '../../lib/loadFiles';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
+import { CommandCategory } from '../../types/CommandCategory';
 
 // Create Socket Server
 const httpServer = createServer();
@@ -39,7 +38,7 @@ class Application extends Client {
     this.development = options.development;
     this.token = options.token;
 
-    Application.getAllCommands().then(async (res: Category[]) => {
+    Application.getAllCommands().then(async (res: CommandCategory[]) => {
       res.forEach((category) => {
         print.info(
           '%s has %s commands',
@@ -47,11 +46,8 @@ class Application extends Client {
           category.commands.length
         );
         category.commands.forEach((command) => {
-          const hasCommand = commands.get(<CommandCategory>category.name) ?? [];
-          commands.set(
-            <CommandCategory>category.name,
-            hasCommand.concat([command.name])
-          );
+          const hasCommand = commands.get(category.name) ?? [];
+          commands.set(category.name, hasCommand.concat([command.name]));
         });
       });
       return httpServer.listen(3232, () => {

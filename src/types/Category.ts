@@ -1,10 +1,12 @@
-import { Command } from './Command';
-
-export type Category = {
-  id: number;
-  name: string;
-  nsfw: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  commands: Command[];
-};
+export type Category =
+  | 'moderator'
+  | 'image'
+  | 'emote'
+  | 'reaction'
+  | 'hentai'
+  | 'porn'
+  | 'misc'
+  | 'setting'
+  | 'admin'
+  | 'nsfw'
+  | 'music';

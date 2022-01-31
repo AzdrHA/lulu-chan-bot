@@ -1,14 +1,15 @@
-import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message, TextChannel } from 'discord.js';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 import { settings } from '../../lib/constants';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
+import { Category } from '../../types/Category';
 
 export default class Prefix extends BaseCommand {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;

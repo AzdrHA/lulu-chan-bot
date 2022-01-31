@@ -1,12 +1,14 @@
 import Application from '../../components/application/application';
 import { Message } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
-import { commandsList, Guild, settings } from '../../lib/constants';
-import { BaseCommand, CommandConstructor } from '../../components/baseCommand';
+import { commandsList, settings } from '../../lib/constants';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 import UtilsDate from '../../utils/utilsDate';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
+import { Guild } from '../../types/Guild';
+import { CommandConstructor } from '../../types/CommandConstructor';
 const cooldown = new Map<string, any>();
 
 const messageCreate = async (client: Application, message: Message) => {

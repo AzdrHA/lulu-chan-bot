@@ -1,31 +1,7 @@
-import { HexColorString } from 'discord.js';
+import { Setting } from '../types/Setting';
+import { Category } from '../types/Category';
 
-export type CommandCategory =
-  | 'emote'
-  | 'reaction'
-  | 'hentai'
-  | 'porn'
-  | 'misc'
-  | 'setting';
-
-export type Setting = {
-  id: number;
-  prefix: string;
-  color: HexColorString;
-  language: string;
-  createdAt: string;
-  updateAt: string;
-};
-
-export type Guild = {
-  id: number;
-  guild: string;
-  createdAt: Date;
-  updateAt: Date;
-  setting: Setting;
-};
-
-export const commands = new Map<CommandCategory, string[]>();
+export const commands = new Map<Category, string[]>();
 export const settings = new Map<string, Setting>();
 export const commandsList = new Map<string, any>();
 export const getProjectDir = process.cwd();

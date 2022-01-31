@@ -1,28 +1,18 @@
 import { Message, MessageEmbed, MessageEmbedOptions, User } from 'discord.js';
 import Application from '../application/application';
 import { APIEmbed } from 'discord-api-types';
-import { Setting } from '../../lib/constants';
 import translations from '../translations/translations';
 import color from '../../utils/color';
 import emoji from '../../utils/emoji';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
-export type CategoryInterface =
-  | 'moderator'
-  | 'image'
-  | 'emote'
-  | 'reaction'
-  | 'hentai'
-  | 'porn'
-  | 'misc'
-  | 'setting'
-  | 'admin'
-  | 'nsfw'
-  | 'music';
+import { Category } from '../../types/Category';
+import { Setting } from '../../types/Setting';
+import { CommandConstructor } from '../../types/CommandConstructor';
 
 export type BaseCommandType = {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;
@@ -33,18 +23,10 @@ export type BaseCommandType = {
   execute: () => Promise<Message>;
 };
 
-export type CommandConstructor = {
-  client: Application;
-  message: Message;
-  setting: Setting;
-  command: string;
-  args: string[];
-};
-
 export abstract class BaseCommand implements BaseCommandType {
   public abstract alias: string[];
   public abstract allowDM: boolean;
-  public abstract category: CategoryInterface;
+  public abstract category: Category;
   public abstract cooldown: number;
   public abstract description: string;
   public abstract disable: boolean;

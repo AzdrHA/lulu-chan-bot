@@ -1,10 +1,11 @@
-import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message, TextChannel } from 'discord.js';
+import { Category } from '../../types/Category';
 
 export default class Nsfw extends BaseCommand {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;

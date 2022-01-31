@@ -1,11 +1,12 @@
-import { BaseCommand, CategoryInterface } from '../../components/baseCommand';
+import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
+import { Category } from '../../types/Category';
 
 export default class Invite extends BaseCommand {
   alias: string[];
   allowDM: boolean;
-  category: CategoryInterface;
+  category: Category;
   cooldown: number;
   description: string;
   disable: boolean;
