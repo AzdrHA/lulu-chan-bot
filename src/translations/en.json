@@ -1,5 +1,5 @@
 {
-  "API_CHANGE_ERROR": "An error has been detected. It is impossible to change it!",
+  "API_CHANGE_ERROR": "An error has occurred. It is impossible to change it!",
   "ERROR_DETECTED": "An error has occurred. Sorry for the temporary inconvenience. Please try again later",
   "COOLDOWN": "<:clock:819537888450314280> Wait a second, you're going too fast! try again in **{time}s**",
 
@@ -20,7 +20,7 @@
   "COLOR_CHANGED": "The new color has been changed!",
 
   "LANG_LIST_AVAILABLE": "List of available languages.",
-  "LANG_LIST_FOOTER": "Flags • Id • Language",
+  "LANG_LIST_FOOTER": "Flags - Id - Language",
   "NEW_LANG_EQUAL_TO_CURRENT": "The new language cannot be equal to the current!",
   "LANG_BAD_KEY": "The language you entered is invalid. Try with a valid one!",
   "LANG_CHANGED": "The new language has been saved and changed!",
@@ -41,6 +41,10 @@
   "COMMAND_LANGUAGE_DESCRIPTION": "Change the language of the messages.",
   "COMMAND_PREFIX_DESCRIPTION": "Change the prefix of the commands.",
   "COMMAND_NSFW_DESCRIPTION": "Enable/Disable the NSFW in the channel.",
+  "COMMAND_AVATAR_DESCRIPTION": "Display his avatar or that of the member mentioned.",
+  "COMMAND_HELP_DESCRIPTION": "Display the list of command.",
+  "COMMAND_INVITE_DESCRIPTION": "Give the link for invite bot.",
+  "COMMAND_SUPPORT_DESCRIPTION": "Give the link for join the support server.",
 
   "CREATE_INSTANT_INVITE": "Create Invite",
   "KICK_MEMBERS": "Kick Members",
