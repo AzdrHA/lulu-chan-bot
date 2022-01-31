@@ -36,7 +36,7 @@ export class UtilsDiscord {
     client: Application,
     message: Message
   ) => {
-    const channel = client.channels.cache.get(AppConfig.log_direct_message);
+    const channel = client.channels.cache.get(AppConfig.channel.direct_message);
     if (channel && channel instanceof TextChannel) {
       const embed = new MessageEmbed({
         color: message.author.hexAccentColor ?? color.default_color,
@@ -61,7 +61,7 @@ export class UtilsDiscord {
     command: string,
     error: any
   ) => {
-    const channel = client.channels.cache.get(AppConfig.error_channel);
+    const channel = client.channels.cache.get(AppConfig.channel.error);
     if (channel && channel instanceof TextChannel) {
       const now = new Date().getTime();
       const path = 'temp/' + `error-${command}-${now}.json`;

@@ -27,7 +27,7 @@ const guildDelete = async (client: Application, guild: Guild) => {
     }
   });
 
-  const channel = client.channels.cache.get(AppConfig.log_remove_bot_channel);
+  const channel = client.channels.cache.get(AppConfig.channel.remove_bot);
   if (channel && channel instanceof TextChannel) {
     if (!AppConfig.development) await channel.send({ embeds: [embed] });
   }
