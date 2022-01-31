@@ -21,7 +21,7 @@ export default class Avatar extends BaseCommand {
     this.allowDM = true;
     this.category = 'misc';
     this.cooldown = 2;
-    this.description = 'Display his avatar or that of the member mentioned';
+    this.description = this.translation('COMMAND_AVATAR_DESCRIPTION');
     this.disable = false;
     this.example = '{prefix} avatar [@member|ID]';
     this.onlyDev = false;

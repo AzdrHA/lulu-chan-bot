@@ -27,7 +27,7 @@ export default class Reaction extends BaseCommand {
     this.allowDM = false;
     this.category = 'reaction';
     this.cooldown = 2;
-    this.description = 'Need description';
+    this.description = '';
     this.disable = false;
     this.example = `{prefix} [${commands.get('reaction').join('|')}]`;
     this.onlyDev = false;

@@ -24,7 +24,7 @@ export default class Hentai extends BaseCommand {
     this.allowDM = false;
     this.category = 'hentai';
     this.cooldown = 2;
-    this.description = 'Need description';
+    this.description = '';
     this.disable = false;
     this.example = `{prefix} [${commands.get('hentai').join('|')}]`;
     this.onlyDev = false;

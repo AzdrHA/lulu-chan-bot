@@ -21,7 +21,7 @@ export default class Help extends BaseCommand {
     this.allowDM = true;
     this.category = 'misc';
     this.cooldown = 2;
-    this.description = 'help';
+    this.description = this.translation('COMMAND_HELP_DESCRIPTION');
     this.disable = false;
     this.example = '{prefix} help';
     this.onlyDev = false;

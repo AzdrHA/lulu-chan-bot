@@ -20,7 +20,7 @@ export default class Invite extends BaseCommand {
     this.allowDM = true;
     this.category = 'misc';
     this.cooldown = 0;
-    this.description = 'utils';
+    this.description = this.translation('COMMAND_SUPPORT_DESCRIPTION');
     this.disable = false;
     this.example = '{prefix} support';
     this.onlyDev = false;

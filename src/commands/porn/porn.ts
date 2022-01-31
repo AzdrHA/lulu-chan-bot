@@ -24,7 +24,7 @@ export default class Porn extends BaseCommand {
     this.allowDM = false;
     this.category = 'porn';
     this.cooldown = 2;
-    this.description = 'Need description';
+    this.description = '';
     this.disable = false;
     this.example = `{prefix} [${commands.get('porn').join('|')}]`;
     this.onlyDev = false;

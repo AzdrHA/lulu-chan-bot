@@ -27,7 +27,7 @@ export default class Emote extends BaseCommand {
     this.allowDM = false;
     this.category = 'emote';
     this.cooldown = 2;
-    this.description = 'Need description';
+    this.description = '';
     this.disable = false;
     this.example = `{prefix} [${commands.get('emote').join('|')}]`;
     this.onlyDev = false;
