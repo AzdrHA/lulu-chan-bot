@@ -4,6 +4,7 @@ import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 import { settings } from '../../lib/constants';
 import { AppLanguage } from '../../config/appLanguage';
+import { UtilsDiscord } from '../../utils/utilsDiscord';
 
 export default class Color extends BaseCommand {
   alias: string[];
@@ -23,9 +24,9 @@ export default class Color extends BaseCommand {
     this.allowDM = false;
     this.category = 'setting';
     this.cooldown = 5;
-    this.description = 'jsp';
+    this.description = this.translation('COMMAND_LANGUAGE_DESCRIPTION');
     this.disable = false;
-    this.example = 'jsp';
+    this.example = '{prefix} lang {en|fr}';
     this.onlyDev = false;
   }
 
@@ -89,7 +90,8 @@ export default class Color extends BaseCommand {
           description: this.translation('LANG_CHANGED')
         });
       })
-      .catch(() => {
+      .catch((e) => {
+        UtilsDiscord.sendError(this.client, 'color', e.response.data);
         return this.errorMessage({
           description: this.translation('API_CHANGE_ERROR')
         });

@@ -3,6 +3,7 @@ import { Message, TextChannel } from 'discord.js';
 import { makeRequest } from '../../api/makeRequest';
 import { ApiConfig } from '../../config/apiConfig';
 import { settings } from '../../lib/constants';
+import { UtilsDiscord } from '../../utils/utilsDiscord';
 
 export default class Prefix extends BaseCommand {
   alias: string[];
@@ -24,9 +25,9 @@ export default class Prefix extends BaseCommand {
     this.allowDM = false;
     this.category = 'setting';
     this.cooldown = 5;
-    this.description = 'jsp';
+    this.description = this.translation('COMMAND_PREFIX_DESCRIPTION');
     this.disable = false;
-    this.example = 'jsp';
+    this.example = '{prefix} prefix {prefix}';
     this.onlyDev = false;
   }
 
@@ -82,7 +83,8 @@ export default class Prefix extends BaseCommand {
           description: this.translation('PREFIX_CHANGED')
         });
       })
-      .catch(() => {
+      .catch((e) => {
+        UtilsDiscord.sendError(this.client, 'color', e.response.data);
         return this.errorMessage({
           description: this.translation('API_CHANGE_ERROR')
         });

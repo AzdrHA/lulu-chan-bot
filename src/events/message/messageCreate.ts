@@ -86,6 +86,10 @@ const messageCreate = async (client: Application, message: Message) => {
     cooldown.delete(userCooldown);
   }, commandCooldown);
 
-  return command.execute();
+  try {
+    return command.execute();
+  } catch (e) {
+    command.crashMessage(client, commandName, e);
+  }
 };
 export default messageCreate;

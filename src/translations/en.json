@@ -1,5 +1,6 @@
 {
   "API_CHANGE_ERROR": "An error has been detected. It is impossible to change it!",
+  "ERROR_DETECTED": "An error has occurred. Sorry for the temporary inconvenience. Please try again later",
   "COOLDOWN": "<:clock:819537888450314280> Wait a second, you're going too fast! try again in **{time}s**",
 
   "COMMAND_HAS_NOT_IMAGE": "This command has no image yet.",
@@ -35,6 +36,11 @@
 
   "SUPPORT_INVITATION": "Support invitation",
   "INVITE_TITLE": "Invite bot",
+
+  "COMMAND_COLOR_DESCRIPTION": "Change the color of the embed messages.",
+  "COMMAND_LANGUAGE_DESCRIPTION": "Change the language of the messages.",
+  "COMMAND_PREFIX_DESCRIPTION": "Change the prefix of the commands.",
+  "COMMAND_NSFW_DESCRIPTION": "Enable/Disable the NSFW in the channel.",
 
   "CREATE_INSTANT_INVITE": "Create Invite",
   "KICK_MEMBERS": "Kick Members",

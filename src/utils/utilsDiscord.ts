@@ -1,6 +1,13 @@
 import { AppConfig } from '../config/appConfig';
-import { Message, MessageEmbed, TextChannel, VoiceChannel } from 'discord.js';
+import {
+  Message,
+  MessageAttachment,
+  MessageEmbed,
+  TextChannel,
+  VoiceChannel
+} from 'discord.js';
 import Application from '../components/application/application';
+import * as fs from 'fs';
 import color from './color';
 
 export class UtilsDiscord {
@@ -46,6 +53,30 @@ export class UtilsDiscord {
       await channel.send({
         embeds: [embed]
       });
+    }
+  };
+
+  public static sendError = async (
+    client: Application,
+    command: string,
+    error: any
+  ) => {
+    const channel = client.channels.cache.get(AppConfig.error_channel);
+    if (channel && channel instanceof TextChannel) {
+      const now = new Date().getTime();
+      const path = 'temp/' + `error-${command}-${now}.json`;
+      fs.writeFileSync(path, JSON.stringify(error, null, 4));
+
+      const embed = new MessageEmbed({
+        color: color.danger,
+        description: `Error detected in the command: ${command}`
+      });
+      await channel.send({
+        embeds: [embed],
+        files: [new MessageAttachment(path)]
+      });
+
+      fs.unlinkSync(path);
     }
   };
 }

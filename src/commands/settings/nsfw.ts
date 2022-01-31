@@ -19,9 +19,9 @@ export default class Nsfw extends BaseCommand {
     this.allowDM = true;
     this.category = 'setting';
     this.cooldown = 2;
-    this.description = 'utils';
+    this.description = this.translation('COMMAND_NSFW_DESCRIPTION');
     this.disable = false;
-    this.example = 'jsp';
+    this.example = '{prefix} nsfw';
     this.onlyDev = false;
   }
 

@@ -5,6 +5,7 @@ import { Setting } from '../../lib/constants';
 import translations from '../translations/translations';
 import color from '../../utils/color';
 import emoji from '../../utils/emoji';
+import { UtilsDiscord } from '../../utils/utilsDiscord';
 export type CategoryInterface =
   | 'moderator'
   | 'image'
@@ -54,7 +55,14 @@ export abstract class BaseCommand implements BaseCommandType {
 
   public readonly client: Application | null = null;
   public readonly message: Message | null = null;
-  public readonly setting: Setting | null = null;
+  public readonly setting: Setting = {
+    id: 0,
+    prefix: 'l!',
+    color: color.default_color,
+    language: 'en',
+    createdAt: '',
+    updateAt: ''
+  };
 
   public readonly author: User;
   public readonly args: string[];
@@ -108,6 +116,13 @@ export abstract class BaseCommand implements BaseCommandType {
     options.color = color.success;
     options.description = `${emoji.success} ${options.description}`;
     return this.messageEmbed(options);
+  };
+
+  public crashMessage = (client: Application, command: string, error: any) => {
+    UtilsDiscord.sendError(client, command, error);
+    return this.errorMessage({
+      description: this.translation('ERROR_DETECTED')
+    });
   };
 
   public translation = (key: string, variables?: object) =>
