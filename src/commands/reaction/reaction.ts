@@ -1,11 +1,8 @@
 import { BaseCommand } from '../../components/baseCommand/baseCommand';
-import { Message, TextChannel } from 'discord.js';
+import { Message } from 'discord.js';
 import { commands } from '../../lib/constants';
-import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/apiConfig';
-import { Image } from '../../types/Image';
-import { AppConfig } from '../../config/appConfig';
 import { Category } from '../../types/Category';
+import { ImageService } from '../../service/image/ImageService';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const messages = require('../../messages/reactions.json');
@@ -36,17 +33,10 @@ export default class Reaction extends BaseCommand {
   }
 
   async execute(): Promise<Message> {
-    if (!(this.message.channel instanceof TextChannel)) return;
-
     let member =
       this.message.mentions.members.first() ||
       this.message.guild.members.cache.get(this.args[0]);
     if (!member) member = this.message.guild.members.cache.get(this.author.id);
-
-    const image = (await makeRequest(
-      ApiConfig.get_image_by_command(this.command),
-      'GET'
-    )) as Image;
 
     let message: string[] | string = messages[this.command];
     if (message) {
@@ -60,23 +50,8 @@ export default class Reaction extends BaseCommand {
       } else message = '';
     }
 
-    if (image.status && image.status === 404)
-      return this.errorMessage({
-        description: this.translation('COMMAND_HAS_NOT_IMAGE'),
-        image: {
-          url: AppConfig.cdn_domain + '/utils/image-not-found.png'
-        }
-      });
-
-    return this.messageEmbed({
-      description: message as string,
-      footer: {
-        text: image.name
-      },
-      timestamp: new Date(),
-      image: {
-        url: image.url
-      }
+    return this.message.channel.send({
+      embeds: [await ImageService.imageCommand(this, message as string)]
     });
   }
 }

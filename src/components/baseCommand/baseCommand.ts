@@ -72,7 +72,7 @@ export abstract class BaseCommand implements BaseCommandType {
     );
   };
 
-  public messageEmbed = (options: MessageEmbedOptions) => {
+  public messageEmbed = (options: MessageEmbedOptions): Promise<Message> => {
     return this.message.channel.send({ embeds: [this.embed(options)] });
   };
 
