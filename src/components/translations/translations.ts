@@ -13,10 +13,15 @@ const t = (
   }
 ): string => {
   try {
+    // TODO REMOVE eslint-disable-next-line
+
     if (!options.lang) return keyTranslation;
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const lang: object = require(`../../translations/${options.lang}.json`);
-    let str = lang[keyTranslation];
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const defaultLanguage = require(`../../translations/en.json`);
+    let str = lang[keyTranslation] ?? defaultLanguage[keyTranslation];
+
     if (!str) return keyTranslation;
 
     for (const k of Object.keys(emojis)) {

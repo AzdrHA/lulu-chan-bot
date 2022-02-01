@@ -3,9 +3,7 @@ import { Message } from 'discord.js';
 import { commands } from '../../lib/constants';
 import { Category } from '../../types/Category';
 import { ImageService } from '../../service/image/ImageService';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const messages = require('../../messages/reactions.json');
+import messages from '../../messages/reactions.json';
 
 export default class Reaction extends BaseCommand {
   alias: string[];
@@ -33,21 +31,16 @@ export default class Reaction extends BaseCommand {
   }
 
   async execute(): Promise<Message> {
-    let member =
-      this.message.mentions.members.first() ||
-      this.message.guild.members.cache.get(this.args[0]);
-    if (!member) member = this.message.guild.members.cache.get(this.author.id);
-
     let message: string[] | string = messages[this.command];
     if (message) {
-      if (member.id !== this.author.id) message = message['mentioned'];
-      else message = message['self'];
+      message = message[this.memberItsMe() ? 'mentioned' : 'self'];
+      if (!message) message = '';
 
       if (message) {
         message = message[Math.floor(Math.random() * message.length)] as string;
         message = message.replace(/{author}/, this.author.toString());
-        message = message.replace(/{member}/, member.toString());
-      } else message = '';
+        message = message.replace(/{member}/, this.member.toString());
+      }
     }
 
     return this.message.channel.send({

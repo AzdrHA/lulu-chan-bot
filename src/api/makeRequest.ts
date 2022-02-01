@@ -2,9 +2,9 @@ import axios, { AxiosError, Method } from 'axios';
 import { AppConfig } from '../config/appConfig';
 import print from '../lib/print';
 
-export const makeRequest = async (url: string, method: Method, data = {}) => {
-  return new Promise((resolve, reject) => {
-    return axios({
+export const makeRequest = async (url: string, method: Method, data = {}) =>
+  new Promise((resolve, reject) =>
+    axios({
       baseURL: AppConfig.api_domain,
       method,
       url,
@@ -22,6 +22,5 @@ export const makeRequest = async (url: string, method: Method, data = {}) => {
           process.exit(1);
         }
         return reject(e);
-      });
-  });
-};
+      })
+  );

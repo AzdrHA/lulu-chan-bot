@@ -2,10 +2,8 @@ import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message } from 'discord.js';
 import { commands } from '../../lib/constants';
 import { Category } from '../../types/Category';
-import { EmoteMessage, ImageService } from '../../service/image/ImageService';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const messages = require('../../messages/emotes.json');
+import { ImageService } from '../../service/image/ImageService';
+import messages from '../../messages/emotes.json';
 
 export default class Emote extends BaseCommand {
   alias: string[];

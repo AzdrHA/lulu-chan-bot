@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-
 import Application from './components/application/application';
 import { Intents } from 'discord.js';
 import { AppConfig } from './config/appConfig';

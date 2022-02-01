@@ -39,23 +39,15 @@ export default class Avatar extends BaseCommand {
         }
       });
     } else {
-      let member =
-        this.message.mentions.members.first() ||
-        this.message.guild.members.cache.get(this.args[0]);
-      if (!member)
-        member = this.message.guild.members.cache.get(this.author.id);
-
-      console.log(member.presence);
-
       return this.messageEmbed({
         description: `[${
-          member.displayName
-        }'s avatar](${member.displayAvatarURL({
+          this.member.displayName
+        }'s avatar](${this.member.displayAvatarURL({
           size: this.size,
           format: 'png'
         })})`,
         image: {
-          url: member.displayAvatarURL({
+          url: this.member.displayAvatarURL({
             size: this.size,
             format: 'png'
           })

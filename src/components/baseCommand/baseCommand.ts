@@ -1,4 +1,10 @@
-import { Message, MessageEmbed, MessageEmbedOptions, User } from 'discord.js';
+import {
+  GuildMember,
+  Message,
+  MessageEmbed,
+  MessageEmbedOptions,
+  User
+} from 'discord.js';
 import Application from '../application/application';
 import { APIEmbed } from 'discord-api-types';
 import translations from '../translations/translations';
@@ -48,6 +54,7 @@ export abstract class BaseCommand implements BaseCommandType {
 
   public readonly author: User;
   public readonly args: string[];
+  public member: GuildMember;
 
   protected constructor({
     client,
@@ -64,7 +71,20 @@ export abstract class BaseCommand implements BaseCommandType {
     this.args = args;
 
     this.author = message.author;
+    this.member = this.getMember();
   }
+
+  public memberItsMe = () => {
+    return this.member.id === this.author.id;
+  };
+
+  private getMember = (): GuildMember => {
+    return (
+      (this.message.mentions.members.first() ||
+        this.message.guild.members.cache.get(this.args[0])) ??
+      this.message.member
+    );
+  };
 
   public embed = (options?: MessageEmbed | MessageEmbedOptions | APIEmbed) => {
     return new MessageEmbed(options).setColor(

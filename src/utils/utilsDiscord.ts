@@ -1,5 +1,6 @@
 import { AppConfig } from '../config/appConfig';
 import {
+  Channel,
   Message,
   MessageAttachment,
   MessageEmbed,
@@ -9,14 +10,20 @@ import {
 import Application from '../components/application/application';
 import * as fs from 'fs';
 import color from './color';
+import { Snowflake } from 'discord-api-types';
 
 export class UtilsDiscord {
+  public static getChannel = async (
+    client: Application,
+    id: Snowflake
+  ): Promise<Channel> =>
+    client.channels.cache.get(id) ??
+    (await client.channels.fetch(id, { force: true }));
+
   public static updateGuildsStatus = async (client: Application) => {
     if (AppConfig.development) return;
 
-    const channelGuild =
-      client.channels.cache.get(AppConfig.guild_count_channel) ??
-      (await client.channels.fetch(AppConfig.guild_count_channel));
+    const channelGuild = this.getChannel(client, AppConfig.guild_count_channel);
 
     if (channelGuild && channelGuild instanceof VoiceChannel)
       await channelGuild.setName(`Guilds: ${client.guilds.cache.size}`);
@@ -29,9 +36,10 @@ export class UtilsDiscord {
       client.guilds.cache.get(AppConfig.luluchan_guild_id) ??
       (await client.guilds.fetch(AppConfig.luluchan_guild_id));
 
-    const channelMember =
-      client.channels.cache.get(AppConfig.member_count_channel) ??
-      (await client.channels.fetch(AppConfig.member_count_channel));
+    const channelMember = this.getChannel(
+      client,
+      AppConfig.member_count_channel
+    );
 
     if (channelMember && channelMember instanceof VoiceChannel)
       await channelMember.setName(`Members: ${guild.memberCount}`);
@@ -41,9 +49,7 @@ export class UtilsDiscord {
     client: Application,
     message: Message
   ) => {
-    const channel =
-      client.channels.cache.get(AppConfig.channel.direct_message) ??
-      (await client.channels.fetch(AppConfig.channel.direct_message));
+    const channel = this.getChannel(client, AppConfig.channel.direct_message);
 
     if (channel && channel instanceof TextChannel) {
       const embed = new MessageEmbed({
@@ -69,9 +75,7 @@ export class UtilsDiscord {
     command: string,
     error: any
   ) => {
-    const channel =
-      client.channels.cache.get(AppConfig.channel.error) ??
-      (await client.channels.fetch(AppConfig.channel.error));
+    const channel = this.getChannel(client, AppConfig.channel.error);
 
     if (channel && channel instanceof TextChannel) {
       const now = new Date().getTime();

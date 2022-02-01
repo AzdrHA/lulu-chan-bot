@@ -37,11 +37,7 @@ export abstract class GuildMemberService {
         break;
     }
 
-    const channel =
-      client.channels.cache.get(typeData.channel) ??
-      (await client.channels.fetch(typeData.channel, { force: true }));
-    if (channel.partial) await channel.fetch();
-
+    const channel = await UtilsDiscord.getChannel(client, typeData.channel);
     if (channel && channel instanceof TextChannel)
       await channel.send(typeData.message);
   };
