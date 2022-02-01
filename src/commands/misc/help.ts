@@ -1,8 +1,9 @@
 import { BaseCommand } from '../../components/baseCommand/baseCommand';
-import { Message, TextChannel } from 'discord.js';
+import { EmbedFieldData, Message, TextChannel } from 'discord.js';
 import { commands } from '../../lib/constants';
 import { AppConfig } from '../../config/appConfig';
 import { Category } from '../../types/Category';
+import { UtilsArray } from '../../utils/utilsArray';
 
 export default class Help extends BaseCommand {
   alias: string[];
@@ -28,52 +29,30 @@ export default class Help extends BaseCommand {
     this.onlyDev = false;
   }
 
+  helpTitle = {
+    emote: '<:write:616957647509389324> Emotes',
+    reaction: '<:raphi:648949919801016350> Reactions',
+    porn: ':underage: Nsfw Anime',
+    hentai: ':underage: Nsfw',
+    misc: ':file_folder: Misc',
+    setting: ':gear: Settings'
+  };
+
+  private getBody = () => {
+    const fields: EmbedFieldData[] = [];
+    commands.forEach((commands, category) => {
+      fields.push({
+        name: this.helpTitle[category],
+        value: UtilsArray.join(commands, ', ', '`')
+      });
+    });
+    return fields;
+  };
+
   execute(): Promise<Message> {
     if (!(this.message.channel instanceof TextChannel)) return;
     return this.messageEmbed({
-      fields: [
-        {
-          name: '<:write:616957647509389324> Emotes',
-          value: commands
-            .get('emote')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
-        {
-          name: '<:raphi:648949919801016350> Reactions',
-          value: commands
-            .get('reaction')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
-        {
-          name: ':underage: Nsfw Anime',
-          value: commands
-            .get('hentai')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
-        {
-          name: ':underage: Nsfw',
-          value: commands
-            .get('porn')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
-        {
-          name: ':file_folder: Misc',
-          value: commands
-            .get('misc')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
-        {
-          name: ':gear: Settings',
-          value: commands
-            .get('setting')
-            .map((v) => '`' + v + '`')
-            .join(',')
-        },
+      fields: this.getBody().concat(
         {
           name: this.translation('SUPPORT_INVITATION'),
           value: this.translation('DISCORD_SERVER_INVITATION', {
@@ -88,7 +67,7 @@ export default class Help extends BaseCommand {
           }),
           inline: true
         }
-      ]
+      )
     });
   }
 }
