@@ -4,6 +4,10 @@ import color from '../../utils/color';
 import { AppConfig } from '../../config/appConfig';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
 
+/**
+ * @param {Application} client
+ * @param {Guild} guild
+ */
 const guildDelete = async (client: Application, guild: Guild) => {
   const embed = new MessageEmbed({
     author: {

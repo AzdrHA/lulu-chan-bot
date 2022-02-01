@@ -1,17 +1,24 @@
 import Application from '../../components/application/application';
-import { GuildMember, TextChannel } from 'discord.js';
+import { GuildMember, Message, TextChannel } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
 import emoji from '../../utils/emoji';
 
+// TODO change to enum
 type MemberActionType = 'add' | 'remove';
 
 export abstract class GuildMemberService {
+  /**
+   * @param {Application} client
+   * @param {GuildMember} member
+   * @param {MemberActionType} type
+   * @return {Promise<Message>}
+   */
   public static memberJoinOrLeave = async (
     client: Application,
     member: GuildMember,
     type: MemberActionType
-  ) => {
+  ): Promise<Message> => {
     if (member.guild.id !== AppConfig.luluchan_guild_id) return;
     await UtilsDiscord.updateMembersStatus(client);
     let typeData = { channel: '', message: '' };
@@ -38,7 +45,8 @@ export abstract class GuildMemberService {
     }
 
     const channel = await UtilsDiscord.getChannel(client, typeData.channel);
-    if (channel && channel instanceof TextChannel)
-      await channel.send(typeData.message);
+    if (!channel || !(channel instanceof TextChannel)) return;
+
+    return channel.send(typeData.message);
   };
 }

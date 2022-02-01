@@ -6,7 +6,6 @@ import {
   User
 } from 'discord.js';
 import Application from '../application/application';
-import { APIEmbed } from 'discord-api-types';
 import translations from '../translations/translations';
 import color from '../../utils/color';
 import emoji from '../../utils/emoji';
@@ -74,10 +73,16 @@ export abstract class BaseCommand implements BaseCommandType {
     this.member = this.getMember();
   }
 
-  public memberItsMe = () => {
+  /**
+   * @return {boolean}
+   */
+  public memberItsMe = (): boolean => {
     return this.member.id === this.author.id;
   };
 
+  /**
+   * @return {GuildMember}
+   */
   private getMember = (): GuildMember => {
     return (
       (this.message.mentions.members.first() ||
@@ -86,48 +91,87 @@ export abstract class BaseCommand implements BaseCommandType {
     );
   };
 
-  public embed = (options?: MessageEmbed | MessageEmbedOptions | APIEmbed) => {
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {MessageEmbed}
+   */
+  public embed = (options?: MessageEmbedOptions): MessageEmbed => {
     return new MessageEmbed(options).setColor(
       options.color ?? this.setting.color
     );
   };
 
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {Promise<Message>}
+   */
   public messageEmbed = (options: MessageEmbedOptions): Promise<Message> => {
     return this.message.channel.send({ embeds: [this.embed(options)] });
   };
 
-  public warningMessage = (options: MessageEmbedOptions) => {
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {Promise<Message>}
+   */
+  public warningMessage = (options: MessageEmbedOptions): Promise<Message> => {
     options.color = color.warning;
     options.description = `${emoji.warning} ${options.description}`;
     return this.messageEmbed(options);
   };
 
-  public errorMessage = (options: MessageEmbedOptions) => {
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {Promise<Message>}
+   */
+  public errorMessage = (options: MessageEmbedOptions): Promise<Message> => {
     options.color = color.danger;
     options.description = `${emoji.error} ${options.description}`;
     return this.messageEmbed(options);
   };
 
-  public accessDenied = (options: MessageEmbedOptions) => {
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {Promise<Message>}
+   */
+  public accessDenied = (options: MessageEmbedOptions): Promise<Message> => {
     options.color = color.danger;
     options.description = `${emoji.denied} ${options.description}`;
     return this.messageEmbed(options);
   };
 
-  public successMessage = (options: MessageEmbedOptions) => {
+  /**
+   * @param {MessageEmbedOptions} options
+   * @return {Promise<Message>}
+   */
+  public successMessage = (options: MessageEmbedOptions): Promise<Message> => {
     options.color = color.success;
     options.description = `${emoji.success} ${options.description}`;
     return this.messageEmbed(options);
   };
 
-  public crashMessage = (client: Application, command: string, error: any) => {
+  /**
+   * @param {Application} client
+   * @param {string} command
+   * @param {any} error
+   * @return {Promise<Message>}
+   */
+  public crashMessage = (
+    client: Application,
+    command: string,
+    error: any
+  ): Promise<Message> => {
     UtilsDiscord.sendError(client, command, error);
     return this.errorMessage({
       description: this.translation('ERROR_DETECTED')
     });
   };
 
-  public translation = (key: string, variables?: object) =>
+  /**
+   * @param {string} key
+   * @param {Object} variables
+   * @return {string}
+   */
+  public translation = (key: string, variables?: object): string =>
     translations(key, {
       lang: this.setting.language || 'en',
       variables: variables

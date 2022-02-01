@@ -5,10 +5,12 @@ import { AppConfig } from '../../config/appConfig';
 import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 
+// TODO See if it is necessary
 export type EmoteMessage = {
   [command: string]: string[];
 };
 
+// TODO See if it is necessary
 export type ReactionMessage = {
   [command: string]: {
     self?: string[];
@@ -17,6 +19,10 @@ export type ReactionMessage = {
 };
 
 export abstract class ImageService {
+  /**
+   * @param {BaseCommand} data
+   * @return {Promise<Message>}
+   */
   public static nsfwCommand = async (data: BaseCommand): Promise<Message> => {
     if (!(data.message.channel instanceof TextChannel)) return;
 
@@ -33,6 +39,11 @@ export abstract class ImageService {
     });
   };
 
+  /**
+   * @param {BaseCommand} data
+   * @param {string|null} message
+   * @return {Promise<MessageEmbed>}
+   */
   public static imageCommand = async (
     data: BaseCommand,
     message?: string

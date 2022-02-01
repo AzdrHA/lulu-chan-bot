@@ -11,6 +11,10 @@ import { Guild } from '../../types/Guild';
 import { CommandConstructor } from '../../types/CommandConstructor';
 const cooldown = new Map<string, any>();
 
+/**
+ * @param {Application} client
+ * @param {Message} message
+ */
 const messageCreate = async (client: Application, message: Message) => {
   if (message.author.bot) return;
   if (message.channel.type === 'DM')

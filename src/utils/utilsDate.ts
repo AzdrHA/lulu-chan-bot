@@ -1,4 +1,8 @@
 export default class UtilsDate {
+  /**
+   * @param {number} ms
+   * @return {string}
+   */
   public static formatTime = (ms: number): string => {
     const timeMs = new Date(ms);
     const minutes = timeMs.getMinutes();

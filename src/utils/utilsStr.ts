@@ -1,5 +1,9 @@
 export default class UtilsStr {
-  public static convertStringArrayToArray = (input: string) => {
+  /**
+   * @param {string} input
+   * @return {string[]}
+   */
+  public static convertStringArrayToArray = (input: string): string[] => {
     return input.replace(/[\[\]]/g, '').split(',');
   };
 }

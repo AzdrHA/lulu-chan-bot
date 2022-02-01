@@ -1,14 +1,21 @@
-import { MessageReaction, User } from 'discord.js';
+import { Message, MessageReaction, User } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
 
+// TODO change to enum
 type RoleReactionType = 'add' | 'remove';
 
 export abstract class MessageReactionService {
+  /**
+   * @param {MessageReaction} messageReaction
+   * @param {User} user
+   * @param {RoleReactionType} type
+   * @return {Promise<Message>}
+   */
   public static roleAddOrRemove = async (
     messageReaction: MessageReaction,
     user: User,
     type: RoleReactionType
-  ) => {
+  ): Promise<Message> => {
     if (messageReaction.message.id === AppConfig.roles.team.message) {
       if (messageReaction.message.partial)
         await messageReaction.message.fetch();
@@ -32,11 +39,10 @@ export abstract class MessageReactionService {
         switch (type) {
           case 'add':
             await member.roles.add(role);
-            await member.send(`You have chosen the role **${role.name}**.`);
-            break;
+            return member.send(`You have chosen the role **${role.name}**.`);
           case 'remove':
             await member.roles.remove(role);
-            await member.send(`You have withdrawn the role **${role.name}**.`);
+            return member.send(`You have withdrawn the role **${role.name}**.`);
         }
       }
     }

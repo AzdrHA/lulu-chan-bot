@@ -6,8 +6,6 @@ const messageReactionRemove = async (
   client: Application,
   messageReaction: MessageReaction,
   user: User
-) => {
-  await MessageReactionService.roleAddOrRemove(messageReaction, user, 'remove');
-};
+) => MessageReactionService.roleAddOrRemove(messageReaction, user, 'remove');
 
 export default messageReactionRemove;
