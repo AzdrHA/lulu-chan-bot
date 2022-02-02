@@ -1,5 +1,4 @@
 export type Category =
-  | 'moderator'
   | 'image'
   | 'emote'
   | 'reaction'
@@ -8,5 +7,4 @@ export type Category =
   | 'misc'
   | 'setting'
   | 'admin'
-  | 'nsfw'
   | 'music';

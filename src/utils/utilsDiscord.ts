@@ -34,7 +34,10 @@ export class UtilsDiscord {
   ): Promise<Channel> => {
     if (AppConfig.development) return;
 
-    const channelGuild = this.getChannel(client, AppConfig.guild_count_channel);
+    const channelGuild = await this.getChannel(
+      client,
+      AppConfig.guild_count_channel
+    );
 
     if (channelGuild && channelGuild instanceof VoiceChannel)
       await channelGuild.setName(`Guilds: ${client.guilds.cache.size}`);
@@ -55,7 +58,7 @@ export class UtilsDiscord {
       client.guilds.cache.get(AppConfig.luluchan_guild_id) ??
       (await client.guilds.fetch(AppConfig.luluchan_guild_id));
 
-    const channelMember = this.getChannel(
+    const channelMember = await this.getChannel(
       client,
       AppConfig.member_count_channel
     );
@@ -75,7 +78,10 @@ export class UtilsDiscord {
     client: Application,
     message: Message
   ): Promise<Message> => {
-    const channel = this.getChannel(client, AppConfig.channel.direct_message);
+    const channel = await this.getChannel(
+      client,
+      AppConfig.channel.direct_message
+    );
     if (!channel || !(channel instanceof TextChannel)) return;
 
     const embed = new MessageEmbed({
@@ -105,7 +111,7 @@ export class UtilsDiscord {
     command: string,
     error: any
   ): Promise<Message> => {
-    const channel = this.getChannel(client, AppConfig.channel.error);
+    const channel = await this.getChannel(client, AppConfig.channel.error);
     if (!channel || !(channel instanceof TextChannel)) return;
 
     const now = new Date().getTime();

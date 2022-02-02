@@ -49,6 +49,7 @@ const loadFiles = async (
                     );
                 } else if (type === 'command') {
                   const command: BaseCommandType = new event({});
+                  // TODO NEED TO ORDER CATEGORY
                   if (!command.multipleCommand) {
                     const hasCommand = commands.get(command.category) ?? [];
 

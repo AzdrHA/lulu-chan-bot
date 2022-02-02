@@ -1,5 +1,10 @@
 import { BaseCommand } from '../../components/baseCommand/baseCommand';
-import { EmbedFieldData, Message, TextChannel } from 'discord.js';
+import {
+  CategoryChannel,
+  EmbedFieldData,
+  Message,
+  TextChannel
+} from 'discord.js';
 import { commands } from '../../lib/constants';
 import { AppConfig } from '../../config/appConfig';
 import { Category } from '../../types/Category';
@@ -29,7 +34,10 @@ export default class Help extends BaseCommand {
     this.onlyDev = false;
   }
 
-  helpTitle = {
+  helpTitle: Record<Category, string> = {
+    admin: '🔨 Administrator',
+    image: '🖼 Images',
+    music: '🎵 Musics',
     emote: '<:write:616957647509389324> Emotes',
     reaction: '<:raphi:648949919801016350> Reactions',
     porn: ':underage: Nsfw Anime',

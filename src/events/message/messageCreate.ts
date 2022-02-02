@@ -95,7 +95,14 @@ const messageCreate = async (client: Application, message: Message) => {
   try {
     return command.execute();
   } catch (e) {
-    command.crashMessage(client, commandName, e);
+    if (e instanceof RangeError)
+      return command.crashMessage(client, commandName, {
+        message: e.message,
+        name: e.name,
+        stack: e.stack
+      });
+
+    return command.crashMessage(client, commandName, e);
   }
 };
 export default messageCreate;
