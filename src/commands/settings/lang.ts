@@ -91,8 +91,8 @@ export default class Color extends BaseCommand {
           description: this.translation('LANG_CHANGED')
         });
       })
-      .catch((e) => {
-        UtilsDiscord.sendError(this.client, 'color', e.response.data);
+      .catch(async (e) => {
+        await UtilsDiscord.sendError(this.client, 'color', e.response.data);
         return this.errorMessage({
           description: this.translation('API_CHANGE_ERROR')
         });

@@ -46,14 +46,14 @@ export default class Color extends BaseCommand {
           description: this.translation('COLOR_CHANGED')
         });
       })
-      .catch((e) => {
-        UtilsDiscord.sendError(this.client, 'color', e.response.data);
+      .catch(async (e) => {
+        await UtilsDiscord.sendError(this.client, 'color', e.response.data);
         return this.errorMessage({
           description: this.translation('API_CHANGE_ERROR')
         });
       });
 
-  public execute(): Promise<Message> {
+  public async execute(): Promise<Message> {
     if (!(this.message.channel instanceof TextChannel)) return;
 
     try {
@@ -92,7 +92,7 @@ export default class Color extends BaseCommand {
 
       return this.saveColor(newColor as HexColorString);
     } catch (e) {
-      UtilsDiscord.sendError(this.client, 'color', e);
+      await UtilsDiscord.sendError(this.client, 'color', e);
     }
   }
 }

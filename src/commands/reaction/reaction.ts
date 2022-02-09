@@ -31,13 +31,13 @@ export default class Reaction extends BaseCommand {
   }
 
   async execute(): Promise<Message> {
-    let message: string[] | string = messages[this.command];
+    let message: string = messages[this.command];
     if (message) {
-      message = message[this.memberItsMe() ? 'mentioned' : 'self'];
+      message = message[this.memberItsMe() ? 'self' : 'mentioned'];
       if (!message) message = '';
 
       if (message) {
-        message = message[Math.floor(Math.random() * message.length)] as string;
+        message = message[Math.floor(Math.random() * message.length)];
         message = message.replace(/{author}/, this.author.toString());
         message = message.replace(/{member}/, this.member.toString());
       }

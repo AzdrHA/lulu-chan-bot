@@ -1,4 +1,5 @@
 import * as util from 'util';
+import { AppConfig } from '../../config/appConfig';
 
 const color = {
   cyan: function (message: string) {
@@ -33,8 +34,7 @@ const log = (
     date.getMinutes(),
     date.getSeconds()
   );
-  // TODO remove process.env.DEVELOPMENT. Go through app config
-  dateFormat = process.env.DEVELOPMENT ? dateFormat.split(' ')[1] : dateFormat;
+  dateFormat = AppConfig.development ? dateFormat.split(' ')[1] : dateFormat;
   return process.stdout.write(
     prefix +
       ' ' +

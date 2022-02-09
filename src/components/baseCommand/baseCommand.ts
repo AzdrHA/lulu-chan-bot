@@ -155,12 +155,12 @@ export abstract class BaseCommand implements BaseCommandType {
    * @param {any} error
    * @return {Promise<Message>}
    */
-  public crashMessage = (
+  public crashMessage = async (
     client: Application,
     command: string,
     error: any
   ): Promise<Message> => {
-    UtilsDiscord.sendError(client, command, error);
+    await UtilsDiscord.sendError(client, command, error);
     return this.errorMessage({
       description: this.translation('ERROR_DETECTED')
     });

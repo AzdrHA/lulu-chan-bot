@@ -4,7 +4,6 @@ import { AppConfig } from '../../config/appConfig';
 import { UtilsDiscord } from '../../utils/utilsDiscord';
 import emoji from '../../utils/emoji';
 
-// TODO change to enum
 type MemberActionType = 'add' | 'remove';
 
 export abstract class GuildMemberService {

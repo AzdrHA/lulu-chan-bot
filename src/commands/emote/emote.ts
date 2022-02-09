@@ -31,7 +31,7 @@ export default class Emote extends BaseCommand {
   }
 
   async execute(): Promise<Message> {
-    let message: string[] | string = messages[this.command];
+    let message: string = messages['gdgdgd'];
     message = message
       ? message[Math.floor(Math.random() * message.length)].replace(
           /{author}/,

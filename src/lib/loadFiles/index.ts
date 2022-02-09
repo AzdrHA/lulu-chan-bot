@@ -7,7 +7,6 @@ import { BaseCommandType } from '../../components/baseCommand/baseCommand';
 const fsPromises = fs.promises;
 import { Server, Socket } from 'socket.io';
 
-// TODO Change to enum
 export type LoadFile = 'command' | 'event' | 'socket';
 
 /**

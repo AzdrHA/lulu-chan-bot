@@ -10,7 +10,7 @@ export const makeRequest = async (url: string, method: Method, data = {}) =>
       url,
       data,
       headers: {
-        authorization: `Bearer ${process.env.API_TOKEN}`
+        authorization: `Bearer ${AppConfig.api_token}`
       }
     })
       .then((r) => resolve(r.data))

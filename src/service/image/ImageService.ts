@@ -5,19 +5,6 @@ import { AppConfig } from '../../config/appConfig';
 import { BaseCommand } from '../../components/baseCommand/baseCommand';
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 
-// TODO See if it is necessary
-export type EmoteMessage = {
-  [command: string]: string[];
-};
-
-// TODO See if it is necessary
-export type ReactionMessage = {
-  [command: string]: {
-    self?: string[];
-    mentioned: string[];
-  };
-};
-
 export abstract class ImageService {
   /**
    * @param {BaseCommand} data

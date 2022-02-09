@@ -1,7 +1,6 @@
 import { Message, MessageReaction, User } from 'discord.js';
 import { AppConfig } from '../../config/appConfig';
 
-// TODO change to enum
 type RoleReactionType = 'add' | 'remove';
 
 export abstract class MessageReactionService {
