@@ -1,4 +1,4 @@
-import UtilsStr from '../utils/utilsStr';
+import UtilsStr from '../utils/UtilsStr';
 import { RoleEmoji } from '../types/RoleEmoji';
 
 export const AppConfig = {

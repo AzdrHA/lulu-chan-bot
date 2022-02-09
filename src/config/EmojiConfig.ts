@@ -1,4 +1,4 @@
-export default {
+const EmojiConfig = {
   success: '<:success:818253170995494933>',
   error: '<:error:818253200070541352>',
   warning: '<:warning:818193290976297001>',
@@ -16,3 +16,4 @@ export default {
   color_reload: '\uD83D\uDD01',
   color_accept: '\uD83C\uDD97'
 };
+export default EmojiConfig;

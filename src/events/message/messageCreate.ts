@@ -1,21 +1,21 @@
-import Application from '../../components/application/application';
+import Application from '../../components/Application/Application';
 import { Message } from 'discord.js';
-import { AppConfig } from '../../config/appConfig';
-import { commandsList, settings } from '../../lib/constants';
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { AppConfig } from '../../config/AppConfig';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/apiConfig';
-import UtilsDate from '../../utils/utilsDate';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
+import { ApiConfig } from '../../config/ApiConfig';
+import UtilsDate from '../../utils/UtilsDate';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Guild } from '../../types/Guild';
 import { CommandConstructor } from '../../types/CommandConstructor';
+import { commandsList, settings } from '../../config/Constants';
 const cooldown = new Map<string, any>();
 
 /**
  * @param {Application} client
  * @param {Message} message
  */
-const messageCreate = async (client: Application, message: Message) => {
+export default async (client: Application, message: Message) => {
   if (message.author.bot) return;
   if (message.channel.type === 'DM')
     return UtilsDiscord.directMessage(client, message);
@@ -105,4 +105,3 @@ const messageCreate = async (client: Application, message: Message) => {
     return command.crashMessage(client, commandName, e);
   }
 };
-export default messageCreate;

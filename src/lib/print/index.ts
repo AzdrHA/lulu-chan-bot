@@ -1,14 +1,17 @@
 import * as util from 'util';
-import { AppConfig } from '../../config/appConfig';
+import UtilsDate from '../../utils/UtilsDate';
 
 const color = {
-  cyan: function (message: string) {
+  cyan: (message: string) => {
     return `\x1b[36m${message}\x1b[0m`;
   },
-  black: function (message: string) {
+  black: (message: string) => {
     return `\x1b[30m${message}\x1b[0m`;
   },
-  red: function (message: string) {
+  gray: (message: string) => {
+    return `\x1b[2m${message}\x1b[0m`;
+  },
+  red: (message: string) => {
     return `\x1b[31m${message}\x1b[0m`;
   }
 };
@@ -25,20 +28,10 @@ const log = (
   ...optionalParams: any[]
 ): boolean => {
   const date = new Date();
-  let dateFormat = util.format(
-    '%s/%s/%s %s:%s:%s',
-    date.getDate(),
-    date.getMonth(),
-    date.getFullYear(),
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds()
-  );
-  dateFormat = AppConfig.development ? dateFormat.split(' ')[1] : dateFormat;
   return process.stdout.write(
     prefix +
       ' ' +
-      color.black(dateFormat) +
+      color.gray(UtilsDate.convertDateToFormat(date)) +
       ' ' +
       util.format(message, ...optionalParams) +
       '\n'

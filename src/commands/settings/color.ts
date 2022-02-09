@@ -1,25 +1,29 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { HexColorString, Message, TextChannel } from 'discord.js';
 import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/apiConfig';
-import { settings } from '../../lib/constants';
-import color from '../../utils/color';
-import UtilsRegex from '../../utils/utilsRegex';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
+import { ApiConfig } from '../../config/ApiConfig';
+import UtilsRegex from '../../utils/UtilsRegex';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
+import ColorConfig from '../../config/ColorConfig';
+import { CommandConstructor } from '../../types/CommandConstructor';
+import { settings } from '../../config/Constants';
 
 export default class Color extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  public constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = ['color'];
@@ -53,7 +57,10 @@ export default class Color extends BaseCommand {
         });
       });
 
-  public async execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     if (!(this.message.channel instanceof TextChannel)) return;
 
     try {
@@ -69,13 +76,14 @@ export default class Color extends BaseCommand {
         });
 
       const newColor = this.args[0];
-      if (newColor === 'default') return this.saveColor(color.default_color);
+      if (newColor === 'default')
+        return this.saveColor(ColorConfig.default_color);
 
       // Check first argument is given
       if (!newColor)
         return this.warningMessage({
           description: this.translation('COLOR_MISSING', {
-            defaultColor: color.default_color
+            defaultColor: ColorConfig.default_color
           })
         });
 
@@ -94,5 +102,5 @@ export default class Color extends BaseCommand {
     } catch (e) {
       await UtilsDiscord.sendError(this.client, 'color', e);
     }
-  }
+  };
 }

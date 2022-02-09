@@ -1,22 +1,26 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message } from 'discord.js';
 import { Category } from '../../types/Category';
 import * as util from 'util';
 import childProcess from 'child_process';
-import { UtilsSystem } from '../../utils/utilsSystem';
+import { UtilsSystem } from '../../utils/UtilsSystem';
+import { CommandConstructor } from '../../types/CommandConstructor';
 
 export default class Info extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = ['info'];
@@ -29,12 +33,15 @@ export default class Info extends BaseCommand {
     this.onlyDev = false;
   }
 
-  async execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     const exec = util.promisify(childProcess.exec);
     // const {stdout} = await exec('git log --pretty="%ct" -n 1');
     // const {stdout} = await exec('git show -s --date=format:%cd --format=%cd');
     const { stdout } = await exec('git show -s --format=%ct');
-    const oneDay = 24 * 60 * 60 * 1000;
+    // const oneDay = 24 * 60 * 60 * 1000;
 
     return this.messageEmbed({
       fields: [
@@ -85,5 +92,5 @@ export default class Info extends BaseCommand {
         }
       ]
     });
-  }
+  };
 }

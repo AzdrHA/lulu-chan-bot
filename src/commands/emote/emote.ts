@@ -1,22 +1,26 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message } from 'discord.js';
-import { commands } from '../../lib/constants';
 import { Category } from '../../types/Category';
 import { ImageService } from '../../service/image/ImageService';
 import messages from '../../messages/emotes.json';
+import { CommandConstructor } from '../../types/CommandConstructor';
+import { commands } from '../../config/Constants';
 
 export default class Emote extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = commands.get('emote');
@@ -30,7 +34,10 @@ export default class Emote extends BaseCommand {
     this.multipleCommand = true;
   }
 
-  async execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     let message: string = messages['gdgdgd'];
     message = message
       ? message[Math.floor(Math.random() * message.length)].replace(
@@ -42,5 +49,5 @@ export default class Emote extends BaseCommand {
     return this.message.channel.send({
       embeds: [await ImageService.imageCommand(this, message as string)]
     });
-  }
+  };
 }

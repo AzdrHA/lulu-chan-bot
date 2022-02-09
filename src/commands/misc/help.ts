@@ -1,27 +1,26 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
-import {
-  CategoryChannel,
-  EmbedFieldData,
-  Message,
-  TextChannel
-} from 'discord.js';
-import { commands } from '../../lib/constants';
-import { AppConfig } from '../../config/appConfig';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
+import { EmbedFieldData, Message, TextChannel } from 'discord.js';
+import { AppConfig } from '../../config/AppConfig';
 import { Category } from '../../types/Category';
-import { UtilsArray } from '../../utils/utilsArray';
+import { UtilsArray } from '../../utils/UtilsArray';
+import { CommandConstructor } from '../../types/CommandConstructor';
+import { commands } from '../../config/Constants';
 
 export default class Help extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = ['help'];
@@ -57,7 +56,10 @@ export default class Help extends BaseCommand {
     return fields;
   };
 
-  execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     if (!(this.message.channel instanceof TextChannel)) return;
     return this.messageEmbed({
       fields: this.getBody().concat(
@@ -77,5 +79,5 @@ export default class Help extends BaseCommand {
         }
       )
     });
-  }
+  };
 }

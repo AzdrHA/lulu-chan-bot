@@ -1,7 +1,12 @@
 import axios, { AxiosError, Method } from 'axios';
-import { AppConfig } from '../config/appConfig';
+import { AppConfig } from '../config/AppConfig';
 import print from '../lib/print';
 
+/**
+ * @param {string} url
+ * @param {Method} method
+ * @param {Object} data
+ */
 export const makeRequest = async (url: string, method: Method, data = {}) =>
   new Promise((resolve, reject) =>
     axios({

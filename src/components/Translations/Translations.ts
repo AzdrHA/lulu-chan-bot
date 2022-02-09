@@ -1,11 +1,12 @@
-import emojis from '../../utils/emoji';
+import EmojiConfig from '../../config/EmojiConfig';
+
 /**
  *
  * @param {string} keyTranslation
  * @param {object} options
  * @return {string}
  */
-const t = (
+const translations = (
   keyTranslation: string,
   options: {
     lang: string;
@@ -24,9 +25,9 @@ const t = (
 
     if (!str) return keyTranslation;
 
-    for (const k of Object.keys(emojis)) {
+    for (const k of Object.keys(EmojiConfig)) {
       const re = new RegExp(`{${k}}`, 'gi');
-      if (re) str = str.replace(re, emojis[k]);
+      if (re) str = str.replace(re, EmojiConfig[k]);
     }
 
     if (options.variables) {
@@ -45,4 +46,4 @@ const t = (
   }
 };
 
-export default t;
+export default translations;

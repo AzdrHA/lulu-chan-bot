@@ -1,21 +1,25 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message } from 'discord.js';
 import { Category } from '../../types/Category';
+import { CommandConstructor } from '../../types/CommandConstructor';
 
 export default class Avatar extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
   private readonly size: 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = ['avatar'];
@@ -30,7 +34,10 @@ export default class Avatar extends BaseCommand {
     this.size = 512;
   }
 
-  execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     if (this.message.channel.type === 'DM') {
       return this.messageEmbed({
         description: `[Your avatar!](https://cdn.discordapp.com/avatars/${this.author.id}/${this.author.avatar}.png?size=${this.size})`,
@@ -54,5 +61,5 @@ export default class Avatar extends BaseCommand {
         }
       });
     }
-  }
+  };
 }

@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 import print from '../print';
 import * as path from 'path';
-import Application from '../../components/application/application';
-import { commands, commandsList } from '../constants';
-import { BaseCommandType } from '../../components/baseCommand/baseCommand';
+import Application from '../../components/Application/Application';
+import { BaseCommandType } from '../../components/BaseCommand/BaseCommand';
 const fsPromises = fs.promises;
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
+import { commands, commandsList } from '../../config/Constants';
 
 export type LoadFile = 'command' | 'event' | 'socket';
 
@@ -20,7 +20,7 @@ const loadFiles = async (
   type: LoadFile,
   client: Application,
   socket: Server
-) => {
+): Promise<any> => {
   return fsPromises
     .readdir(dir)
     .then(async (files) => {
@@ -37,15 +37,9 @@ const loadFiles = async (
                 const { default: event } = await import(filePath);
 
                 if (type === 'event') {
-                  if (!event || event.name !== fileName) {
-                    print.danger(
-                      '%s is not correctly configured!',
-                      print.options.bright(fileName)
-                    );
-                  } else
-                    client.on(fileName, (...listener) =>
-                      event(client, ...listener)
-                    );
+                  client.on(fileName, (...listener) =>
+                    event(client, ...listener)
+                  );
                 } else if (type === 'command') {
                   const command: BaseCommandType = new event({});
                   // TODO NEED TO ORDER CATEGORY

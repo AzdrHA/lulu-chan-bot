@@ -1,6 +1,6 @@
 import { HexColorString } from 'discord.js';
 
-export type Color = {
+export type Colors = {
   success: HexColorString;
   danger: HexColorString;
   warning: HexColorString;
@@ -9,7 +9,7 @@ export type Color = {
   default_color: HexColorString;
 };
 
-const color: Color = {
+const ColorConfig: Colors = {
   success: '#29b362',
   danger: '#0xed4245', // c2352b
   warning: '#e5bf4c',
@@ -18,4 +18,4 @@ const color: Color = {
   default_color: '#67acbb'
 };
 
-export default color;
+export default ColorConfig;

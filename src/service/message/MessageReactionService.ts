@@ -1,5 +1,5 @@
 import { Message, MessageReaction, User } from 'discord.js';
-import { AppConfig } from '../../config/appConfig';
+import { AppConfig } from '../../config/AppConfig';
 
 type RoleReactionType = 'add' | 'remove';
 

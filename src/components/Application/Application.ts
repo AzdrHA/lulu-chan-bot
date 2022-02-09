@@ -1,17 +1,17 @@
 import { Client, ClientOptions } from 'discord.js';
 import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/apiConfig';
+import { ApiConfig } from '../../config/ApiConfig';
+import print from '../../lib/print';
+import loadFiles from '../../lib/loadFiles';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import { CommandCategory } from '../../types/CommandCategory';
 import {
   commands,
   commandsDir,
   eventsDir,
   socketDir
-} from '../../lib/constants';
-import print from '../../lib/print';
-import loadFiles from '../../lib/loadFiles';
-import { createServer } from 'http';
-import { Server, Socket } from 'socket.io';
-import { CommandCategory } from '../../types/CommandCategory';
+} from '../../config/Constants';
 
 // Create Socket Server
 const httpServer = createServer();
@@ -32,13 +32,16 @@ class Application extends Client {
   public development: boolean;
   public token: string;
 
+  /**
+   * @param {ApplicationOption} options
+   */
   public constructor(options: ApplicationOption) {
     super(options);
 
     this.development = options.development;
     this.token = options.token;
 
-    Application.getAllCommands().then(async (res: CommandCategory[]) => {
+    Application.getAllCommands().then((res) => {
       res.forEach((category) => {
         print.info(
           '%s has %s commands',
@@ -57,29 +60,49 @@ class Application extends Client {
     });
   }
 
-  private static async getAllCommands() {
-    return makeRequest(ApiConfig.get_all_commands, 'GET');
+  /**
+   * @private
+   * @return {Promise<CommandCategory[]>}
+   */
+  private static async getAllCommands(): Promise<CommandCategory[]> {
+    return (await makeRequest(ApiConfig.get_all_commands, 'GET')) as Promise<
+      CommandCategory[]
+    >;
   }
 
-  private async loadSocket() {
+  /**
+   * @private
+   * @return {Promise<any>}
+   */
+  private async loadSocket(): Promise<any> {
     print.info('Load Socket Event ...');
-    io.on('connection', (socket: Socket) => {
+    io.on('connection', () => {
       return loadFiles(socketDir, 'socket', this, io);
     });
 
     return this.loadEvent();
   }
 
-  private async loadEvent() {
+  /**
+   * @private
+   * @return {Promise<any>}
+   */
+  private async loadEvent(): Promise<any> {
     print.info('Load Event ...');
-    return loadFiles(eventsDir, 'event', this, io).then(() => {
+    return loadFiles(eventsDir, 'event', this, io).then((r) => {
+      console.log('events', r);
       return this.loadCommand();
     });
   }
 
-  private async loadCommand() {
+  /**
+   * @private
+   * @return {Promise<any>}
+   */
+  private async loadCommand(): Promise<any> {
     print.info('Load Command ...');
-    return loadFiles(commandsDir, 'command', this, io).then(() => {
+    return loadFiles(commandsDir, 'command', this, io).then((r) => {
+      console.log('command', r);
       return this.login(this.token);
     });
   }

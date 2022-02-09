@@ -5,14 +5,14 @@ import {
   MessageEmbedOptions,
   User
 } from 'discord.js';
-import Application from '../application/application';
-import translations from '../translations/translations';
-import color from '../../utils/color';
-import emoji from '../../utils/emoji';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
+import Application from '../Application/Application';
+import translations from '../Translations/Translations';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
 import { Setting } from '../../types/Setting';
 import { CommandConstructor } from '../../types/CommandConstructor';
+import ColorConfig from '../../config/ColorConfig';
+import EmojiConfig from '../../config/EmojiConfig';
 
 export type BaseCommandType = {
   alias: string[];
@@ -45,7 +45,7 @@ export abstract class BaseCommand implements BaseCommandType {
   public readonly setting: Setting = {
     id: 0,
     prefix: 'l!',
-    color: color.default_color,
+    color: ColorConfig.default_color,
     language: 'en',
     createdAt: '',
     updateAt: ''
@@ -55,6 +55,14 @@ export abstract class BaseCommand implements BaseCommandType {
   public readonly args: string[];
   public member: GuildMember;
 
+  /**
+   * @param {Application} client
+   * @param {Message} message
+   * @param {Setting} setting
+   * @param {string} command
+   * @param {string[]} args
+   * @protected
+   */
   protected constructor({
     client,
     message,
@@ -114,8 +122,8 @@ export abstract class BaseCommand implements BaseCommandType {
    * @return {Promise<Message>}
    */
   public warningMessage = (options: MessageEmbedOptions): Promise<Message> => {
-    options.color = color.warning;
-    options.description = `${emoji.warning} ${options.description}`;
+    options.color = ColorConfig.warning;
+    options.description = `${EmojiConfig.warning} ${options.description}`;
     return this.messageEmbed(options);
   };
 
@@ -124,8 +132,8 @@ export abstract class BaseCommand implements BaseCommandType {
    * @return {Promise<Message>}
    */
   public errorMessage = (options: MessageEmbedOptions): Promise<Message> => {
-    options.color = color.danger;
-    options.description = `${emoji.error} ${options.description}`;
+    options.color = ColorConfig.danger;
+    options.description = `${EmojiConfig.error} ${options.description}`;
     return this.messageEmbed(options);
   };
 
@@ -134,8 +142,8 @@ export abstract class BaseCommand implements BaseCommandType {
    * @return {Promise<Message>}
    */
   public accessDenied = (options: MessageEmbedOptions): Promise<Message> => {
-    options.color = color.danger;
-    options.description = `${emoji.denied} ${options.description}`;
+    options.color = ColorConfig.danger;
+    options.description = `${EmojiConfig.denied} ${options.description}`;
     return this.messageEmbed(options);
   };
 
@@ -144,8 +152,8 @@ export abstract class BaseCommand implements BaseCommandType {
    * @return {Promise<Message>}
    */
   public successMessage = (options: MessageEmbedOptions): Promise<Message> => {
-    options.color = color.success;
-    options.description = `${emoji.success} ${options.description}`;
+    options.color = ColorConfig.success;
+    options.description = `${EmojiConfig.success} ${options.description}`;
     return this.messageEmbed(options);
   };
 

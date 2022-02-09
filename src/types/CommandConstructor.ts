@@ -1,4 +1,4 @@
-import Application from '../components/application/application';
+import Application from '../components/Application/Application';
 import { Message } from 'discord.js';
 import { Setting } from './Setting';
 

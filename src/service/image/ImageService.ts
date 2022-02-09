@@ -1,8 +1,8 @@
 import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/apiConfig';
+import { ApiConfig } from '../../config/ApiConfig';
 import { Image } from '../../types/Image';
-import { AppConfig } from '../../config/appConfig';
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { AppConfig } from '../../config/AppConfig';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 
 export abstract class ImageService {

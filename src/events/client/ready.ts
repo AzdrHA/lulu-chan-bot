@@ -1,10 +1,7 @@
-import Application from '../../components/application/application';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
+import Application from '../../components/Application/Application';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
 
-/**
- * @param {Application} client
- */
-const ready = async (client: Application) => {
+export default async (client: Application) => {
   await UtilsDiscord.updateGuildsStatus(client);
   await UtilsDiscord.updateMembersStatus(client);
 
@@ -20,4 +17,3 @@ const ready = async (client: Application) => {
 
   console.log(`Logged in as ${client.user.tag}!`);
 };
-export default ready;

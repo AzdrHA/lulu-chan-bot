@@ -27,10 +27,10 @@ module.exports = {
     "require-jsdoc": ["error", {
       "require": {
         "FunctionDeclaration": true,
-        "MethodDefinition": false,
+        "MethodDefinition": true,
         "ClassDeclaration": false,
-        "ArrowFunctionExpression": false,
-        "FunctionExpression": false
+        "ArrowFunctionExpression": true,
+        "FunctionExpression": true
       }
     }]
   }

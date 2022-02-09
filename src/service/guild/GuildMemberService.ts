@@ -1,8 +1,8 @@
-import Application from '../../components/application/application';
+import Application from '../../components/Application/Application';
 import { GuildMember, Message, TextChannel } from 'discord.js';
-import { AppConfig } from '../../config/appConfig';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
-import emoji from '../../utils/emoji';
+import { AppConfig } from '../../config/AppConfig';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
+import EmojiConfig from '../../config/EmojiConfig';
 
 type MemberActionType = 'add' | 'remove';
 
@@ -27,7 +27,7 @@ export abstract class GuildMemberService {
         typeData = {
           channel: AppConfig.channel.member_join,
           message: `${
-            emoji.success
+            EmojiConfig.success
           } ${member.toString()} has joined! We are now ${
             member.guild.memberCount
           } members.`
@@ -36,7 +36,9 @@ export abstract class GuildMemberService {
       case 'remove':
         typeData = {
           channel: AppConfig.channel.member_leave,
-          message: `${emoji.denied} ${member.toString()} has left! We are now ${
+          message: `${
+            EmojiConfig.denied
+          } ${member.toString()} has left! We are now ${
             member.guild.memberCount
           } members.`
         };

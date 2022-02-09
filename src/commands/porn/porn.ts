@@ -1,21 +1,25 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message } from 'discord.js';
-import { commands } from '../../lib/constants';
 import { Category } from '../../types/Category';
 import { ImageService } from '../../service/image/ImageService';
+import { CommandConstructor } from '../../types/CommandConstructor';
+import { commands } from '../../config/Constants';
 
 export default class Porn extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = commands.get('porn');
@@ -29,7 +33,8 @@ export default class Porn extends BaseCommand {
     this.multipleCommand = true;
   }
 
-  async execute(): Promise<Message> {
-    return ImageService.nsfwCommand(this);
-  }
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => ImageService.nsfwCommand(this);
 }

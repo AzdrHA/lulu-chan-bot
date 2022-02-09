@@ -1,12 +1,6 @@
-export type Language = {
-  [lang: string]: {
-    lang: string;
-    flag: string;
-    id: string;
-  };
-};
+import { LanguageList } from '../types/Language';
 
-export const AppLanguage: Language = {
+export const AppLanguage: LanguageList = {
   en: {
     id: 'en',
     lang: 'English',

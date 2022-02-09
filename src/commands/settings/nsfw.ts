@@ -1,19 +1,23 @@
-import { BaseCommand } from '../../components/baseCommand/baseCommand';
+import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message, TextChannel } from 'discord.js';
 import { Category } from '../../types/Category';
+import { CommandConstructor } from '../../types/CommandConstructor';
 
 export default class Nsfw extends BaseCommand {
-  alias: string[];
-  allowDM: boolean;
-  category: Category;
-  cooldown: number;
-  description: string;
-  disable: boolean;
-  example: string;
-  onlyDev: boolean;
-  multipleCommand: boolean;
+  public alias: string[];
+  public allowDM: boolean;
+  public category: Category;
+  public cooldown: number;
+  public description: string;
+  public disable: boolean;
+  public example: string;
+  public onlyDev: boolean;
+  public multipleCommand: boolean;
 
-  constructor(props) {
+  /**
+   * @param {CommandConstructor} props
+   */
+  public constructor(props: CommandConstructor) {
     super(props);
 
     this.alias = ['nsfw'];
@@ -26,7 +30,10 @@ export default class Nsfw extends BaseCommand {
     this.onlyDev = false;
   }
 
-  execute(): Promise<Message> {
+  /**
+   * @return {Promise<Message>}
+   */
+  public execute = async (): Promise<Message> => {
     if (!(this.message.channel instanceof TextChannel)) return;
 
     // Check right permissions
@@ -53,5 +60,5 @@ export default class Nsfw extends BaseCommand {
         })
       );
     }
-  }
+  };
 }

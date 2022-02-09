@@ -1,4 +1,4 @@
-import { AppConfig } from '../config/appConfig';
+import { AppConfig } from '../config/AppConfig';
 import {
   Channel,
   Message,
@@ -7,10 +7,10 @@ import {
   TextChannel,
   VoiceChannel
 } from 'discord.js';
-import Application from '../components/application/application';
+import Application from '../components/Application/Application';
 import * as fs from 'fs';
-import color from './color';
 import { Snowflake } from 'discord-api-types';
+import ColorConfig from '../config/ColorConfig';
 
 export class UtilsDiscord {
   /**
@@ -85,7 +85,7 @@ export class UtilsDiscord {
     if (!channel || !(channel instanceof TextChannel)) return;
 
     const embed = new MessageEmbed({
-      color: message.author.hexAccentColor ?? color.default_color,
+      color: message.author.hexAccentColor ?? ColorConfig.default_color,
       author: {
         name: message.author.username + '#' + message.author.discriminator,
         iconURL: message.author.displayAvatarURL()
@@ -119,7 +119,7 @@ export class UtilsDiscord {
     fs.writeFileSync(path, JSON.stringify(error, null, 4));
 
     const embed = new MessageEmbed({
-      color: color.danger,
+      color: ColorConfig.danger,
       timestamp: new Date(),
       description: `Error detected in the command: ${command}`
     });

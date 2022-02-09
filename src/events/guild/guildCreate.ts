@@ -1,21 +1,21 @@
-import Application from '../../components/application/application';
+import Application from '../../components/Application/Application';
 import { Guild, MessageEmbed, TextChannel } from 'discord.js';
-import color from '../../utils/color';
-import { AppConfig } from '../../config/appConfig';
-import { UtilsDiscord } from '../../utils/utilsDiscord';
+import { AppConfig } from '../../config/AppConfig';
+import { UtilsDiscord } from '../../utils/UtilsDiscord';
+import ColorConfig from '../../config/ColorConfig';
 
 /**
  * @param {Application} client
  * @param {Guild} guild
  */
-const guildCreate = async (client: Application, guild: Guild) => {
+export default async (client: Application, guild: Guild) => {
   const embed = new MessageEmbed({
     author: {
       name: `${client.user.tag} a été ajouté au serveur!`,
       iconURL: client.user.avatarURL()
     },
     description: `Nom du serveur: ${guild.name}`,
-    color: color.success,
+    color: ColorConfig.success,
     fields: [
       {
         name: 'Members',
@@ -42,4 +42,3 @@ const guildCreate = async (client: Application, guild: Guild) => {
 
   await UtilsDiscord.updateGuildsStatus(client);
 };
-export default guildCreate;

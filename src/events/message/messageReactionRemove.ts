@@ -1,11 +1,9 @@
-import Application from '../../components/application/application';
+import Application from '../../components/Application/Application';
 import { MessageReaction, User } from 'discord.js';
 import { MessageReactionService } from '../../service/message/MessageReactionService';
 
-const messageReactionRemove = async (
+export default async (
   client: Application,
   messageReaction: MessageReaction,
   user: User
 ) => MessageReactionService.roleAddOrRemove(messageReaction, user, 'remove');
-
-export default messageReactionRemove;
