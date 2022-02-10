@@ -89,8 +89,7 @@ class Application extends Client {
    */
   private async loadEvent(): Promise<any> {
     print.info('Load Event ...');
-    return loadFiles(eventsDir, 'event', this, io).then((r) => {
-      console.log('events', r);
+    return loadFiles(eventsDir, 'event', this, io).then(() => {
       return this.loadCommand();
     });
   }
@@ -101,8 +100,7 @@ class Application extends Client {
    */
   private async loadCommand(): Promise<any> {
     print.info('Load Command ...');
-    return loadFiles(commandsDir, 'command', this, io).then((r) => {
-      console.log('command', r);
+    return loadFiles(commandsDir, 'command', this, io).then(() => {
       return this.login(this.token);
     });
   }
