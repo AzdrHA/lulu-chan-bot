@@ -5,7 +5,7 @@ import { ApiConfig } from '../../config/ApiConfig';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { settings } from '../../config/Constants';
+import cache from '../../lib/cache';
 
 export default class Prefix extends BaseCommand {
   public alias: string[];
@@ -62,7 +62,7 @@ export default class Prefix extends BaseCommand {
       });
 
     // Check if the prefix is not equal to the current
-    if (newPrefix === settings.get(this.message.guildId).prefix)
+    if (newPrefix === this.setting.prefix)
       return this.warningMessage({
         description: this.translation('NEW_PREFIX_EQUAL_TO_CURRENT')
       });
@@ -73,7 +73,7 @@ export default class Prefix extends BaseCommand {
         description: this.translation('PREFIX_MAX_LENGTH'),
         footer: {
           text: this.translation('PREFIX_LENGTH', {
-            maxLength: this.prefix_max_length
+            MAX_LENGTH: this.prefix_max_length.toString()
           })
         }
       });
@@ -85,8 +85,10 @@ export default class Prefix extends BaseCommand {
         prefix: newPrefix
       }
     )
-      .then(() => {
-        settings.get(this.message.guildId).prefix = newPrefix;
+      .then(async () => {
+        await cache.setting.update(this.message.guildId, {
+          prefix: newPrefix
+        });
         return this.successMessage({
           description: this.translation('PREFIX_CHANGED')
         });

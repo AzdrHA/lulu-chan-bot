@@ -1,7 +1,10 @@
 import { Category } from '../types/Category';
 import { CategoryConfig } from '../types/CategoryConfig';
 
-export const commandConfig: Record<Category, CategoryConfig> = {
+export const commandConfig: Omit<
+  Record<Category, CategoryConfig>,
+  'moderation'
+> = {
   admin: { order: 100 },
   emote: { order: 90 },
   hentai: { order: 70 },

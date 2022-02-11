@@ -37,7 +37,7 @@ export default class Invite extends BaseCommand {
   public execute = async (): Promise<Message> =>
     this.messageEmbed({
       description: this.translation('SUPPORT', {
-        inviteLink: AppConfig.support_invite
+        INVITE_LINK: AppConfig.support_invite
       })
     });
 }

@@ -6,7 +6,7 @@ import { AppLanguage } from '../../config/AppLanguage';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { settings } from '../../config/Constants';
+import cache from '../../lib/cache';
 
 export default class Color extends BaseCommand {
   public alias: string[];
@@ -92,8 +92,10 @@ export default class Color extends BaseCommand {
         language: newLang
       }
     )
-      .then(() => {
-        settings.get(this.message.guildId).language = newLang;
+      .then(async () => {
+        await cache.setting.update(this.message.guildId, {
+          language: newLang
+        });
         return this.successMessage({
           description: this.translation('LANG_CHANGED')
         });

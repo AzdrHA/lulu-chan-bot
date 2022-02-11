@@ -2,13 +2,11 @@ import Application from '../../components/Application/Application';
 import { Message } from 'discord.js';
 import { AppConfig } from '../../config/AppConfig';
 import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
-import { makeRequest } from '../../api/makeRequest';
-import { ApiConfig } from '../../config/ApiConfig';
 import UtilsDate from '../../utils/UtilsDate';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
-import { Guild } from '../../types/Guild';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { commandsList, settings } from '../../config/Constants';
+import { commandsList } from '../../config/Constants';
+import cache from '../../lib/cache';
 const cooldown = new Map<string, any>();
 
 /**
@@ -20,24 +18,14 @@ export default async (client: Application, message: Message) => {
   if (message.channel.type === 'DM')
     return UtilsDiscord.directMessage(client, message);
 
-  if (client.development && message.channel.type === 'GUILD_TEXT') {
-    if (
-      AppConfig.owners &&
-      !AppConfig.owners.includes(message.author.id) &&
-      message.channel.parentId !== '653610950141935668'
-    )
-      return;
-  }
+  if (
+    client.development &&
+    message.channel.type !== 'GUILD_TEXT' &&
+    message.channel.parentId !== '653610950141935668'
+  )
+    return;
 
-  if (!settings.get(message.guildId)) {
-    const guild = (await makeRequest(
-      ApiConfig.get_or_create_or_update_setting(message.guildId),
-      'POST'
-    )) as Guild;
-    settings.set(message.guildId, guild.setting);
-  }
-
-  const setting = settings.get(message.guildId);
+  const setting = await cache.setting.get_or_create(message.guildId);
 
   const prefixes = [
     `<@${client.user.id}>`,
@@ -68,6 +56,7 @@ export default async (client: Application, message: Message) => {
     args: args
   };
   const command: BaseCommand = new CommandClass(CTOR);
+  if (command.onlyDev && !AppConfig.owners.includes(command.author.id)) return;
 
   const userCooldown = message.author.id + command.alias[0];
   const commandCooldown = command.cooldown * 1000;
@@ -79,7 +68,7 @@ export default async (client: Application, message: Message) => {
       .send({
         content: command
           .translation('COOLDOWN')
-          .replace(/{time}/, UtilsDate.formatTime(cooldownEnd))
+          .replace(/{TIME}/, UtilsDate.formatTime(cooldownEnd))
       })
       .then((r) => setTimeout(() => r.delete(), cooldownEnd));
   }

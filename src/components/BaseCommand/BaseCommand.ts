@@ -179,7 +179,10 @@ export abstract class BaseCommand implements BaseCommandType {
    * @param {Object} variables
    * @return {string}
    */
-  public translation = (key: string, variables?: object): string =>
+  public translation = (
+    key: string,
+    variables?: { [key: string]: string }
+  ): string =>
     translations(key, {
       lang: this.setting.language || 'en',
       variables: variables

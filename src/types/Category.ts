@@ -7,4 +7,5 @@ export type Category =
   | 'misc'
   | 'setting'
   | 'admin'
-  | 'music';
+  | 'music'
+  | 'moderation';

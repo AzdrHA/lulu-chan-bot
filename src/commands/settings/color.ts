@@ -7,7 +7,7 @@ import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
 import ColorConfig from '../../config/ColorConfig';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { settings } from '../../config/Constants';
+import cache from '../../lib/cache';
 
 export default class Color extends BaseCommand {
   public alias: string[];
@@ -44,8 +44,8 @@ export default class Color extends BaseCommand {
         color: color
       }
     )
-      .then(() => {
-        settings.get(this.message.guildId).color = color;
+      .then(async () => {
+        await cache.setting.update(this.message.guildId, { color });
         return this.successMessage({
           description: this.translation('COLOR_CHANGED')
         });
@@ -83,7 +83,7 @@ export default class Color extends BaseCommand {
       if (!newColor)
         return this.warningMessage({
           description: this.translation('COLOR_MISSING', {
-            defaultColor: ColorConfig.default_color
+            DEFAULT_COLOR: ColorConfig.default_color
           })
         });
 
@@ -93,7 +93,7 @@ export default class Color extends BaseCommand {
         });
 
       // Check if the color is not equal to the current
-      if (newColor === settings.get(this.message.guildId).color)
+      if (newColor === this.setting.color)
         return this.warningMessage({
           description: this.translation('NEW_COLOR_EQUAL_TO_CURRENT')
         });

@@ -1,7 +1,7 @@
 {
   "API_CHANGE_ERROR": "An error has occurred. It is impossible to change it!",
   "ERROR_DETECTED": "An error has occurred. Sorry for the temporary inconvenience. Please try again later",
-  "COOLDOWN": "<:clock:819537888450314280> Wait a second, you're going too fast! try again in **{time}s**",
+  "COOLDOWN": "<:clock:819537888450314280> Wait a second, you're going too fast! try again in **{TIME}s**",
 
   "COMMAND_HAS_NOT_IMAGE": "This command has no image yet.",
   "NSFW_CHANNEL": "This isn't a **NSFW** channel. You can switch it on, using Lulu's commands `{prefix} nsfw` or into discord channel settings!",
@@ -10,11 +10,11 @@
 
   "PREFIX_MISSING": "You must to write a new prefix to change it!",
   "PREFIX_MAX_LENGTH": "The prefix is too big!",
-  "PREFIX_LENGTH": "The maximum of characters is {maxLength}!",
+  "PREFIX_LENGTH": "The maximum of characters is {MAX_LENGTH}!",
   "PREFIX_CHANGED": "The new prefix has been saved and changed!",
   "NEW_PREFIX_EQUAL_TO_CURRENT": "The new prefix cannot be equal to the current!",
 
-  "COLOR_MISSING": "You must to write an hex color `{defaultColor}`.",
+  "COLOR_MISSING": "You must to write an hex color `{DEFAULT_COLOR}`.",
   "NEW_COLOR_EQUAL_TO_CURRENT": "The new color cannot be equal to the current!",
   "COLOR_INVALID": "This entry is not a hex color!",
   "COLOR_CHANGED": "The new color has been changed!",
@@ -28,8 +28,8 @@
   "NSFW_ENABLED": "You have `enabled` the **NSFW (Not safe for work)** on this channel.",
   "NSFW_DISABLE": "You have `disabled` the **NSFW (Not safe for work)** on this channel.",
 
-  "SUPPORT": ":mailbox_with_mail: [Need help? Join our server!]({inviteLink})",
-  "INVITE": ":mailbox_with_mail: [Invite me to your server!]({inviteLink})",
+  "SUPPORT": ":mailbox_with_mail: [Need help? Join our server!]({LINK})",
+  "INVITE": ":mailbox_with_mail: [Invite me to your server!]({LINK})",
 
   "DISCORD_SERVER_INVITATION": "[Discord server invitation]({LINK})",
   "BOT_INVITATION": "[Bot invitation]({LINK})",
@@ -85,125 +85,5 @@
   "CREATE_PRIVATE_THREADS": "Create Private Threads",
   "USE_EXTERNAL_STICKERS": "Use External Stickers",
   "SEND_MESSAGES_IN_THREADS": "Send Messages in Threads",
-  "START_EMBEDDED_ACTIVITIES": "Start Activities",
-
-
-
-
-
-
-  "INVALID_LINK": "Invalid link",
-
-  "CANCELED": "Canceled",
-  "TIMEOUT": "Timeout",
-  "COMMAND_DISABLED": "{information} This command has been disabled temporarily or permanently!",
-  "COMMAND_DEVELOPERS": "{information} This command is only reserved to developers!",
-
-  "MESSAGE_AUTOMATICALLY_REMOVED": "Automatic deletion of the message in {time}s",
-
-  "NO_REASON_GIVEN": "No reason given!",
-
-  "USER_NOT_FOUND": "{warning} Tag a member or member not found!",
-
-  "PING_LOADING": "{loading} | Recovery of the ping!",
-  "PING_RESULT": "Client: **{bot}ms**\nApi Discord **{discord}ms**",
-
-  "YES": "Yes",
-  "NO": "No",
-
-  "COMMAND_ADMIN_ARG": "{warning} The first argument cannot be null! Choose between `add`, `update` or `remove`",
-  "COMMAND_ADMIN_COMMAND_NAME": "{warning} The command `name` cannot be null! Choose a command name",
-  "COMMAND_ADMIN_COMMAND_FOOTER": "Example: {prefix} command {add|update|remove} {name} {type}",
-  "COMMAND_ADMIN_COMMAND_CREATE": "{success} The command `{commandName}` has been successfully created!",
-  "COMMAND_ADMIN_COMMAND_ALREADY_CREATE": "{error} The command `{commandName}` already exists!",
-  "COMMAND_ADMIN_COMMAND_LOADING": "{loading} Creation of the command!",
-
-  "COMMAND_ADMIN_COMMAND_TYPE": "{warning} The command `type` cannot be null! Choose a command name",
-  "COMMAND_ADMIN_COMMAND_TYPE_CREATED": "{success} The type `{type}` has been successfully created!",
-  "COMMAND_ADMIN_COMMAND_TYPE_LOADING": "{loading} Creation of the command type!",
-  "COMMAND_ADMIN_COMMAND_TYPE_NOT_EXIST": "{information} The command `type`: `{commandType}` does not exist. Do you want to create it?",
-  "COMMAND_ADMIN_COMMAND_TYPE_NOT_EXIST_FOOTER": "Expires in {time} seconds",
-  "COMMAND_ADMIN_COMMAND_TYPE_NOT_EXIST_CONFIRM_EXPIRED": "The confirmation has expired",
-  "COMMAND_ADMIN_COMMAND_TYPE_NOT_EXIST_CONFIRM_CANCEL": "The confirmation has been cancelled",
-
-  "HELP": ":mailbox_with_mail: The help commands has been sent to your dm",
-  "HELP_COMMAND": "Help of the `{command}` command",
-  "HELP_CATEGORY": "Help of the `{category}` category",
-  "INVITE_NOT_FOUND": "{error} Invite not found",
-
-  "PURGE_IMPOSSIBLE": "{error} Impossible to clear more messages",
-  "PURGE_NUMBER": "{warning} You must to write a number between 1 and 1000!",
-  "PURGE_FOURTEEN_DAYS": "{warning} Unable to delete 14 day old messages",
-  "PURGE_SUCCESS_DELETE_ONE": "{success} One message has been send to the end of the world",
-  "PURGE_SUCCESS_DELETE_MULTIPLE": "{success} {messages} messages has been send to greet the Devil",
-  "PURGE_SUCCESS_DELETE": "{danger} {messages} messages has been send to greet the Devil",
-  "PURGE_SUCCESS_DELETE_MULTIPLE_OLD_ONE": "{success} {messages} messages has been send to greet the Devil but One message could not be deleted",
-  "PURGE_SUCCESS_DELETE_MULTIPLE_OLD_MULTIPLE": "{success} {messages} messages has been send to greet the Devil but {oldMessage} messages could not be deleted",
-
-  "TODAY": "Today",
-  "YESTERDAY": "Yesterday",
-  "JANUARY": "January",
-  "FEBRUARY": "February",
-  "MARCH": "March",
-  "APRIL": "April",
-  "MAY": "May",
-  "JUNE": "June",
-  "JULY": "July",
-  "AUGUST": "August",
-  "SEPTEMBER": "September",
-  "OCTOBER": "October",
-  "NOVEMBER": "November",
-  "DECEMBER": "December",
-
-  "MILLISECOND": "Millisecond(s)",
-  "SECOND": "Second(s)",
-  "MINUTE": "Minute(s)",
-  "HOUR": "Hour(s)",
-  "DAY": "Day(s)",
-  "WEEK": "Week(s)",
-  "MONTH": "Month(s)",
-  "YEAR": "Year(s)",
-
-  "INFO_SERVERS": "<:faction:681948528292921428> Servers",
-  "INFO_USERS": "<:player:681948167889223769> Users",
-  "INFO_CHANNELS": "<:chat:681960088151392310> Channels",
-  "INFO_CPU": "<:process:681957977212846119> Processor",
-  "INFO_PLATFORM": "<:platform:681965689036210235> Platform",
-  "INFO_ARCH": "<:architecture:681961881006637176> Architecture",
-  "INFO_RAM": "<:memory:682135419357233161> Rams",
-  "INFO_LIB": "\uD83D\uDCC1 Lib",
-  "INFO_UPTIME": "<:uptime:681948754990989354> UpTime",
-
-  "MODERATOR": "Moderator:",
-  "OFFENDER": "Offender:",
-  "REASON": "Reason:",
-
-  "WARN_MODERATOR": "{warning} You can't warn a Moderator!",
-  "WARN_YOURSELF": "{warning} You can't warn yourself",
-  "WARN_REASON_BIG": "{warning} The reason of the warn must not exceed 100 characters",
-  "WARN_ERROR": "{danger} Impossible to warn!",
-  "USER_WARNED": "User Warned | Case: {case}",
-
-  "MUSIC_VOLUME": "{danger} You can adjust the volume between 1 and 100",
-  "MUSIC_LOADING": "{loading} | Loading of the music!",
-  "MUSIC_NEXT_SONG": "Music in progress: **{song}** | {member} |\n**{members}** people in the channel.",
-  "MUSIC_CANT_SKIP": "{warning} You cannot skip the music because is no more music in the queue",
-  "MUSIC_CANT_USE_SAME_CHANNEL": "{warning} You can't use this command if you are not in the same voice channel!",
-  "MUSIC_CANT_USE_NOT_JOINED_CHANNEL": "{warning} You can't use this command if i'm not in a voice channel!",
-  "MUSIC_ALREADY_PAUSE": "{warning} The music is already paused",
-  "MUSIC_NOT_PLAYING": "{warning} No music is listening!",
-  "MUSIC_@ME_CHANNEL": "{warning} You must first join a vocal channel!",
-  "MUSIC_@ME_SAME_BOT": "{warning} You must be in the same voice channel to play music!",
-  "MUSIC_JOIN_ANOTHER": "{warning} I can join your voice channel because i'm already in voice channel with people",
-  "MUSIC_ADD_TO_QUEUE": "**{song}** has been added to the queue by {member}",
-
-  "SERVERS": "<:faction:681948528292921428> Servers",
-  "USERS": "<:player:681948167889223769> Users",
-  "CHANNELS": "<:chat:681960088151392310> Channels",
-  "PROCESSOR": "<:process:681957977212846119> Processor",
-  "PLATFORM": "<:platform:681965689036210235> Platform",
-  "ARCHITECTURE": "<:architecture:681961881006637176> Architecture",
-  "RAM": "<:memory:682135419357233161> Ram",
-  "UPTIME": "<:uptime:681948754990989354> Uptime",
-  "LAST_UPDATE": "<:updated:888501813257588766> Last Update"
+  "START_EMBEDDED_ACTIVITIES": "Start Activities"
 }

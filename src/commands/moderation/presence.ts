@@ -1,10 +1,9 @@
 import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import { Message } from 'discord.js';
-import { AppConfig } from '../../config/AppConfig';
 import { Category } from '../../types/Category';
 import { CommandConstructor } from '../../types/CommandConstructor';
 
-export default class Invite extends BaseCommand {
+export default class Presence extends BaseCommand {
   public alias: string[];
   public allowDM: boolean;
   public category: Category;
@@ -21,23 +20,38 @@ export default class Invite extends BaseCommand {
   public constructor(props: CommandConstructor) {
     super(props);
 
-    this.alias = ['invite'];
+    this.alias = ['presence'];
     this.allowDM = true;
-    this.category = 'misc';
+    this.category = 'moderation';
     this.cooldown = 0;
-    this.description = this.translation('COMMAND_INVITE_DESCRIPTION');
+    this.description = '';
     this.disable = false;
-    this.example = '{prefix} invite';
-    this.onlyDev = false;
+    this.example = '{prefix} moderation';
+    this.onlyDev = true;
   }
 
   /**
    * @return {Promise<Message>}
    */
-  public execute = async (): Promise<Message> =>
-    this.messageEmbed({
-      description: this.translation('INVITE', {
-        LINK: AppConfig.add_bot_link
-      })
+  public execute = async (): Promise<Message> => {
+    /* const type = this.args[0] ? this.args[0].toLowerCase() : null;
+
+    switch (type) {
+      case 'status':
+        this.client.user.setPresence({
+          status: 'idle',
+          activities: [
+            {
+              name: 'Hello',
+              type: 'PLAYING'
+            }
+          ]
+        });
+        break;
+    }
+*/
+    return this.messageEmbed({
+      description: 'wave'
     });
+  };
 }

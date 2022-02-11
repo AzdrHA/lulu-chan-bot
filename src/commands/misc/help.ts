@@ -5,6 +5,7 @@ import { Category } from '../../types/Category';
 import { UtilsArray } from '../../utils/UtilsArray';
 import { CommandConstructor } from '../../types/CommandConstructor';
 import { commands } from '../../config/Constants';
+import { commandConfig } from '../../config/CommandConfig';
 
 export default class Help extends BaseCommand {
   public alias: string[];
@@ -33,7 +34,7 @@ export default class Help extends BaseCommand {
     this.onlyDev = false;
   }
 
-  helpTitle: Record<Category, string> = {
+  helpTitle: Omit<Record<Category, string>, 'moderation'> = {
     admin: '🔨 Administrator',
     image: '🖼 Images',
     music: '🎵 Musics',
@@ -48,12 +49,13 @@ export default class Help extends BaseCommand {
   private getBody = () => {
     const fields: EmbedFieldData[] = [];
     commands.forEach((commands, category) => {
-      fields.push({
-        name: this.helpTitle[category],
-        value: UtilsArray.join(commands, ', ', '`')
-      });
+      if (commandConfig[category])
+        fields[commandConfig[category].order] = {
+          name: this.helpTitle[category],
+          value: UtilsArray.join(commands, ', ', '`')
+        };
     });
-    return fields;
+    return fields.reverse().sort();
   };
 
   /**
