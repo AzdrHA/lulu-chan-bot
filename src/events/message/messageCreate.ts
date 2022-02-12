@@ -5,7 +5,7 @@ import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import UtilsDate from '../../utils/UtilsDate';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { commandsList } from '../../config/Constants';
+import { blacklists, commandsList } from '../../config/Constants';
 import cache from '../../lib/cache';
 const cooldown = new Map<string, any>();
 
@@ -45,7 +45,7 @@ export default async (client: Application, message: Message) => {
     .split(/ +/g);
 
   const commandName = args.shift();
-  const CommandClass = commandsList.get(commandName);
+  const CommandClass = commandsList.get(commandName.toLowerCase());
   if (!CommandClass) return;
 
   const CTOR: CommandConstructor = {
@@ -56,6 +56,13 @@ export default async (client: Application, message: Message) => {
     args: args
   };
   const command: BaseCommand = new CommandClass(CTOR);
+
+  // Checks user blacklist
+  if (blacklists.get(message.author.id))
+    return command.warningMessage({
+      description: 'You are blacklist'
+    });
+
   if (command.onlyDev && !AppConfig.owners.includes(command.author.id)) return;
 
   const userCooldown = message.author.id + command.alias[0];

@@ -7,11 +7,14 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { CommandCategory } from '../../types/CommandCategory';
 import {
+  blacklists,
   commands,
   commandsDir,
   eventsDir,
   socketDir
 } from '../../config/Constants';
+import { Pagination } from '../../types/Pagination';
+import { Blacklist } from '../../types/Blacklist';
 
 // Create Socket Server
 const httpServer = createServer();
@@ -61,10 +64,46 @@ class Application extends Client {
   }
 
   /**
+   * @param {number} page
+   * @param {number} limit
    * @private
+   */
+  private async yoloExe(page: number, limit: number) {
+    return makeRequest(
+      ApiConfig.get_all_users_blacklist(page, limit),
+      'GET'
+    ).then(async (data: Pagination<Blacklist>) => {
+      if (data.page === 1)
+        print.info(
+          `${data.total} users blacklist found on ${data.maxPage} pages`
+        );
+
+      print.info(`${data.res.length} users blacklist on page ${data.page}`);
+      data.res.map((blacklist, i) => {
+        blacklists.set(String(blacklist.user.userId), blacklist);
+      });
+
+      if (data.maxPage !== 0 && page !== data.maxPage)
+        await this.yoloExe(page + 1, limit);
+    });
+  }
+
+  /**
+   * @param {number} page
+   * @param {number} limit
+   * @private
+   */
+  private async getUsersBlacklist(page: number, limit: number) {
+    print.info('Searching blacklist user ...');
+    await this.yoloExe(page, limit);
+    return this.loadEvent();
+  }
+
+  /**
    * @return {Promise<CommandCategory[]>}
    */
   private static async getAllCommands(): Promise<CommandCategory[]> {
+    print.info('Commands retrieval ...');
     return (await makeRequest(ApiConfig.get_all_commands, 'GET')) as Promise<
       CommandCategory[]
     >;
@@ -80,7 +119,7 @@ class Application extends Client {
       return loadFiles(socketDir, 'socket', this, io);
     });
 
-    return this.loadEvent();
+    return this.getUsersBlacklist(1, 25);
   }
 
   /**
