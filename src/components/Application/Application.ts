@@ -11,10 +11,12 @@ import {
   commands,
   commandsDir,
   eventsDir,
+  owners,
   socketDir
 } from '../../config/Constants';
 import { Pagination } from '../../types/Pagination';
 import { Blacklist } from '../../types/Blacklist';
+import { User } from '../../types/User';
 
 // Create Socket Server
 const httpServer = createServer();
@@ -44,6 +46,7 @@ class Application extends Client {
     this.development = options.development;
     this.token = options.token;
 
+    this.getUsersOwner();
     Application.getAllCommands().then((res) => {
       res.forEach((category) => {
         print.info(
@@ -61,6 +64,16 @@ class Application extends Client {
         return this.loadSocket();
       });
     });
+  }
+
+  /**
+   * @private
+   */
+  private async getUsersOwner() {
+    print.info('Recovery of the owner ...');
+    return makeRequest(ApiConfig.get_user_owner, 'GET').then((res: User[]) =>
+      res.map((u) => owners.add(u.userId))
+    );
   }
 
   /**
