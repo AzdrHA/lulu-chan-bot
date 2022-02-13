@@ -7,6 +7,7 @@ import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { Category } from '../../types/Category';
 import { CommandConstructor } from '../../types/CommandConstructor';
 import cache from '../../lib/cache';
+import { Language } from '../../types/Language';
 
 export default class Color extends BaseCommand {
   public alias: string[];
@@ -70,7 +71,7 @@ export default class Color extends BaseCommand {
         }
       });
 
-    const newLang = this.args[0];
+    const newLang = this.args[0] as Language;
 
     if (!newLang) return this.getLanguageList();
     const langKey = newLang.toLowerCase();

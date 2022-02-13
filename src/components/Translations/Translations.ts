@@ -1,5 +1,6 @@
 import EmojiConfig from '../../config/EmojiConfig';
 import UtilsStr from '../../utils/UtilsStr';
+import { Language } from '../../types/Language';
 
 /**
  *
@@ -10,7 +11,7 @@ import UtilsStr from '../../utils/UtilsStr';
 const translations = (
   keyTranslation: string,
   options: {
-    lang: string;
+    lang: Language;
     variables?: { [key: string]: string };
   }
 ): string => {
