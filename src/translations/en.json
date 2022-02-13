@@ -3,6 +3,8 @@
   "ERROR_DETECTED": "An error has occurred. Sorry for the temporary inconvenience. Please try again later",
   "COOLDOWN": "<:clock:819537888450314280> Wait a second, you're going too fast! try again in **{TIME}s**",
 
+  "USER_NOT_FOUND": "The user was not found!",
+
   "COMMAND_HAS_NOT_IMAGE": "This command has no image yet.",
   "NSFW_CHANNEL": "This isn't a **NSFW** channel. You can switch it on, using Lulu's commands `{prefix} nsfw` or into discord channel settings!",
   "BAD_PERMISSION": "You haven't the required permission to do that!",
@@ -45,6 +47,16 @@
   "COMMAND_HELP_DESCRIPTION": "Display the list of command.",
   "COMMAND_INVITE_DESCRIPTION": "Give the link for invite bot.",
   "COMMAND_SUPPORT_DESCRIPTION": "Give the link for join the support server.",
+
+  "ALREADY_BLACKLIST": "This user is already blacklist for **{REASON}**",
+  "CANT_BLACKLIST_THIS_USER": "You can blacklist this user because it's a Owner!",
+  "BLACKLIST_REASON_MISSING": "The reason of the blacklist must be indicate!",
+  "REASON_LENGTH": "The reason must be longer than or equal to 1 characters and to be shorter than or equal to 256 characters!",
+  "USER_BLACKLISTED_LOG": "{USER} has been blacklisted by {MODERATOR} for **{REASON}**!",
+  "USER_BLACKLISTED": "{USER} was added to the blacklisted",
+
+  "MODERATOR": "Moderator",
+  "SANCTIONED": "Sanctioned",
 
   "CREATE_INSTANT_INVITE": "Create Invite",
   "KICK_MEMBERS": "Kick Members",
