@@ -1,11 +1,10 @@
 import Application from '../../components/Application/Application';
 import { Message } from 'discord.js';
-import { AppConfig } from '../../config/AppConfig';
 import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import UtilsDate from '../../utils/UtilsDate';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { CommandConstructor } from '../../types/CommandConstructor';
-import { blacklists, commandsList } from '../../config/Constants';
+import { blacklists, commandsList, owners } from '../../config/Constants';
 import cache from '../../lib/cache';
 const cooldown = new Map<string, any>();
 
@@ -63,7 +62,7 @@ export default async (client: Application, message: Message) => {
       description: 'You are blacklist'
     });
 
-  if (command.onlyDev && !AppConfig.owners.includes(command.author.id)) return;
+  if (command.onlyDev && !owners.has(command.author.id)) return;
 
   const userCooldown = message.author.id + command.alias[0];
   const commandCooldown = command.cooldown * 1000;
