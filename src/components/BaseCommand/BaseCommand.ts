@@ -174,6 +174,20 @@ export abstract class BaseCommand implements BaseCommandType {
     });
   };
 
+  public adminLogMessage = async (
+    content: string,
+    options?: MessageEmbedOptions
+  ) => {
+    const embed = new MessageEmbed({
+      description: content,
+      color: ColorConfig.info,
+      timestamp: new Date(),
+      ...options
+    });
+    const channel = this.client.channels.cache.get('942428928151269386');
+    if (channel.isText()) return channel.send({ embeds: [embed] });
+  };
+
   /**
    * @param {string} key
    * @param {Object} variables
