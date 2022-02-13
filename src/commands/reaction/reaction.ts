@@ -5,6 +5,7 @@ import { ImageService } from '../../service/image/ImageService';
 import messages from '../../messages/reactions.json';
 import { CommandConstructor } from '../../types/CommandConstructor';
 import { commands } from '../../config/Constants';
+import UtilsStr from '../../utils/UtilsStr';
 
 export default class Reaction extends BaseCommand {
   public alias: string[];
@@ -44,9 +45,13 @@ export default class Reaction extends BaseCommand {
       if (!message) message = '';
 
       if (message) {
-        message = message[Math.floor(Math.random() * message.length)];
-        message = message.replace(/{author}/, this.author.toString());
-        message = message.replace(/{member}/, this.member.toString());
+        message = UtilsStr.replace(
+          message[Math.floor(Math.random() * message.length)],
+          {
+            author: this.author.toString(),
+            member: this.member.toString()
+          }
+        );
       }
     }
 
