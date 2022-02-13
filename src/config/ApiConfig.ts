@@ -1,5 +1,7 @@
 type ApiConfig = {
   get_all_commands: string;
+  blacklist_user: string;
+  get_user_owner: string;
   get_all_users_blacklist(page: number, limit: number): string;
   get_or_create_or_update_setting(guildId: string): string;
   get_image_by_command(command: string): string;
@@ -7,6 +9,8 @@ type ApiConfig = {
 
 export const ApiConfig: ApiConfig = {
   get_all_commands: 'command/category/commands',
+  blacklist_user: 'user/blacklist',
+  get_user_owner: '/user/owners',
 
   /**
    * @param {number} page
