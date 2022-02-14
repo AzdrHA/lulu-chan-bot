@@ -1,5 +1,5 @@
 import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
-import { GuildMember, Message, MessageMentions } from 'discord.js';
+import { Message } from 'discord.js';
 import { Category } from '../../types/Category';
 import { CommandConstructor } from '../../types/CommandConstructor';
 import { blacklists } from '../../config/Constants';
@@ -38,14 +38,14 @@ export default class Invite extends BaseCommand {
     if (blacklists.get(this.member.id)) {
       return this.messageEmbed({
         description: this.translation('USER_BLACKLIST', {
-          MEMBER: this.member.toString(),
+          USER: this.member.toString(),
           REASON: blacklists.get(this.member.id).reason
         })
       });
     } else {
       return this.messageEmbed({
         description: this.translation('USER_NOT_BLACKLIST', {
-          MEMBER: this.member.toString()
+          USER: this.member.toString()
         })
       });
     }

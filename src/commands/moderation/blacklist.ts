@@ -43,7 +43,9 @@ export default class Blacklist extends BaseCommand {
 
     if (!userId)
       return this.warningMessage({
-        description: 'Userid'
+        description: translations('USER_NOT_FOUND', {
+          lang: 'en'
+        })
       });
 
     try {
@@ -85,7 +87,7 @@ export default class Blacklist extends BaseCommand {
           })
         });
 
-      makeRequest(ApiConfig.blacklist_user, 'POST', {
+      makeRequest(ApiConfig.blacklist.add, 'POST', {
         user: user.id,
         moderator: this.author.id,
         reason: reason
