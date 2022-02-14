@@ -3,6 +3,8 @@
   "ERROR_DETECTED": "Une erreur s'est produite. Excusez-nous pour ce désagrément. Veuillez réessayer plus tard.",
   "COOLDOWN": "<:clock:819537888450314280> Attendez une seconde, vous allez trop vite ! Essayez à nouveau dans **{TIME}s**",
 
+  "USER_NOT_FOUND": "The user was not found!",
+
   "COMMAND_HAS_NOT_IMAGE": "Cette commande n'a pas encore d'image.",
   "NSFW_CHANNEL": "Ceci n'est pas un salon d'**NSFW (Non sûr pour le travail)**. Vous pouvez l'activer en utilisant la command `{prefix} nsfw` ou dans les paramètres du salon !",
   "BAD_PERMISSION": "Vous n'avez pas l'autorisation requise pour faire cette action !",
@@ -45,6 +47,18 @@
   "COMMAND_HELP_DESCRIPTION": "Affiche la liste des commandes.",
   "COMMAND_INVITE_DESCRIPTION": "Give the link for invite bot.",
   "COMMAND_SUPPORT_DESCRIPTION": "Give the link for join the support server.",
+
+  "ALREADY_BLACKLIST": "This user is already blacklist for **{REASON}**",
+  "CANT_BLACKLIST_THIS_USER": "You can blacklist this user because it's a Owner!",
+  "BLACKLIST_REASON_MISSING": "The reason of the blacklist must be indicate!",
+  "REASON_LENGTH": "The reason must be longer than or equal to 1 characters and to be shorter than or equal to 256 characters!",
+  "USER_BLACKLISTED_LOG": "{USER} has been blacklisted by {MODERATOR} for **{REASON}**!",
+  "USER_BLACKLISTED": "{USER} was added to the blacklisted",
+  "USER_NOT_BLACKLIST": "{MEMBER} n'est pas sur la liste noir.",
+  "USER_BLACKLIST": "{MEMBER} est sur la liste noir pour **{REASON}**",
+
+  "MODERATOR": "Moderateur",
+  "SANCTIONED": "Sanctionné",
 
   "CREATE_INSTANT_INVITE": "Create Invite",
   "KICK_MEMBERS": "Kick Members",

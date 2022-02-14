@@ -54,6 +54,8 @@
   "REASON_LENGTH": "The reason must be longer than or equal to 1 characters and to be shorter than or equal to 256 characters!",
   "USER_BLACKLISTED_LOG": "{USER} has been blacklisted by {MODERATOR} for **{REASON}**!",
   "USER_BLACKLISTED": "{USER} was added to the blacklisted",
+  "USER_NOT_BLACKLIST": "{MEMBER} are not blacklist.",
+  "USER_BLACKLIST": "{MEMBER} are blacklist for **{REASON}**",
 
   "MODERATOR": "Moderator",
   "SANCTIONED": "Sanctioned",

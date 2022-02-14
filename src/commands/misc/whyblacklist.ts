@@ -35,30 +35,19 @@ export default class Invite extends BaseCommand {
    * @return {Promise<Message>}
    */
   public execute = async (): Promise<Message> => {
-    if (this.memberItsMe()) {
-      if (blacklists.get(this.author.id)) {
-        return this.messageEmbed({
-          description: `You are blacklist for ${
-            blacklists.get(this.author.id).reason
-          }`
-        });
-      } else {
-        return this.messageEmbed({
-          description: 'You are not blacklist.'
-        });
-      }
+    if (blacklists.get(this.member.id)) {
+      return this.messageEmbed({
+        description: this.translation('USER_BLACKLIST', {
+          MEMBER: this.member.toString(),
+          REASON: blacklists.get(this.member.id).reason
+        })
+      });
     } else {
-      if (blacklists.get(this.member.id)) {
-        return this.messageEmbed({
-          description: `${this.member.toString()} are blacklist for **${
-            blacklists.get(this.member.id).reason
-          }**`
-        });
-      } else {
-        return this.messageEmbed({
-          description: `${this.member.toString()} are not blacklist`
-        });
-      }
+      return this.messageEmbed({
+        description: this.translation('USER_NOT_BLACKLIST', {
+          MEMBER: this.member.toString()
+        })
+      });
     }
   };
 }
