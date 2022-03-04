@@ -9,7 +9,7 @@ export const AppConfig = {
   support_invite: process.env.SUPPORT_INVITE,
 
   guild_count_channel: '660852164846944275',
-  member_count_channel: '660846057785393162',
+  member_count_channel: '949254398100529153',
   luluchan_guild_id: '587424467538673664',
 
   roles: {
