@@ -84,6 +84,15 @@ export class UtilsDiscord {
     );
     if (!channel || !(channel instanceof TextChannel)) return;
 
+    const messageAttachment = [];
+    let i = 1;
+    message.attachments.map((attachment) => {
+      messageAttachment.push(`[Attachment n°: ${i}](${attachment.attachment})`);
+      i++;
+    });
+
+    console.log(messageAttachment);
+
     const embed = new MessageEmbed({
       color: message.author.hexAccentColor ?? ColorConfig.default_color,
       author: {
@@ -94,8 +103,9 @@ export class UtilsDiscord {
       footer: {
         text: message.author.id
       },
-      description: message.content
+      description: message.content + '\n' + messageAttachment.join(', ')
     });
+
     return channel.send({
       embeds: [embed]
     });
