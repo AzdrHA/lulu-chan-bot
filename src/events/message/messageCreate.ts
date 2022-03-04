@@ -19,14 +19,14 @@ export default async (client: Application, message: Message) => {
   if (message.channel.type === 'DM')
     return UtilsDiscord.directMessage(client, message);
 
-  if (client.development && message.channel.parentId !== '931503353463181342')
+  /* if (client.development && message.channel.parentId !== '931503353463181342')
     return;
 
   if (
     client.development === false &&
     message.channel.parentId === '931503353463181342'
   )
-    return;
+    return;*/
 
   const setting = await cache.setting.get_or_create(message.guildId);
 
