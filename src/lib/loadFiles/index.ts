@@ -46,15 +46,17 @@ const loadFiles = async (
                   if (!command.multipleCommand) {
                     const hasCommand = commands.get(command.category) ?? [];
 
-                    commands.set(
-                      command.category,
-                      hasCommand.concat([command.alias[0]])
-                    );
+                    if (!command.disable)
+                      commands.set(
+                        command.category,
+                        hasCommand.concat([command.alias[0]])
+                      );
                   }
 
-                  command.alias.forEach((name) => {
-                    commandsList.set(name, event);
-                  });
+                  if (!command.disable)
+                    command.alias.forEach((name) => {
+                      commandsList.set(name, event);
+                    });
                 }
               }
               resolve(i * 2);

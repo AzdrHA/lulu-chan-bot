@@ -49,7 +49,7 @@ export const AppConfig = {
     error: '937690625510359050'
   },
 
-  token: process.env.TOKEN,
+  token: process.env.TOKEN ?? 'token not found',
   development: Boolean(process.env.DEVELOPMENT) ?? true,
-  owners: UtilsStr.convertStringArrayToArray(process.env.OWNERS)
+  owners: UtilsStr.convertStringArrayToArray(process.env.OWNERS ?? '[]')
 };

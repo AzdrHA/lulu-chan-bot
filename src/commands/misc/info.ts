@@ -28,7 +28,7 @@ export default class Info extends BaseCommand {
     this.category = 'misc';
     this.cooldown = 0;
     this.description = '';
-    this.disable = false;
+    this.disable = true;
     this.example = '{prefix} info';
     this.onlyDev = false;
   }

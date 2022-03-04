@@ -7,8 +7,6 @@ services:
       - "3000:3000"
     env_file:
       - .env
-    networks:
-      - api-luluchan_nesjs-network
     volumes:
       - .:/srv/bot
       - .:/node_module
@@ -16,9 +14,3 @@ services:
 
 volumes:
   node_modules:
-
-networks:
-  api-luluchan_nesjs-network:
-  default:
-    external:
-      name: bot-luluchan

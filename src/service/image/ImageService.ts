@@ -22,7 +22,7 @@ export abstract class ImageService {
       });
 
     return data.message.channel.send({
-      embeds: [await this.imageCommand(data)]
+      embeds: [await ImageService.imageCommand(data)]
     });
   };
 

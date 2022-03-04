@@ -30,10 +30,10 @@ export default class UtilsDate {
    * @return {string}
    */
   public static convertDateToFormat = (date: Date): string =>
-    `${this.dateTransform(
+    `${UtilsDate.dateTransform(
       [date.getDate(), date.getMonth(), date.getFullYear()],
       '/'
-    )} ${this.dateTransform(
+    )} ${UtilsDate.dateTransform(
       [date.getHours(), date.getMinutes(), date.getSeconds()],
       ':'
     )}`;

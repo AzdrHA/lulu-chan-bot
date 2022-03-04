@@ -41,7 +41,9 @@ export abstract class UtilsSystem {
    */
   public static getPercentRamUsed = (): string => {
     return (
-      Math.round((this.getUsedRam() / this.getTotalRam()) * 1000) / 10
+      Math.round(
+        (UtilsSystem.getUsedRam() / UtilsSystem.getTotalRam()) * 1000
+      ) / 10
     ).toString();
   };
 }

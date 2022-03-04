@@ -7,7 +7,11 @@ import print from '../lib/print';
  * @param {Method} method
  * @param {Object} data
  */
-export const makeRequest = async (url: string, method: Method, data = {}) =>
+export const makeRequest = async (
+  url: string,
+  method: Method,
+  data = {}
+): Promise<any> =>
   new Promise((resolve, reject) =>
     axios({
       baseURL: AppConfig.api_domain,

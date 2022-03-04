@@ -46,22 +46,23 @@ class Application extends Client {
     this.development = options.development;
     this.token = options.token;
 
-    this.getUsersOwner();
-    Application.getAllCommands().then((res) => {
-      res.forEach((category) => {
-        print.info(
-          '%s has %s commands',
-          category.name,
-          category.commands.length
-        );
-        category.commands.forEach((command) => {
-          const hasCommand = commands.get(category.name) ?? [];
-          commands.set(category.name, hasCommand.concat([command.name]));
+    this.getUsersOwner().then(() => {
+      Application.getAllCommands().then((res) => {
+        res.forEach((category) => {
+          print.info(
+            '%s has %s commands',
+            category.name,
+            category.commands.length
+          );
+          category.commands.forEach((command) => {
+            const hasCommand = commands.get(category.name) ?? [];
+            commands.set(category.name, hasCommand.concat([command.name]));
+          });
         });
-      });
-      return httpServer.listen(3232, () => {
-        print.info('Socket server is start');
-        return this.loadSocket();
+        return httpServer.listen(3232, () => {
+          print.info('Socket server is start');
+          return this.loadSocket();
+        });
       });
     });
   }
@@ -92,7 +93,7 @@ class Application extends Client {
         );
 
       print.info(`${data.res.length} users blacklist on page ${data.page}`);
-      data.res.map((blacklist, i) => {
+      data.res.map((blacklist) => {
         blacklists.set(String(blacklist.user.userId), blacklist);
       });
 

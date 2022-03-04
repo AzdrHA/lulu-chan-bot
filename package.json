@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon src/main.ts",
-    "start:dev": "npx ts-node-dev src/main.ts"
+    "start:dev": "npx ts-node-dev src/main.ts",
+    "clean": "npx tsc --build --clean",
+    "build": "npm run clean && npx tsc",
+    "start:prod": "npm run build && node --experimental-modules .\\dist\\start.js"
   },
   "keywords": [],
   "author": "",
