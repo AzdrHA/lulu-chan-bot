@@ -17,5 +17,4 @@ export default async (client: Application) => {
   });
 
   console.log(`Logged in as ${client.user.tag}!`);
-  console.log(AppConfig.development);
 };
