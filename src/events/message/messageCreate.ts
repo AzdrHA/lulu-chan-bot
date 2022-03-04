@@ -1,11 +1,13 @@
 import Application from '../../components/Application/Application';
-import { Message } from 'discord.js';
+import { Message, MessageEmbed, TextChannel, VoiceChannel } from 'discord.js';
 import { BaseCommand } from '../../components/BaseCommand/BaseCommand';
 import UtilsDate from '../../utils/UtilsDate';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
 import { CommandConstructor } from '../../types/CommandConstructor';
 import { blacklists, commandsList, owners } from '../../config/Constants';
 import cache from '../../lib/cache';
+import ColorConfig from '../../config/ColorConfig';
+import { AppConfig } from '../../config/AppConfig';
 const cooldown = new Map<string, any>();
 
 /**
@@ -17,10 +19,12 @@ export default async (client: Application, message: Message) => {
   if (message.channel.type === 'DM')
     return UtilsDiscord.directMessage(client, message);
 
+  if (client.development && message.channel.parentId !== '931503353463181342')
+    return;
+
   if (
-    client.development &&
-    message.channel.type !== 'GUILD_TEXT' &&
-    message.channel.parentId !== '653610950141935668'
+    client.development === false &&
+    message.channel.parentId === '931503353463181342'
   )
     return;
 
@@ -88,6 +92,28 @@ export default async (client: Application, message: Message) => {
   }, commandCooldown);
 
   try {
+    // TODO NEED CLEANING
+    const embed = new MessageEmbed({
+      author: {
+        name: `${command.author.tag}`,
+        iconURL: command.author.avatarURL()
+      },
+      description: command.command,
+      timestamp: new Date(),
+      color: ColorConfig.default_color,
+      footer: {
+        text: `Guild ID: ${command.message.guild.id}`
+      }
+    });
+
+    const channelGuild = await UtilsDiscord.getChannel(
+      client,
+      '949278454598205450'
+    );
+
+    if (channelGuild && channelGuild instanceof TextChannel)
+      await channelGuild.send({ embeds: [embed] });
+
     return command.execute();
   } catch (e) {
     if (e instanceof RangeError)
