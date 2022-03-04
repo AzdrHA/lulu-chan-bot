@@ -50,6 +50,6 @@ export const AppConfig = {
   },
 
   token: process.env.TOKEN ?? 'token not found',
-  development: Boolean(process.env.DEVELOPMENT) ?? true,
+  development: <boolean>(process.env.DEVELOPMENT ?? true),
   owners: UtilsStr.convertStringArrayToArray(process.env.OWNERS ?? '[]')
 };

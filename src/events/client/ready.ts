@@ -1,5 +1,6 @@
 import Application from '../../components/Application/Application';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
+import { AppConfig } from '../../config/AppConfig';
 
 export default async (client: Application) => {
   await UtilsDiscord.updateGuildsStatus(client);
@@ -16,4 +17,5 @@ export default async (client: Application) => {
   });
 
   console.log(`Logged in as ${client.user.tag}!`);
+  console.log(AppConfig.development);
 };
