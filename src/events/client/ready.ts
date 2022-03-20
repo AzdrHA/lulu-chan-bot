@@ -1,6 +1,5 @@
 import Application from '../../components/Application/Application';
 import { UtilsDiscord } from '../../utils/UtilsDiscord';
-import { AppConfig } from '../../config/AppConfig';
 
 export default async (client: Application) => {
   await UtilsDiscord.updateGuildsStatus(client);
