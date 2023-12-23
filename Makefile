@@ -10,3 +10,9 @@ enter:
 
 install:
 	@docker-compose run --rm node npm install
+
+format:
+	@docker compose run --rm node bunx @biomejs/biome format * --write
+
+lint:
+	@docker compose run --rm node bunx @biomejs/biome lint *

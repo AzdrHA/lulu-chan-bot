@@ -1,17 +1,10 @@
-ARG NODE_VERSION=18
-FROM node:${NODE_VERSION}-alpine AS node_api
-
+# use the official Bun image
+# see all versions at https://hub.docker.com/r/oven/bun/tags
+FROM oven/bun as base
 WORKDIR /srv/app
 
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		g++ \
-		gcc \
-		git \
-		make \
-        python3 \
-	;
-
-RUN npm -g install npm@latest
-
-USER node
+# run the app
+USER bun
+EXPOSE 3000/tcp
+#ENTRYPOINT [ "bun", "run", "src/main.ts" ]
+#CMD bun run src/main.ts

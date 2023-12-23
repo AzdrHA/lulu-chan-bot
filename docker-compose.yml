@@ -8,3 +8,4 @@ services:
       - .env
     labels:
       - word.enable=true
+    command: ["bun", "--watch", "run", "src/main.ts"]
