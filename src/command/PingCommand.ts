@@ -1,6 +1,6 @@
 import { ICommand } from "../interface/ICommand";
 import { ChatInputCommandInteraction } from "discord.js";
-import translatorManager from '../manager/TranslatorManager';
+import translatorManager from "../manager/TranslatorManager";
 
 export default class PingCommand implements ICommand {
 	public name = "ping";
@@ -10,7 +10,7 @@ export default class PingCommand implements ICommand {
 		interaction: ChatInputCommandInteraction,
 	): Promise<void> {
 		await interaction.reply({
-			content: translatorManager.translate('Ping! <3'),
+			content: translatorManager.translate("Ping! <3"),
 			ephemeral: true,
 		});
 	}
