@@ -1,4 +1,4 @@
-import { ICommand } from "../interface/ICommand";
+import { ICommand } from "../interface/Command/ICommand";
 import { ChatInputCommandInteraction } from "discord.js";
 import translatorManager from "../manager/TranslatorManager";
 
