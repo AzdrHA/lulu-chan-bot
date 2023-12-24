@@ -1,17 +1,17 @@
 import { IEventHandler } from "../interface/IEventHandler";
 import Client from "../client";
 import LoadFileHandler from "./LoadFileHandler";
-import * as util from "util";
-import { APP_DIR } from "../config/Constant";
+import { COMMAND_DIR, COMMAND_LIST } from "../config/Constant";
 import { ICommand } from "../interface/ICommand";
-import { REST, Routes } from "discord.js";
+import { REST } from "discord.js";
+import { Routes as SlashRoutes } from "discord-api-types/v10";
 
 export default class CommandHandler
 	extends LoadFileHandler
 	implements IEventHandler
 {
 	constructor(client: Client) {
-		super(util.format("%s/%s", APP_DIR, "command"), client);
+		super(COMMAND_DIR, client);
 	}
 
 	public async handle() {
@@ -21,7 +21,13 @@ export default class CommandHandler
 		const handlers = <ICommand[]>await this.searchInFolder();
 		handlers.map((handler) => {
 			console.log(`Loaded command ${handler.name}`);
-			// this.client.commands.set(handler.name, handler);
+
+			if (COMMAND_LIST.has(handler.name)) {
+				console.log(`Command ${handler.name} already exist`);
+				return;
+			}
+
+			COMMAND_LIST.set(handler.name, handler);
 			command.push({
 				name: handler.name,
 				description: handler.description,
@@ -36,7 +42,7 @@ export default class CommandHandler
 			console.log("Started refreshing application (/) commands. watch");
 
 			await rest.put(
-				Routes.applicationCommands(process.env.DISCORD_CLIENT_ID),
+				SlashRoutes.applicationCommands(process.env.DISCORD_CLIENT_ID),
 				{ body: command },
 			);
 
@@ -44,7 +50,6 @@ export default class CommandHandler
 		} catch (error) {
 			console.error(error);
 		}
-
 		console.log("Loaded command\n");
 	}
 }

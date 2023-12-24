@@ -1,8 +1,7 @@
 import { IEventHandler } from "../interface/IEventHandler";
 import Client from "../client";
 import LoadFileHandler from "./LoadFileHandler";
-import * as util from "util";
-import { APP_DIR } from "../config/Constant";
+import { EVENT_DIR } from "../config/Constant";
 import { IEvent } from "../interface/IEvent";
 
 export default class EventHandler
@@ -10,7 +9,7 @@ export default class EventHandler
 	implements IEventHandler
 {
 	constructor(client: Client) {
-		super(util.format("%s/%s", APP_DIR, "event"), client);
+		super(EVENT_DIR, client);
 	}
 	public async handle() {
 		console.log("Loading events...");

@@ -1,11 +1,11 @@
-import { GatewayIntentBits, REST, Routes } from "discord.js";
+import { IntentsBitField } from "discord.js";
 import Client from "./client";
 import EventManager from "./manager/EventManager";
 import EventHandler from "./handler/EventHandler";
 import CommandHandler from "./handler/CommandHandler";
 
 const client = new Client<false>({
-	intents: [GatewayIntentBits.Guilds],
+	intents: [IntentsBitField.Flags.Guilds],
 });
 
 const eventManager = new EventManager();

@@ -1,16 +1,16 @@
 import { IEvent } from "../../interface/IEvent";
-import { ClientEvents } from "discord.js";
+import { ClientEvents, Interaction } from "discord.js";
+import InteractionCreateManager from "../../manager/InteractionCreateManager";
+import InteractionCreateMessage from "../../handler/InteractionCreateMessage";
 
 export default class InteractionCreateEvent implements IEvent {
 	public name: keyof ClientEvents = "interactionCreate";
 
-	public async execute(interaction): Promise<void> {
-		if (!interaction.isChatInputCommand()) return;
-
-		if (interaction.commandName === "help") {
-			await interaction.reply("Pong!");
-		}
-		console.log("create!");
-		return Promise.resolve(undefined);
+	public async execute(interaction: Interaction): Promise<void> {
+		const interactionCreateManager = new InteractionCreateManager();
+		await interactionCreateManager.handle(
+			new InteractionCreateMessage(),
+			interaction,
+		);
 	}
 }
