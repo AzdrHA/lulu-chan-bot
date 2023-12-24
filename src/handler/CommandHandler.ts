@@ -1,5 +1,4 @@
 import { IEventHandler } from "../interface/IEventHandler";
-import Client from "../client";
 import LoadFileHandler from "./LoadFileHandler";
 import { COMMAND_DIR, COMMAND_LIST } from "../config/Constant";
 import { ICommand } from "../interface/ICommand";
@@ -10,15 +9,15 @@ export default class CommandHandler
 	extends LoadFileHandler
 	implements IEventHandler
 {
-	constructor(client: Client) {
-		super(COMMAND_DIR, client);
+	constructor() {
+		super(COMMAND_DIR);
 	}
 
 	public async handle() {
 		console.log("Loading command...");
 
 		const command = [];
-		const handlers = <ICommand[]>await this.searchInFolder();
+		const handlers = await this.searchInFolder<ICommand>();
 		handlers.map((handler) => {
 			console.log(`Loaded command ${handler.name}`);
 

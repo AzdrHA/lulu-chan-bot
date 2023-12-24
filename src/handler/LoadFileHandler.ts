@@ -6,15 +6,13 @@ import { IEventBase } from "../interface/IEventBase";
 
 export default class LoadFileHandler implements ILoadFileHandler {
 	private readonly folderPath: string;
-	public client: Client;
 
-	protected constructor(folderPath: string, client: Client) {
-		this.client = client;
+	protected constructor(folderPath: string) {
 		this.folderPath = folderPath;
 	}
 
-	public async searchInFolder(): Promise<IEventBase[]> {
-		const results: IEventBase[] = [];
+	public async searchInFolder<T extends IEventBase>(): Promise<T[]> {
+		const results: T[] = [];
 
 		async function traverse(currentPath: string): Promise<void> {
 			const files = fs.readdirSync(currentPath);
@@ -27,7 +25,7 @@ export default class LoadFileHandler implements ILoadFileHandler {
 					await traverse(filePath); // Recursively traverse subdirectories
 				} else if (stats.isFile() && path.extname(filePath) === ".ts") {
 					const importedModule = await import(filePath);
-					const exportedClass: IEventBase = importedModule.default;
+					const exportedClass: T = importedModule.default;
 
 					if (typeof exportedClass === "function") {
 						results.push(new exportedClass());
