@@ -5,7 +5,7 @@ import EventHandler from "./handler/EventHandler";
 import CommandHandler from "./handler/CommandHandler";
 
 const client = new Client<false>({
-	intents: [IntentsBitField.Flags.Guilds],
+	intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages],
 });
 
 const eventManager = new EventManager();

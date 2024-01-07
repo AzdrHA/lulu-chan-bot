@@ -7,6 +7,8 @@ import { Routes as SlashRoutes } from "discord-api-types/v10";
 import { IMultipleCommand } from "../interface/Command/IMultipleCommand";
 import { ICommandHandler } from "../interface/Command/ICommandHandler";
 import { SharedNameAndDescription } from "@discordjs/builders";
+import { getAllCategory } from '../api/categoryRequest';
+export const commandList = new Map();
 
 export default class CommandHandler
 	extends LoadFileHandler
@@ -33,7 +35,7 @@ export default class CommandHandler
 	}
 
 	private loadMultipleCommand(handler: IMultipleCommand) {
-		console.log(`Loaded multiple command ${handler.name}`);
+		console.log(`Loaded multiple command ${handler.name.join(", ")}`);
 		handler.name.map((name) => {
 			if (COMMAND_LIST.has(name)) {
 				console.log(`Command ${name} already exist`);
@@ -55,6 +57,10 @@ export default class CommandHandler
 			console.log(`Command ${handler.name} already exist`);
 			return;
 		}
+
+		const commands = commandList.get(handler.category) ?? [];
+		commands.push(handler.name);
+		commandList.set(handler.category, commands);
 
 		COMMAND_LIST.set(handler.name, handler);
 		this.registeredCommand.push(
@@ -83,13 +89,24 @@ export default class CommandHandler
 		}
 	}
 
+	private async getCommandFromAPI() {
+		const categories = await getAllCategory();
+		console.log("Loading category command from API...");
+		categories.map((category) => {
+			console.log(`Loaded category ${category.name} with ${category.commands.length} commands`);
+			const commands = category.commands.map((command) => command.name);
+			commandList.set(category.name, commands);
+		});
+	}
+
 	public async handle() {
+		await this.getCommandFromAPI();
 		console.log("Loading command...");
 		const handlers = await this.searchInFolder<ICommand | IMultipleCommand>();
 		handlers.map((handler) => {
 			this.loadCommand(handler);
 		});
 
-		await this.registerCommand();
+		// await this.registerCommand();
 	}
 }
