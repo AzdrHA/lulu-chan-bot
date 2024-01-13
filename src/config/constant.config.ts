@@ -8,3 +8,5 @@ export const EVENT_DIR = util.format("%s/event", APP_DIR);
 export const TRANSLATION_DIR = util.format("%s/translation", APP_DIR);
 
 export const COMMAND_LIST = new Map<string, IBaseCommand>();
+
+export const POLICY_URL = "https://lulu-chan.com/privacy-policy";

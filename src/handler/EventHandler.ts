@@ -1,7 +1,7 @@
 import { IEventHandler } from "../interface/IEventHandler";
 import Client from "../client";
 import LoadFileHandler from "./LoadFileHandler";
-import { EVENT_DIR } from "../config/Constant";
+import { EVENT_DIR } from "../config/constant.config";
 import { IEvent } from "../interface/IEvent";
 
 export default class EventHandler

@@ -2,6 +2,7 @@ import { ICommand } from "../../interface/Command/ICommand";
 import { ChatInputCommandInteraction } from "discord.js";
 import translatorManager from "../../manager/TranslatorManager";
 import { ECommandCategory } from "../../enum/ECommandCategory";
+import { POLICY_URL } from "../../config/constant.config";
 
 export default class PolicyCommand implements ICommand {
 	public name = "policy";
@@ -12,9 +13,7 @@ export default class PolicyCommand implements ICommand {
 		interaction: ChatInputCommandInteraction,
 	): Promise<void> {
 		await interaction.reply({
-			content: translatorManager.translate(
-				"https://lulu-chan.com/privacy-policy",
-			),
+			content: POLICY_URL,
 			ephemeral: true,
 		});
 	}

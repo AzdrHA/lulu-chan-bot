@@ -1,6 +1,6 @@
 import { IEventHandler } from "../interface/IEventHandler";
 import LoadFileHandler from "./LoadFileHandler";
-import { COMMAND_DIR, COMMAND_LIST } from "../config/Constant";
+import { COMMAND_DIR, COMMAND_LIST } from "../config/constant.config";
 import { ICommand } from "../interface/Command/ICommand";
 import { REST } from "discord.js";
 import { Routes as SlashRoutes } from "discord-api-types/v10";

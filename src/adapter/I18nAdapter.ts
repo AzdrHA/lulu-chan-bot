@@ -1,6 +1,6 @@
 import { ITranslatorAdapter } from "../interface/ITranslatorAdapter";
 import { I18n } from "i18n";
-import { TRANSLATION_DIR } from "../config/Constant";
+import { TRANSLATION_DIR } from "../config/constant.config";
 
 export class I18nAdapter implements ITranslatorAdapter {
 	private data: I18n;
