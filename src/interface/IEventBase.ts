@@ -1,1 +1,3 @@
-export interface IEventBase {}
+export interface IEventBase {
+	name;
+}

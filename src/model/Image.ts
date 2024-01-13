@@ -1,4 +1,4 @@
 export class Image {
-  public image: string;
-  public name: string;
+	public image: string;
+	public name: string;
 }

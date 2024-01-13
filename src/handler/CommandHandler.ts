@@ -7,7 +7,7 @@ import { Routes as SlashRoutes } from "discord-api-types/v10";
 import { IMultipleCommand } from "../interface/Command/IMultipleCommand";
 import { ICommandHandler } from "../interface/Command/ICommandHandler";
 import { SharedNameAndDescription } from "@discordjs/builders";
-import { getAllCategory } from '../api/categoryRequest';
+import { getAllCategory } from "../api/categoryRequest";
 export const commandList = new Map();
 
 export default class CommandHandler
@@ -35,7 +35,11 @@ export default class CommandHandler
 	}
 
 	private loadMultipleCommand(handler: IMultipleCommand) {
-		console.log(`Loaded multiple command ${handler.name.join(", ")}`);
+		console.log(
+			`Loaded multiple command from ${handler.category} : ${handler.name.join(
+				", ",
+			)}`,
+		);
 		handler.name.map((name) => {
 			if (COMMAND_LIST.has(name)) {
 				console.log(`Command ${name} already exist`);
@@ -93,7 +97,9 @@ export default class CommandHandler
 		const categories = await getAllCategory();
 		console.log("Loading category command from API...");
 		categories.map((category) => {
-			console.log(`Loaded category ${category.name} with ${category.commands.length} commands`);
+			console.log(
+				`Loaded category ${category.name} with ${category.commands.length} commands`,
+			);
 			const commands = category.commands.map((command) => command.name);
 			commandList.set(category.name, commands);
 		});

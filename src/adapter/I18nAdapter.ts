@@ -13,7 +13,7 @@ export class I18nAdapter implements ITranslatorAdapter {
 		});
 	}
 
-	public translate(key: string, ...replace: any[]): string {
+	public translate(key: string, ...replace: Record<string, string>[]): string {
 		return this.data.__mf(key, replace);
 	}
 }
