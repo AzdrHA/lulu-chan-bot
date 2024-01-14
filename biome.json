@@ -1,24 +1,12 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.5.1/schema.json",
 	"organizeImports": {
-		"enabled": true
+		"enabled": false
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true
 		}
-	},
-	"files": {
-		"ignore": [
-			"node_modules/**",
-			"/srv/app/node_modules/**",
-			"Makefile",
-			"docker-compose.yml",
-			"bun.lockb",
-			"package.json",
-			"tsconfig.json"
-		],
-		"include": ["**/*.ts", "**/*.tsx"]
 	}
 }

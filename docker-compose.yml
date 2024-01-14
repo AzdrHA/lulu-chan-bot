@@ -1,11 +1,10 @@
 services:
   node:
-    build:
-      context: ./docker
+    build: .
     volumes:
       - ./:/srv/app:rw,cached
     env_file:
       - .env
     labels:
       - word.enable=true
-    command: ["bun", "--watch", "run", "src/main.ts"]
+    command: ["npm", "run", "dev"]

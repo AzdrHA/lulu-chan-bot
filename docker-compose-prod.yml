@@ -1,0 +1,9 @@
+services:
+  node:
+    image: azdracito/lulu-chan-bot
+    env_file:
+      - .env
+    volumes:
+      - ./src:/srv/app/src:rw,cached
+    environment:
+      - NODE_ENV=production
