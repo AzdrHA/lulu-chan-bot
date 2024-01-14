@@ -25,9 +25,9 @@ export default class LoadFileHandler implements ILoadFileHandler {
 					await traverse(filePath); // Recursively traverse subdirectories
 				} else if (stats.isFile() && path.extname(filePath) === ".ts") {
 					const importedModule = await import(filePath);
-					const exportedClass: T = importedModule.default;
-					if (typeof exportedClass === "function") {
-						results.push(new exportedClass());
+					const ExportedClass: IEvent = importedModule.default;
+					if (typeof ExportedClass === "function") {
+						results.push(new ExportedClass());
 					}
 				}
 			}

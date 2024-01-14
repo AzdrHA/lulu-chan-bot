@@ -4,6 +4,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./src:/srv/app/src:rw,cached
+      - ./src:/srv/app/src:r,cached
     environment:
       - NODE_ENV=production

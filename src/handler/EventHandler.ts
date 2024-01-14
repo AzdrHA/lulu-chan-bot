@@ -19,7 +19,7 @@ export default class EventHandler
 		const handlers = await this.searchInFolder<IEvent>();
 		handlers.map((handler) => {
 			console.log(`Loaded event ${handler.name}`);
-			this.client.on(handler.name, (...args) => handler.execute(...args));
+			this.client.on(handler.name, (...args: unknown[]) => handler.execute(...args));
 		});
 		console.log("Loaded events\n");
 	}
