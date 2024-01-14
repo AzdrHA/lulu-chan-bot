@@ -1,24 +1,23 @@
-import { EmbedBuilder } from "discord.js";
-import { IEmbedBuilder } from "../interface/IEmbedBuilder";
-import { Image } from "../model/Image";
-import DefaultEmbedBuilder from "./DefaultEmbedBuilder";
-import colorConfig from "../config/color.config";
+import { type EmbedBuilder } from 'discord.js'
+import { type IEmbedBuilder } from '../interface/IEmbedBuilder'
+import DefaultEmbedBuilder from './DefaultEmbedBuilder'
+import colorConfig from '../config/color.config'
+import type IImage from '../interface/IImage'
 
 export class HentaiCommandEmbedBuilder
-	extends DefaultEmbedBuilder
-	implements IEmbedBuilder
-{
-	private image: Image;
+  extends DefaultEmbedBuilder
+  implements IEmbedBuilder {
+  private readonly image: IImage
 
-	constructor(image: Image) {
-		super();
-		this.image = image;
-	}
+  constructor (image: IImage) {
+    super()
+    this.image = image
+  }
 
-	public build(): EmbedBuilder {
-		return this.setImage(this.image.image)
-			.setFooter({ text: this.image.name })
-			.setTimestamp()
-			.setColor(colorConfig.SEXY);
-	}
+  public build (): EmbedBuilder {
+    return this.setImage(this.image.image)
+      .setFooter({ text: this.image.name })
+      .setTimestamp()
+      .setColor(colorConfig.SEXY)
+  }
 }

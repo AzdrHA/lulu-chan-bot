@@ -1,8 +1,10 @@
+import { type ColorResolvable } from 'discord.js'
+
 export default {
-	DEFAULT: "#add8e6",
-	SUCCESS: "#66f9c3",
-	ERROR: "#f96666",
-	INFO: "#66c3f9",
-	WARNING: "#f9c366",
-	SEXY: "#f966c3",
-};
+  DEFAULT: '#add8e6' as ColorResolvable,
+  SUCCESS: '#66f9c3' as ColorResolvable,
+  ERROR: '#f96666' as ColorResolvable,
+  INFO: '#66c3f9' as ColorResolvable,
+  WARNING: '#f9c366' as ColorResolvable,
+  SEXY: '#f966c3' as ColorResolvable
+}

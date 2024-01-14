@@ -15,7 +15,7 @@ format:
 	@docker compose run --rm node npx @biomejs/biome format * --write
 
 lint:
-	@docker compose run --rm node npx @biomejs/biome lint *
+	@docker compose run --rm node npx eslint --ext .ts src/ --fix
 
 prod:
 	docker compose down

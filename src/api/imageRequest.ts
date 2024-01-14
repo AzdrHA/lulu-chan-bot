@@ -1,8 +1,8 @@
-import { makeRequest } from "./makeRequest";
-import { Image } from "../model/Image";
+import { makeRequest } from './makeRequest'
+import type IImage from '../interface/IImage'
 
 export const getImageByCommandName = async (
-	commandName: string,
-): Promise<Image> => {
-	return makeRequest(`/command/${commandName}/image`, "GET");
-};
+  commandName: string
+): Promise<IImage> => {
+  return await makeRequest(`/command/${commandName}/image`, 'GET')
+}

@@ -1,11 +1,11 @@
-import { ICommand } from "../interface/Command/ICommand";
-import { ChatInputCommandInteraction } from "discord.js";
+import { type ICommand } from '../interface/Command/ICommand'
+import { type ChatInputCommandInteraction } from 'discord.js'
 
 export default class CommandManager {
-	public async handle(
-		command: ICommand,
-		interaction: ChatInputCommandInteraction,
-	): Promise<void> {
-		await command.execute(interaction);
-	}
+  public async handle (
+    command: ICommand,
+    interaction: ChatInputCommandInteraction
+  ): Promise<void> {
+    await command.execute(interaction)
+  }
 }

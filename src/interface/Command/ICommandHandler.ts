@@ -1,5 +1,5 @@
-import { SharedNameAndDescription } from "@discordjs/builders";
+import { type SharedNameAndDescription } from '@discordjs/builders'
 
 export interface ICommandHandler {
-	registeredCommand: SharedNameAndDescription[];
+  registeredCommand: SharedNameAndDescription[]
 }

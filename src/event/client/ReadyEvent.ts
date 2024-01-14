@@ -1,11 +1,11 @@
-import { IEvent } from "../../interface/IEvent";
-import { ClientEvents, Events } from "discord.js";
+import { type IEvent } from '../../interface/IEvent'
+import { type ClientEvents, Events } from 'discord.js'
 
 export default class ReadyEvent implements IEvent {
-	public name: keyof ClientEvents = Events.ClientReady;
+  public name: keyof ClientEvents = Events.ClientReady
 
-	public execute(): Promise<void> {
-		console.log("Ready!");
-		return Promise.resolve(undefined);
-	}
+  public async execute (): Promise<void> {
+    console.log('Ready!')
+    await Promise.resolve(undefined)
+  }
 }

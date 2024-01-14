@@ -1,13 +1,13 @@
-import { IFetchAdapter } from "../interface/IFetchAdapter";
+import { type IFetchAdapter } from '../interface/IFetchAdapter'
 
 export class MakeRequestManager {
-	private fetchAdapter: IFetchAdapter;
+  private readonly fetchAdapter: IFetchAdapter
 
-	constructor(fetchAdapter: IFetchAdapter) {
-		this.fetchAdapter = fetchAdapter;
-	}
+  constructor (fetchAdapter: IFetchAdapter) {
+    this.fetchAdapter = fetchAdapter
+  }
 
-	makeRequest(url, method, data) {
-		return this.fetchAdapter.makeRequest(url, method, data);
-	}
+  public makeRequest (url: string, method: string, data?: Record<string, string>): any {
+    return this.fetchAdapter.makeRequest(url, method, data)
+  }
 }

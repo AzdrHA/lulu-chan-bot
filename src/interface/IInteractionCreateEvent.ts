@@ -1,5 +1,5 @@
-import { Interaction } from "discord.js";
+import { type Interaction } from 'discord.js'
 
 export interface IInteractionCreateEvent {
-	handle(interaction: Interaction): Promise<void>;
+  handle: (interaction: Interaction) => Promise<void>
 }

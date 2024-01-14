@@ -1,6 +1,6 @@
-import { ClientEvents } from "discord.js";
+import { type ClientEvents } from 'discord.js'
 
 export interface IEvent {
-	name: keyof ClientEvents;
-	execute(...args: unknown[]): Promise<void>;
+  name: keyof ClientEvents
+  execute: (...args: any[]) => Promise<void>
 }

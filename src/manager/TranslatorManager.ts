@@ -1,16 +1,16 @@
-import { ITranslatorAdapter } from "../interface/ITranslatorAdapter";
-import { I18nAdapter } from "../adapter/I18nAdapter";
+import { type ITranslatorAdapter } from '../interface/ITranslatorAdapter'
+import { I18nAdapter } from '../adapter/I18nAdapter'
 
 export class TranslatorManager {
-	private translator: ITranslatorAdapter;
+  private readonly translator: ITranslatorAdapter
 
-	public constructor(translator: ITranslatorAdapter) {
-		this.translator = translator;
-	}
+  public constructor (translator: ITranslatorAdapter) {
+    this.translator = translator
+  }
 
-	public translate(key: string): string {
-		return this.translator.translate(key);
-	}
+  public translate (key: string): string {
+    return this.translator.translate(key)
+  }
 }
 
-export default new TranslatorManager(new I18nAdapter());
+export default new TranslatorManager(new I18nAdapter())

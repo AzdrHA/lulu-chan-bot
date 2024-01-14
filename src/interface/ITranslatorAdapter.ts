@@ -1,3 +1,3 @@
 export interface ITranslatorAdapter {
-	translate(key: string): string;
+  translate: (key: string) => string
 }

@@ -1,20 +1,20 @@
-import { EmbedBuilder } from "discord.js";
-import { IEmbedBuilder } from "../interface/IEmbedBuilder";
-import { Image } from "../model/Image";
-import DefaultEmbedBuilder from "./DefaultEmbedBuilder";
+import { type EmbedBuilder } from 'discord.js'
+import { type IEmbedBuilder } from '../interface/IEmbedBuilder'
+import DefaultEmbedBuilder from './DefaultEmbedBuilder'
+import type IImage from '../interface/IImage'
 
 export class EmoteCommandEmbedBuilder
-	extends DefaultEmbedBuilder
-	implements IEmbedBuilder
-{
-	private image: Image;
-	constructor(image: Image) {
-		super();
-		this.image = image;
-	}
-	public build(): EmbedBuilder {
-		return this.setImage(this.image.image)
-			.setFooter({ text: this.image.name })
-			.setTimestamp();
-	}
+  extends DefaultEmbedBuilder
+  implements IEmbedBuilder {
+  private readonly image: IImage
+  constructor (image: IImage) {
+    super()
+    this.image = image
+  }
+
+  public build (): EmbedBuilder {
+    return this.setImage(this.image.image)
+      .setFooter({ text: this.image.name })
+      .setTimestamp()
+  }
 }

@@ -1,5 +1,5 @@
-import { IEvent } from "./IEvent";
+import { type IEvent } from './IEvent'
 
 export interface ILoadFileHandler {
-	searchInFolder(): Promise<IEvent[]>;
+  searchInFolder: () => Promise<IEvent[]>
 }

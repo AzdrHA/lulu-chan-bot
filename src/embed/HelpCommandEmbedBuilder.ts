@@ -1,15 +1,15 @@
-import { IEmbedBuilder } from '../interface/IEmbedBuilder';
-import { APIEmbedField, EmbedBuilder } from 'discord.js';
-import { commandList } from '../handler/CommandHandler';
-import { ECommandCategory } from '../enum/ECommandCategory';
-import DefaultEmbedBuilder from './DefaultEmbedBuilder';
+import { type IEmbedBuilder } from '../interface/IEmbedBuilder'
+import { type APIEmbedField, type EmbedBuilder } from 'discord.js'
+import { commandList } from '../handler/CommandHandler'
+import { ECommandCategory } from '../enum/ECommandCategory'
+import DefaultEmbedBuilder from './DefaultEmbedBuilder'
 
 export class HelpCommandEmbedBuilder
   extends DefaultEmbedBuilder
   implements IEmbedBuilder {
-  private readonly formatValue = (value: string): string => `\`${value}\``;
-  private readonly formatValues = (values: string[]): string =>
-    values.map(this.formatValue).sort().join(', ');
+  private readonly formatValue = (value: string): string => `\`${value}\``
+  private readonly formatValues = (values: string[] | undefined = []): string =>
+    values.map(this.formatValue).sort().join(', ')
 
   private readonly fields: APIEmbedField[] = [
     {
@@ -65,9 +65,9 @@ export class HelpCommandEmbedBuilder
       value: '[Privacy Policy](https://lulu-chan.com/privacy-policy)',
       inline: true
     }
-  ];
+  ]
 
-  public build(): EmbedBuilder {
-    return this.setDescription('Here is the list of available commands:').setFields(this.fields);
+  public build (): EmbedBuilder {
+    return this.setDescription('Here is the list of available commands:').setFields(this.fields)
   }
 }

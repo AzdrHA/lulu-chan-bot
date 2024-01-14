@@ -1,10 +1,11 @@
-import { ECommandCategory } from "../../enum/ECommandCategory";
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { Interaction } from "discord.js";
+import { type ECommandCategory } from '../../enum/ECommandCategory'
+import { type SlashCommandBuilder } from '@discordjs/builders'
+import { type ChatInputCommandInteraction } from 'discord.js'
 
 export interface ICommand {
-	multiple?: boolean;
-	category: ECommandCategory;
-	config: SlashCommandBuilder;
-	execute(interaction: Interaction): Promise<unknown>;
+  multiple?: boolean
+  category: ECommandCategory
+  config: SlashCommandBuilder
+  disable?: boolean
+  execute: (interaction: ChatInputCommandInteraction) => Promise<unknown>
 }
