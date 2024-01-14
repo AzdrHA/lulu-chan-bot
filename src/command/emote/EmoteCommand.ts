@@ -8,8 +8,9 @@ import { EmoteCommandEmbedBuilder } from "../../embed/EmoteCommandEmbedBuilder";
 
 export default class EmoteCommand implements IMultipleCommand {
 	public name = commandList.get("Emotes");
-	public description = "Emotes command";
+	public description = "i'm a description";
 	public multiple = true;
+	public nsfw = false;
 	public category = ECommandCategory.EMOTES;
 
 	public async execute(

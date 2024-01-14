@@ -8,9 +8,10 @@ import NoNSFWChannelEmbedBuilder from "../../embed/NoNSFWChannelEmbedBuilder";
 import { PornCommandEmbedBuilder } from "../../embed/PornCommandEmbedBuilder";
 
 export default class PornCommand implements IMultipleCommand {
-	public description = "Porn command";
+	public description = "...";
 	public multiple = true;
 	public name = commandList.get("Porn");
+	public nsfw = true;
 	public category = ECommandCategory.PORN;
 
 	public async execute(

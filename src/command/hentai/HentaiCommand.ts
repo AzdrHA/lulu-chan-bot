@@ -8,8 +8,9 @@ import EmbedBuilderManager from "../../manager/EmbedBuilderManager";
 import { HentaiCommandEmbedBuilder } from "../../embed/HentaiCommandEmbedBuilder";
 
 export default class HentaiCommand implements IMultipleCommand {
-	public description = "Hentai command";
+	public description = "...";
 	public multiple = true;
+	public nsfw = true;
 	public name = commandList.get("Hentai");
 	public category = ECommandCategory.HENTAI;
 

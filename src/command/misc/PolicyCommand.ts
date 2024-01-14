@@ -6,7 +6,9 @@ import { POLICY_URL } from "../../config/constant.config";
 
 export default class PolicyCommand implements ICommand {
 	public name = "policy";
-	public description = "Reply with Pong and a heart because I love you <3";
+	public description =
+		"Access our policies instantly for all the details you need.";
+	public nsfw = false;
 	public category = ECommandCategory.MISC;
 
 	public async execute(

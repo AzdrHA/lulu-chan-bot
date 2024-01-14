@@ -6,7 +6,9 @@ import { HelpCommandEmbedBuilder } from "../../embed/HelpCommandEmbedBuilder";
 
 export default class PingCommand implements ICommand {
 	public name = "help";
-	public description = "Reply with Pong and a heart because I love you <3";
+	public description =
+		"Discover the power of commands! Simply type 'Help' to unveil the list of available commands.";
+	public nsfw = false;
 	public category = ECommandCategory.MISC;
 
 	public async execute(

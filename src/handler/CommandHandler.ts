@@ -6,7 +6,10 @@ import { REST } from "discord.js";
 import { Routes as SlashRoutes } from "discord-api-types/v10";
 import { IMultipleCommand } from "../interface/Command/IMultipleCommand";
 import { ICommandHandler } from "../interface/Command/ICommandHandler";
-import { SharedNameAndDescription } from "@discordjs/builders";
+import {
+	SharedNameAndDescription,
+	SlashCommandBuilder,
+} from "@discordjs/builders";
 import { getAllCategory } from "../api/categoryRequest";
 export const commandList = new Map();
 
@@ -48,9 +51,10 @@ export default class CommandHandler
 
 			COMMAND_LIST.set(name, handler);
 			this.registeredCommand.push(
-				new SharedNameAndDescription()
+				new SlashCommandBuilder()
 					.setName(name)
-					.setDescription(handler.description),
+					.setDescription(handler.description)
+					.setNSFW(handler.nsfw)
 			);
 		});
 	}
@@ -68,9 +72,10 @@ export default class CommandHandler
 
 		COMMAND_LIST.set(handler.name, handler);
 		this.registeredCommand.push(
-			new SharedNameAndDescription()
+			new SlashCommandBuilder()
 				.setName(handler.name)
-				.setDescription(handler.description),
+				.setDescription(handler.description)
+				.setNSFW(handler.nsfw),
 		);
 	}
 
@@ -113,6 +118,6 @@ export default class CommandHandler
 			this.loadCommand(handler);
 		});
 
-		// await this.registerCommand();
+		await this.registerCommand();
 	}
 }

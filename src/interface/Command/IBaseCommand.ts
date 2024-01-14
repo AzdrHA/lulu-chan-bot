@@ -6,6 +6,7 @@ export interface IBaseCommand extends IEventBase {
 	name: string | string[];
 	multiple?: boolean;
 	description: string;
+	nsfw?: boolean;
 	category: ECommandCategory;
 	execute(interaction: Interaction): Promise<unknown>;
 }
