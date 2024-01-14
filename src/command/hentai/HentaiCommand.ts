@@ -3,28 +3,20 @@ import { ChatInputCommandInteraction } from "discord.js";
 import { commandList } from "../../handler/CommandHandler";
 import { getImageByCommandName } from "../../api/imageRequest";
 import { ECommandCategory } from "../../enum/ECommandCategory";
-import NoNSFWChannelEmbedBuilder from "../../embed/NoNSFWChannelEmbedBuilder";
 import EmbedBuilderManager from "../../manager/EmbedBuilderManager";
 import { HentaiCommandEmbedBuilder } from "../../embed/HentaiCommandEmbedBuilder";
+import { SlashCommandBuilder } from "@discordjs/builders";
 
 export default class HentaiCommand implements IMultipleCommand {
-	public description = "...";
+	public config = new SlashCommandBuilder().setDescription("...").setNSFW(true);
+
+	public names = commandList.get("Hentai");
 	public multiple = true;
-	public nsfw = true;
-	public name = commandList.get("Hentai");
 	public category = ECommandCategory.HENTAI;
 
 	public async execute(
 		interaction: ChatInputCommandInteraction,
 	): Promise<unknown> {
-		if (interaction.channel.nsfw === false)
-			return interaction.reply({
-				ephemeral: true,
-				embeds: [
-					new EmbedBuilderManager().handle(new NoNSFWChannelEmbedBuilder()),
-				],
-			});
-
 		const request = await getImageByCommandName(interaction.commandName);
 		return interaction.reply({
 			embeds: [

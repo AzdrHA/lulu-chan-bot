@@ -1,14 +1,17 @@
 import { ICommand } from "../../interface/Command/ICommand";
 import { ChatInputCommandInteraction } from "discord.js";
-import translatorManager from "../../manager/TranslatorManager";
 import { ECommandCategory } from "../../enum/ECommandCategory";
 import { POLICY_URL } from "../../config/constant.config";
+import { SlashCommandBuilder } from "@discordjs/builders";
 
 export default class PolicyCommand implements ICommand {
-	public name = "policy";
-	public description =
-		"Access our policies instantly for all the details you need.";
-	public nsfw = false;
+	public config = new SlashCommandBuilder()
+		.setName("policy")
+		.setDescription(
+			"Access our policies instantly for all the details you need.",
+		)
+		.setNSFW(false);
+
 	public category = ECommandCategory.MISC;
 
 	public async execute(

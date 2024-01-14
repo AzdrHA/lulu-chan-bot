@@ -1,8 +1,8 @@
-import Client from "../client";
 import { ILoadFileHandler } from "../interface/ILoadFileHandler";
 import path from "node:path";
 import * as fs from "fs";
-import { IEventBase } from "../interface/IEventBase";
+import { ICommand } from "../interface/Command/ICommand";
+import { IEvent } from "../interface/IEvent";
 
 export default class LoadFileHandler implements ILoadFileHandler {
 	private readonly folderPath: string;
@@ -11,7 +11,7 @@ export default class LoadFileHandler implements ILoadFileHandler {
 		this.folderPath = folderPath;
 	}
 
-	public async searchInFolder<T extends IEventBase>(): Promise<T[]> {
+	public async searchInFolder<T extends ICommand | IEvent>(): Promise<T[]> {
 		const results: T[] = [];
 
 		async function traverse(currentPath: string): Promise<void> {
@@ -26,7 +26,6 @@ export default class LoadFileHandler implements ILoadFileHandler {
 				} else if (stats.isFile() && path.extname(filePath) === ".ts") {
 					const importedModule = await import(filePath);
 					const exportedClass: T = importedModule.default;
-
 					if (typeof exportedClass === "function") {
 						results.push(new exportedClass());
 					}

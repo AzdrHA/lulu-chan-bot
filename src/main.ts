@@ -13,5 +13,5 @@ await eventManager.handle(new EventHandler(client));
 await eventManager.handle(new CommandHandler());
 
 await client.login(process.env.DISCORD_TOKEN).then(() => {
-	// client.user.setPresence({ activities: [{ name: "/help" }], status: "idle" });
+	client.user.setPresence({ activities: [{ name: "/help" }], status: "idle" });
 });

@@ -26,57 +26,51 @@ export default class CommandHandler
 	public isMultipleCommand(
 		command: ICommand | IMultipleCommand,
 	): command is IMultipleCommand {
-		return Array.isArray(command.name);
+		return "multiple" in command;
 	}
 
 	private loadCommand(handler: ICommand | IMultipleCommand) {
 		if (this.isMultipleCommand(handler)) {
 			this.loadMultipleCommand(handler);
 		} else {
-			this.loadSingleCommand(handler);
+			// this.loadSingleCommand(handler);
 		}
 	}
 
 	private loadMultipleCommand(handler: IMultipleCommand) {
 		console.log(
-			`Loaded multiple command from ${handler.category} : ${handler.name.join(
+			`Loaded multiple command from ${handler.category} : ${handler.names.join(
 				", ",
 			)}`,
 		);
-		handler.name.map((name) => {
+		handler.names.map((name) => {
 			if (COMMAND_LIST.has(name)) {
 				console.log(`Command ${name} already exist`);
 				return;
 			}
 
 			COMMAND_LIST.set(name, handler);
-			this.registeredCommand.push(
-				new SlashCommandBuilder()
-					.setName(name)
-					.setDescription(handler.description)
-					.setNSFW(handler.nsfw)
-			);
+			handler.config.name = name;
+			handler.config.description = `Get a random ${name} image`;
+			const slashCommand = {
+				...new SlashCommandBuilder(),
+				...handler.config,
+			};
+			this.registeredCommand.push(slashCommand);
 		});
 	}
 
 	private loadSingleCommand(handler: ICommand) {
-		console.log(`Loaded command ${handler.name}`);
-		if (COMMAND_LIST.has(handler.name)) {
-			console.log(`Command ${handler.name} already exist`);
+		console.log(`Loaded command ${handler.config.name}`);
+		if (COMMAND_LIST.has(handler.config.name)) {
+			console.log(`Command ${handler.config.name} already exist`);
 			return;
 		}
 
 		const commands = commandList.get(handler.category) ?? [];
-		commands.push(handler.name);
 		commandList.set(handler.category, commands);
-
-		COMMAND_LIST.set(handler.name, handler);
-		this.registeredCommand.push(
-			new SlashCommandBuilder()
-				.setName(handler.name)
-				.setDescription(handler.description)
-				.setNSFW(handler.nsfw),
-		);
+		COMMAND_LIST.set(handler.config.name, handler);
+		this.registeredCommand.push(handler.config);
 	}
 
 	private async registerCommand() {
@@ -85,7 +79,7 @@ export default class CommandHandler
 		);
 
 		try {
-			console.log("Started refreshing application (/) commands. watch");
+			console.log("\nStarted refreshing application (/) commands. watch");
 
 			await rest.put(
 				SlashRoutes.applicationCommands(process.env.DISCORD_CLIENT_ID),
@@ -100,7 +94,7 @@ export default class CommandHandler
 
 	private async getCommandFromAPI() {
 		const categories = await getAllCategory();
-		console.log("Loading category command from API...");
+		console.log("Fetching category command from API...");
 		categories.map((category) => {
 			console.log(
 				`Loaded category ${category.name} with ${category.commands.length} commands`,
@@ -112,12 +106,11 @@ export default class CommandHandler
 
 	public async handle() {
 		await this.getCommandFromAPI();
-		console.log("Loading command...");
+		console.log("\nLoading command...");
 		const handlers = await this.searchInFolder<ICommand | IMultipleCommand>();
 		handlers.map((handler) => {
 			this.loadCommand(handler);
 		});
-
 		await this.registerCommand();
 	}
 }

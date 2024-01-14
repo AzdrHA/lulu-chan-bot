@@ -5,12 +5,15 @@ import { getImageByCommandName } from "../../api/imageRequest";
 import { ECommandCategory } from "../../enum/ECommandCategory";
 import EmbedBuilderManager from "../../manager/EmbedBuilderManager";
 import { EmoteCommandEmbedBuilder } from "../../embed/EmoteCommandEmbedBuilder";
+import { SlashCommandBuilder } from "@discordjs/builders";
 
 export default class EmoteCommand implements IMultipleCommand {
-	public name = commandList.get("Emotes");
-	public description = "i'm a description";
+	public config = new SlashCommandBuilder()
+		.setDescription("...")
+		.setNSFW(false);
+
+	public names = commandList.get("Emotes");
 	public multiple = true;
-	public nsfw = false;
 	public category = ECommandCategory.EMOTES;
 
 	public async execute(

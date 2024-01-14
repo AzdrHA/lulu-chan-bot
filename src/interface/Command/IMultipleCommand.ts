@@ -1,6 +1,6 @@
-import { IBaseCommand } from "./IBaseCommand";
+import { ICommand } from "./ICommand";
 
-export interface IMultipleCommand extends IBaseCommand {
-	name: string[];
+export interface IMultipleCommand extends ICommand {
 	multiple: boolean;
+	names: string[];
 }
