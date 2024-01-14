@@ -5,7 +5,7 @@ import EmbedBuilderManager from "../../manager/EmbedBuilderManager";
 import { HelpCommandEmbedBuilder } from "../../embed/HelpCommandEmbedBuilder";
 import { SlashCommandBuilder } from "@discordjs/builders";
 
-export default class PingCommand implements ICommand {
+export default class HelpCommand implements ICommand {
 	public config = new SlashCommandBuilder()
 		.setName("help")
 		.setDescription(

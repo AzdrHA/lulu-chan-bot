@@ -33,7 +33,7 @@ export default class CommandHandler
 		if (this.isMultipleCommand(handler)) {
 			this.loadMultipleCommand(handler);
 		} else {
-			// this.loadSingleCommand(handler);
+			this.loadSingleCommand(handler);
 		}
 	}
 
@@ -68,6 +68,8 @@ export default class CommandHandler
 		}
 
 		const commands = commandList.get(handler.category) ?? [];
+		commands.push(handler.config.name);
+
 		commandList.set(handler.category, commands);
 		COMMAND_LIST.set(handler.config.name, handler);
 		this.registeredCommand.push(handler.config);
@@ -111,6 +113,6 @@ export default class CommandHandler
 		handlers.map((handler) => {
 			this.loadCommand(handler);
 		});
-		await this.registerCommand();
+		// await this.registerCommand();
 	}
 }
