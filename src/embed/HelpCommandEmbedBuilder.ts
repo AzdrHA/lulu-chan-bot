@@ -3,6 +3,7 @@ import { type APIEmbedField, type EmbedBuilder } from 'discord.js'
 import { commandList } from '../handler/CommandHandler'
 import { ECommandCategory } from '../enum/ECommandCategory'
 import DefaultEmbedBuilder from './DefaultEmbedBuilder'
+import { INVITE_URL, POLICY_URL, SUPPORT_URL } from '../config/constant.config'
 
 export class HelpCommandEmbedBuilder
   extends DefaultEmbedBuilder
@@ -40,13 +41,13 @@ export class HelpCommandEmbedBuilder
 
     {
       name: 'Support invitation',
-      value: '[Discord server invitation](https://discord.gg/Jb6JwTd)',
+      value: `[Discord server invitation](${SUPPORT_URL})`,
       inline: true
     },
     {
       name: 'Bot invitation',
       value:
-        '[Bot invitation](https://discord.com/oauth2/authorize?client_id=578907743122096148&permissions=842525950&scope=bot)',
+        `[Bot invitation](${INVITE_URL})`,
       inline: true
     },
 
@@ -62,7 +63,7 @@ export class HelpCommandEmbedBuilder
     },
     {
       name: 'ㅤ',
-      value: '[Privacy Policy](https://lulu-chan.com/privacy-policy)',
+      value: `[Privacy Policy](${POLICY_URL})`,
       inline: true
     }
   ]
