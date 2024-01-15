@@ -13,12 +13,12 @@ export class HelpCommandEmbedBuilder
 
   private readonly fields: APIEmbedField[] = [
     {
-      name: ':write: Emotes',
+      name: '<:write:616957647509389324> Emotes',
       value: this.formatValues(commandList.get(ECommandCategory.EMOTES)),
       inline: false
     },
     // {
-    //   name: ':raphi: Reactions',
+    //   name: '<:raphi:648949919801016350> Reactions',
     //   value: this.formatValues(commandList.get(ECommandCategory.REACTIONS)),
     //   inline: false
     // },
