@@ -1,6 +1,6 @@
 import { type IInteractionCreateEvent } from '../interface/IInteractionCreateEvent'
 import CommandManager from '../manager/CommandManager'
-import { COMMAND_LIST } from '../config/constant.config'
+import { COMMAND_LIST, IS_DEVELOPMENT } from '../config/constant.config'
 import { type Interaction } from 'discord.js'
 import EmbedBuilderManager from '../manager/EmbedBuilderManager'
 import { CommandUsedLogEmbedBuilder } from '../embed/log/CommandUsedLogEmbedBuilder'
@@ -15,13 +15,15 @@ implements IInteractionCreateEvent {
 
     const commandManager = new CommandManager()
     void commandManager.handle(command, interaction).then(async () => {
-      const channel = await interaction.client.channels.fetch('949278454598205450')
-      if ((channel != null) && channel.isTextBased()) {
-        void channel.send({
-          embeds: [
-            new EmbedBuilderManager().handle(new CommandUsedLogEmbedBuilder(interaction))
-          ]
-        })
+      if (!IS_DEVELOPMENT) {
+        const channel = await interaction.client.channels.fetch('949278454598205450')
+        if ((channel != null) && channel.isTextBased()) {
+          void channel.send({
+            embeds: [
+              new EmbedBuilderManager().handle(new CommandUsedLogEmbedBuilder(interaction))
+            ]
+          })
+        }
       }
     })
   }
