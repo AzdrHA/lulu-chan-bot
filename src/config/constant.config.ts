@@ -10,6 +10,8 @@ export const TRANSLATION_DIR = util.format('%s/translation', APP_DIR)
 export const COMMAND_LIST = new Map<string, ICommand>()
 
 export const POLICY_URL = 'https://lulu-chan.com/privacy-policy'
+export const INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=578907743122096148&permissions=842525950&scope=bot'
+export const SUPPORT_URL = 'https://discord.gg/Jb6JwTd'
 export const DISCORD_TOKEN: string = process.env.DISCORD_TOKEN ?? ' '
 export const DISCORD_CLIENT_ID: string = process.env.DISCORD_CLIENT_ID ?? ' '
 
