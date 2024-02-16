@@ -6,7 +6,10 @@ import CommandHandler from './handler/CommandHandler'
 
 void (async () => {
   const client = new Client({
-    intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages]
+    intents: [
+      IntentsBitField.Flags.Guilds,
+      IntentsBitField.Flags.GuildMessages
+    ]
   })
 
   const eventManager = new EventManager()
@@ -14,6 +17,9 @@ void (async () => {
   await eventManager.handle(new CommandHandler())
 
   await client.login(process.env.DISCORD_TOKEN).then(() => {
-    client.user?.setPresence({ activities: [{ name: '/help' }], status: 'idle' })
+    client.user?.setPresence({
+      activities: [{ name: '/help' }],
+      status: 'idle'
+    })
   })
 })()

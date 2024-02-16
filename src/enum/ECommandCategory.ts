@@ -4,4 +4,5 @@ export enum ECommandCategory {
   HENTAI = 'Hentai',
   PORN = 'Porn',
   MISC = 'Misc',
+  SETTINGS = 'Settings',
 }

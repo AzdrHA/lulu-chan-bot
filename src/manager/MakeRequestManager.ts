@@ -7,7 +7,11 @@ export class MakeRequestManager {
     this.fetchAdapter = fetchAdapter
   }
 
-  public makeRequest (url: string, method: string, data?: Record<string, string>): any {
+  public makeRequest (
+    url: string,
+    method: string,
+    data?: Record<string, string>
+  ): any {
     return this.fetchAdapter.makeRequest(url, method, data)
   }
 }

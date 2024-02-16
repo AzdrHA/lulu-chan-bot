@@ -1,8 +1,13 @@
 import DefaultEmbedBuilder from '../DefaultEmbedBuilder'
 import type { IEmbedBuilder } from '../../interface/IEmbedBuilder'
-import { type ChatInputCommandInteraction, type EmbedBuilder } from 'discord.js'
+import {
+  type ChatInputCommandInteraction,
+  type EmbedBuilder
+} from 'discord.js'
 
-export class CommandUsedLogEmbedBuilder extends DefaultEmbedBuilder implements IEmbedBuilder {
+export class CommandUsedLogEmbedBuilder
+  extends DefaultEmbedBuilder
+  implements IEmbedBuilder {
   constructor (private readonly interaction: ChatInputCommandInteraction) {
     super()
   }
@@ -13,7 +18,8 @@ export class CommandUsedLogEmbedBuilder extends DefaultEmbedBuilder implements I
         name: this.interaction.user.displayName,
         iconURL: this.interaction.user.avatarURL() ?? ' '
       })
-      .setTimestamp().setFooter({
+      .setTimestamp()
+      .setFooter({
         text: this.interaction.user.id
       })
   }

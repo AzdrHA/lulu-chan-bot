@@ -1,13 +1,19 @@
 import { type IEventHandler } from '../interface/IEventHandler'
 import LoadFileHandler from './LoadFileHandler'
-import { COMMAND_DIR, COMMAND_LIST, DISCORD_CLIENT_ID, DISCORD_TOKEN } from '../config/constant.config'
+import {
+  COMMAND_DIR,
+  COMMAND_LIST,
+  DISCORD_CLIENT_ID,
+  DISCORD_TOKEN
+} from '../config/constant.config'
 import { type ICommand } from '../interface/Command/ICommand'
 import { REST } from 'discord.js'
 import { Routes as SlashRoutes } from 'discord-api-types/v10'
 import { type IMultipleCommand } from '../interface/Command/IMultipleCommand'
 import { type ICommandHandler } from '../interface/Command/ICommandHandler'
 import {
-  type SharedNameAndDescription, SlashCommandBuilder
+  type SharedNameAndDescription,
+  SlashCommandBuilder
 } from '@discordjs/builders'
 import { getAllCategory } from '../api/categoryRequest'
 
@@ -37,7 +43,10 @@ export default class CommandHandler
   }
 
   private loadMultipleCommand (handler: IMultipleCommand): void {
-    console.log(`Loaded multiple command from ${handler.category} : ${handler.names.join(', ')}`
+    console.log(
+			`Loaded multiple command from ${handler.category} : ${handler.names.join(
+				', '
+			)}`
     )
     handler.names.forEach((name) => {
       if (COMMAND_LIST.has(name)) {
@@ -75,10 +84,9 @@ export default class CommandHandler
     try {
       console.log('\nStarted refreshing application (/) commands. watch')
 
-      await rest.put(
-        SlashRoutes.applicationCommands(DISCORD_CLIENT_ID),
-        { body: this.registeredCommand }
-      )
+      await rest.put(SlashRoutes.applicationCommands(DISCORD_CLIENT_ID), {
+        body: this.registeredCommand
+      })
 
       console.log('Successfully reloaded application (/) commands.')
     } catch (error) {
@@ -90,7 +98,9 @@ export default class CommandHandler
     const categories = await getAllCategory()
     console.log('Fetching category command from API...')
     categories.forEach((category) => {
-      console.log(`Loaded category ${category.name} with ${category.commands.length} commands`)
+      console.log(
+				`Loaded category ${category.name} with ${category.commands.length} commands`
+      )
       const commands = category.commands.map((command) => command.name)
       commandList.set(category.name, commands)
     })
@@ -102,7 +112,9 @@ export default class CommandHandler
     const handlers = await this.searchInFolder<ICommand | IMultipleCommand>()
     handlers.forEach((handler) => {
       if (handler.disable !== true) this.loadCommand(handler)
-      else console.log(`Load canceled : ${handler.constructor.name} is disabled`)
+      else {
+        console.log(`Load canceled : ${handler.constructor.name} is disabled`)
+      }
     })
     await this.registerCommand()
   }

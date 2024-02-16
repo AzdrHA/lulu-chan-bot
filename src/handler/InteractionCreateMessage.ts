@@ -16,11 +16,14 @@ implements IInteractionCreateEvent {
     const commandManager = new CommandManager()
     void commandManager.handle(command, interaction).then(async () => {
       if (!IS_DEVELOPMENT) {
-        const channel = await interaction.client.channels.fetch('949278454598205450')
-        if ((channel != null) && channel.isTextBased()) {
+        const channel =
+					await interaction.client.channels.fetch('949278454598205450')
+        if (channel != null && channel.isTextBased()) {
           void channel.send({
             embeds: [
-              new EmbedBuilderManager().handle(new CommandUsedLogEmbedBuilder(interaction))
+              new EmbedBuilderManager().handle(
+                new CommandUsedLogEmbedBuilder(interaction)
+              )
             ]
           })
         }
