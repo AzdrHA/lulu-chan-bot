@@ -23,7 +23,9 @@ export default class ReactionCommand implements IMultipleCommand {
     const image = await getImageByCommandName(interaction.commandName)
     return await interaction.reply({
       embeds: [
-        new EmbedBuilderManager().handle(new ReactionCommandEmbedBuilder(image))
+        new EmbedBuilderManager().handle(
+          new ReactionCommandEmbedBuilder(image)
+        )
       ]
     })
   }

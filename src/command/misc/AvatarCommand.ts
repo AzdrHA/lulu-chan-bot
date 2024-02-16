@@ -24,7 +24,9 @@ export default class AvatarCommand implements ICommand {
     const user = interaction.options.getUser('user', false) ?? interaction.user
     await interaction.reply({
       ephemeral: false,
-      embeds: [new EmbedBuilderManager().handle(new AvatarCommandEmbedBuilder(user))]
+      embeds: [
+        new EmbedBuilderManager().handle(new AvatarCommandEmbedBuilder(user))
+      ]
     })
   }
 }

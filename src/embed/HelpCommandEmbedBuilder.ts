@@ -38,6 +38,11 @@ export class HelpCommandEmbedBuilder
       value: this.formatValues(commandList.get(ECommandCategory.MISC)),
       inline: false
     },
+    {
+      name: ':gear: Settings',
+      value: this.formatValues(commandList.get(ECommandCategory.SETTINGS)),
+      inline: false
+    },
 
     {
       name: 'Support invitation',
@@ -46,8 +51,7 @@ export class HelpCommandEmbedBuilder
     },
     {
       name: 'Bot invitation',
-      value:
-        `[Bot invitation](${INVITE_URL})`,
+      value: `[Bot invitation](${INVITE_URL})`,
       inline: true
     },
 
@@ -69,6 +73,8 @@ export class HelpCommandEmbedBuilder
   ]
 
   public build (): EmbedBuilder {
-    return this.setDescription('Here is the list of available commands:').setFields(this.fields)
+    return this.setDescription(
+      'Here is the list of available commands:'
+    ).setFields(this.fields)
   }
 }
